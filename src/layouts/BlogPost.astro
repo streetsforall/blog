@@ -7,7 +7,7 @@ import FormattedDate from '../components/FormattedDate.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, authors } = Astro.props;
 ---
 
 <html lang="en">
@@ -37,9 +37,12 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 			}
 			.title {
 				margin-bottom: 1em;
-				padding: 1em 0;
+				border-bottom: 1px dotted black;
+				padding: 2em 0;
+				margin-bottom: 2rem;
 				text-align: center;
 				line-height: 1;
+				color: rgb(var(--gray-dark));
 			}
 			.title h1 {
 				margin: 0 0 0.5em 0;
@@ -73,8 +76,12 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 								)
 							}
 						</div>
+			
 						<h1>{title}</h1>
-						<hr />
+						<div>
+							Written by
+							{authors}
+						</div>
 					</div>
 					<slot />
 				</div>

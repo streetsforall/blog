@@ -1,6 +1,7 @@
 ---
 title: 'First post'
 description: 'Lorem ipsum dolor sit amet'
+authors: 'josh vredevoogd'
 pubDate: 'Jul 08 2022'
 heroImage: '/blog-placeholder-3.jpg'
 ---

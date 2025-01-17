@@ -7,8 +7,8 @@
 :root {
 	--accent: #ff8223;
 	--accent-dark: #616161;
-	--black: #111111;
-	--gray: 96, 115, 159;
+	--black: #353535;
+	--gray: #7b7b7b;
 	--gray-light: 229, 233, 240;
 	--gray-dark: 34, 41, 57;
 	--gray-gradient: rgba(var(--gray-light), 50%), #fff;
@@ -20,6 +20,7 @@ body {
 	font-family: sans-serif;
 	margin: auto;
 	padding: 0;
+	padding-top: 1rem;
 	text-align: left;
 	word-wrap: break-word;
 	overflow-wrap: break-word;
@@ -95,6 +96,7 @@ code {
 	padding: 2px 5px;
 	background-color: rgb(var(--gray-light));
 	border-radius: 2px;
+	font-size: 1rem;
 }
 pre {
 	padding: 1.5em;
