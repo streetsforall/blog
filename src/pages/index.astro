@@ -15,15 +15,65 @@ const posts = (await getCollection('blog')).sort(
 <html lang="en">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<style>
+			main {
+				width: 960px;
+			}
+			ul {
+				list-style-type: none;
+				margin: 0;
+				padding: 0;
+			}
+			ul li {
+				margin-bottom: 1rem;
+			}
+			ul li * {
+				text-decoration: none;
+				transition: 0.2s ease;
+			}
+			ul li a {
+				display: flex;
+				width: 100%;
+				justify-content: space-between;
+			}
+			.title {
+				margin: 0;
+				color: var(--black);
+				line-height: 1;
+			}
+			.date {
+				margin: 0;
+				color: var(--gray);
+			}
+			ul a:hover img {
+				box-shadow: var(--box-shadow);
+			}
+			@media (max-width: 720px) {
+				ul {
+					gap: 0.5em;
+				}
+			}
+		</style>
 	</head>
 	<body>
 		<Header />
 		<main>
-			<h1>Streets for All Data Dev Team</h1>
-			<p>
-				At Streets for All, we base our advocacy on real data and quantifiable evidence. Our Data/Dev Team, comprised of volunteer data scientists, GIS analysts, and web developers, synthesizes data pulled from a multitude of sources and presents it in intuitive web interfaces to tell accessible and compelling stories. Read more about our process and past projects here.
-			</p>
-
+			<section>
+				<ul>
+					{
+						posts.map((post) => (
+							<li>
+								<a href={`/blog/${post.id}/`}>
+									<b class="title">{post.data.title}</b>
+									<p class="date">
+										<FormattedDate date={post.data.pubDate} />
+									</p>
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</section>
 		</main>
 		<Footer />
 	</body>

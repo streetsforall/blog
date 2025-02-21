@@ -1,0 +1,30 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
+import { getCollection } from 'astro:content';
+import FormattedDate from '../../components/FormattedDate.astro';
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h3>Streets for All Data Dev Team</h3>
+			<p>
+				At Streets for All, we base our advocacy on real data and quantifiable evidence. Our Data/Dev Team, comprised of volunteer data scientists, GIS analysts, and web developers, synthesizes data pulled from a multitude of sources and presents it in intuitive web interfaces to tell accessible and compelling stories. Read more about our process and past projects here.
+			</p>
+
+		</main>
+		<Footer />
+	</body>
+</html>

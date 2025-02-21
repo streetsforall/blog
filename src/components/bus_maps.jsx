@@ -44,18 +44,20 @@ const MapView = (props) => {
           id: "routes",
           type: "fill",
           source: "routes",
-          // filter: ['==', ['get', 'Severe_Injury'], true],
+          filter: ['!=', ['get', "minutes_lost_per_mile"], null],
           paint: {
             "fill-color": [
               "interpolate",
               ["linear"],
               ["get", "minutes_lost_per_mile"], // Property from your data
               0,
-              "rgb(0, 255, 0)", // green
+              "rgb(40, 200, 40)", // green
               2500,
-              "rgb(255,165,0)", // orange
+              "rgb(255,165,40)", // orange
+              7500,
+              "rgb(255, 30, 30)", // red
               10000,
-              "rgb(255, 0, 0)", // red
+              "rgb(140, 30, 30)", // red
             ],
             "fill-opacity": 0.8,
           },
@@ -67,17 +69,8 @@ const MapView = (props) => {
         source: "routes",
         filter: ['>', ['get', 'corridor_group_id_90'], 0],
         paint: {
-          "fill-color": [
-            "interpolate",
-            ["linear"],
-            ["get", "minutes_lost_per_mile"], // Property from your data
-            0,
-            "rgb(0, 255, 0)", // green
-            2500,
-            "rgb(255,165,0)", // orange
-            10000,
-            "rgb(255, 0, 0)", // red
-          ],
+          "fill-color":
+            "rgb(255, 0, 0)",
           "fill-opacity": 0.8,
         },
       });
