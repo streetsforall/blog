@@ -44,15 +44,20 @@ The starting point is CalTrans’s Cal-ITP California Transit Speed map, which p
 The CalTrans’s Cal-ITP California Transit Speed data measured bus travel speeds at the 20th, 50th, and 80th percentiles for each segment of the network at the different service time periods throughout the day, defined as follows:
 
 Early AM: 04:00-07:00
+
 AM Peak: 07:00-10:00
+
 Midday: 10:00-15:00
+
 PM Peak: 15:00-20:00
+
 Evening: 20:00-24:00
+
 Owl: 00:00-04:00
 
 The time lost due to delays is calculated based on the difference in time to travel the segment between the highest 80th percentile speed across all non-Owl time periods and average 50th percentile speed among the core transit time periods: AM Peak, PM Peak, and Midday. 
 
-segment minutes lost = (segment lengthaggregated segment p50 speed - segment lengthhighest non-owl segment p80 speed) * 60
+$$segment minutes lost = (segment lengthaggregated segment p50 speed - segment lengthhighest non-owl segment p80 speed) * 60$$
  
 Some data cleaning and processing work was needed here to deal with duplicate values where there were multiple data points for a given segment of a route at a specific type of day. Many of these duplicates hold dirty and/or useless speed data, such as numeric values being all zeroes, which are filtered out. For remaining duplicates, the rows with the largest difference between 80th and 50th percentile speed are chosen. This was chosen after observing that many of the non-informative duplicates had the same values for both percentiles. 
 
