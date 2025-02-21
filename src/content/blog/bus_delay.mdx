@@ -1,5 +1,5 @@
 ---
-title: 'Bus Delay Analysis'
+title: 'Bus riders in LA are delayed more than 5 million minutes every weekday'
 description: ''
 pubDate: 'March 1 2025'
 heroImage: ''
@@ -8,17 +8,62 @@ authors: ''
 
 import MapView from '../../components/map.jsx';
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
+In a new analysis, the Streets for All Data/Dev team has found that on the average weekday LA Metro bus riders are delayed by 5,538,500 minutes - or more than ten years of lost time per day. 
 
-<MapView 
-  title="Did you know?"
-  description="MDX lets you use components right inside your markdown content!"
-/>
+LA Metro has the second highest bus ridership in the nation. The bus system is the backbone of LA’s transit network, with single bus routes often moving more people than dedicated rail or BRT routes. However - these routes often lack any sort of dedicated lane or tactical improvement to speed up service. Hundreds of thousands of passengers sit in the same traffic as private vehicles -  a failure in planning efficient streets and failure of equitable mobility.
 
-Morbi tristique senectus et netus. Id semper risus in hendrerit gravida rutrum quisque non tellus. Habitasse platea dictumst quisque sagittis purus sit amet. Tellus molestie nunc non blandit massa. Cursus vitae congue mauris rhoncus. Accumsan tortor posuere ac ut. Fringilla urna porttitor rhoncus dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius morbi enim nunc. Bibendum neque egestas congue quisque egestas diam. Cras ornare arcu dui vivamus arcu felis bibendum. Dignissim suspendisse in est ante in nibh mauris. Sed tempus urna et pharetra pharetra massa massa ultricies mi.
+In LA 89% of bus riders have a median household income less than $50k, 78% do not have access to a car. Often, the bus is a mobility lifeline for riders. 
 
-Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque. Diam sit amet nisl suscipit. Lacus viverra vitae congue eu consequat ac felis donec. Egestas integer eget aliquet nibh praesent tristique magna sit amet. Eget magna fermentum iaculis eu non diam. In vitae turpis massa sed elementum. Tristique et egestas quis ipsum suspendisse ultrices. Eget lorem dolor sed viverra ipsum. Vel turpis nunc eget lorem dolor sed viverra. Posuere ac ut consequat semper viverra nam. Laoreet suspendisse interdum consectetur libero id faucibus. Diam phasellus vestibulum lorem sed risus ultricies tristique. Rhoncus dolor purus non enim praesent elementum facilisis. Ultrices tincidunt arcu non sodales neque. Tempus egestas sed sed risus pretium quam vulputate. Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Fringilla urna porttitor rhoncus dolor purus non. Amet dictum sit amet justo donec enim.
+These same riders are at the forefront of advancing the region’s climate and congestion goals, reducing air pollution and reducing cars on the road. But in turn our road design rewards them with slow, delayed, and unreliable trips. 
 
-Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id cursus metus aliquam eleifend mi.
+<MapView client:load load="all" desc="Map of bus delay by rider minutes by segment" />
 
-Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
+Speeding up buses also creates more efficient service, allowing fewer buses and drivers to serve the same frequency. Not only would speed improvements mean faster trips for riders, but increased frequency at the same cost to Metro.
+
+Our analysis defines delay as the difference between when a bus is reliably fastest (often early in the morning) and the average bus speed across the parts of the day when most people ride (7AM-8PM). This delay is then multiplied by the average number of riders over a given segment to return total rider minutes delayed in a specific section of street. 
+
+For example, between Washington and Venice along Western Ave our analysis found 2700 riders travel northbound on the average weekday. Without congestion, the bus averages 15.5 mph but during the middle of the day it slows to less than 9mph. Over this less than half mile segment of street the bus slows by nearly 2 minutes. That turns into 4,800 minutes of rider delay per weekday.
+
+
+## 6% of lane miles are responsible for 40% of delays
+
+Another finding is that while most streets see some rider delay - there are clear hotspots with extreme amounts of both congestion and ridership. These are the areas that would benefit the most from transit improvements - allowing buses to move more reliably and significantly increasing the throughput of the street.
+
+<MapView client:load load="percentiles" desc="Map of 95th percentile segments" />
+
+
+
+## Methodology
+
+This analysis is based on accessible, transparent methods for calculating delay impacts to riders across the entire LA Metro bus network. The ultimate goal is to produce a dataset describing, for every physical section of street that is covered by an LA Metro bus, how much time bus riders lose on that section of the street due to buses sitting in traffic. This is reflected in the calculated metric of ‘Total Segment Rider-Minutes Lost’, which is the number of minutes lost due to the bus delay on that segment, defined as a portion of a route between two stops, multiplied by the segment’s average number of riders, then summed across the different bus routes that serve that segment. 
+
+The starting point is CalTrans’s Cal-ITP California Transit Speed map, which publishes data describing the speed of transit vehicles across a transit network for every route at every segment. In addition to the segment geometry and basic descriptive information, this dataset features the most common speed along with common better and worse performing speeds at the different times of day that the bus routes operate. By comparing the most common speeds with the better performing speeds for a segment, we calculate the number of minutes that delay on this segment wastes for riders. Next, using data featuring the average number of people who get on and off the bus at every stop, we can calculate the average riders on that segment of a bus route. The number of riders is multiplied by the minutes lost and then totalled across the buses operating on that segment to produce the ‘Total Segment Rider-Minutes Lost’’.
+
+The CalTrans’s Cal-ITP California Transit Speed data measured bus travel speeds at the 20th, 50th, and 80th percentiles for each segment of the network at the different service time periods throughout the day, defined as follows:
+
+Early AM: 04:00-07:00
+AM Peak: 07:00-10:00
+Midday: 10:00-15:00
+PM Peak: 15:00-20:00
+Evening: 20:00-24:00
+Owl: 00:00-04:00
+
+The time lost due to delays is calculated based on the difference in time to travel the segment between the highest 80th percentile speed across all non-Owl time periods and average 50th percentile speed among the core transit time periods: AM Peak, PM Peak, and Midday. 
+
+segment minutes lost = (segment lengthaggregated segment p50 speed - segment lengthhighest non-owl segment p80 speed) * 60
+ 
+Some data cleaning and processing work was needed here to deal with duplicate values where there were multiple data points for a given segment of a route at a specific type of day. Many of these duplicates hold dirty and/or useless speed data, such as numeric values being all zeroes, which are filtered out. For remaining duplicates, the rows with the largest difference between 80th and 50th percentile speed are chosen. This was chosen after observing that many of the non-informative duplicates had the same values for both percentiles. 
+
+The next key input was reliable and accurate segment-level ridership for each bus route. Using data received through a public records FOIA (Freedom of Information Act) request which described the average boardings and de-boardings on a daily basis for each stop for each bus route, we were able to iterate through the bus route sequentially in each direction and generate a proportional segment-level ridership curve for each bus route in the network.
+
+The data was also missing values for the segments’ stop numbers along the route, since stop sequence is not consistent for every route at all times of day and all types of service trip, so in order to have usable sequence values we used a separate dataset, also received through Cal-ITP, to seed initial sequence values and then iteratively filled missing values by matching adjacent stops to one another.
+
+Since this input dataset featured average daily boardings and deboardings, the resulting curve does not represent the approximate ridership for each bus at any given segment in the network at any given time, but instead represents approximately how many riders traverse that segment on that bus route each weekday.
+
+Using the calculated values for route-segment-level time lost due to delay and approximate daily ridership, we can then simply multiply to calculate daily ridership-minutes lost due to delay. The final step is to procedurally and intelligently merge the route-segments into merged segments so that the delay can be viewed across the network’s geometry instead of separated by route. We merged through combining segments that met an 80% threshold of overlap. 
+
+Those overlapping segments are first prepared for the merging algorithm by extrapolating the line segments in the dataset into polygons and shortening them to prevent extraneous overlap at the ends. Next, pairs of segments are inspected for their overlap and, if the threshold is met, their geometry is merged and the features are updated, either concatenated, aggregated, or otherwise, commensurate with individual shape and type of each feature. 
+
+This merging procedure is performed for each direction of the network separately so that segments representing bus travel in opposite directions are not merged. This is done since segment improvements, such as a dedicated bus lane, can be performed for one travel direction and not the other. 
+
+Once the Total Segment Rider Minutes Lost is calculated for the entire network, we calculate additional key metrics such as Total Segment Rider Minutes Lost per Mile, which the original metric is normalized by distance. This full procedure results in a comprehensive segment-level analysis of the time lost to riders across the LA Metro bus network. This analysis is able to inform decision making and advocacy efforts for improving streetscapes, network operations optimization, and more.

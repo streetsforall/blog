@@ -4,55 +4,89 @@ import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
 const MapView = (props) => {
-  const mapRef = useRef()
-  const mapContainerRef = useRef()
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const mapRef = useRef();
+  const mapContainerRef = useRef();
 
-  var token = import.meta.env.MAPBOX_ACCESS_TOKEN;
   useEffect(() => {
-    // if (map.current) return;
+    mapboxgl.accessToken = import.meta.env.PUBLIC_MAPBOX_ACCESS_TOKEN;
 
-    mapRef.current = new mapboxgl.Map({
-      container: mapContainerRef.current,
-      style: "mapbox://styles/mapbox/streets-v12",
-      center: [-74.5, 40], // starting position [lng, lat]
-      zoom: 9, // starting zoom
-    });
+    if (!mapRef.current) {
+      try {
+        mapRef.current = new mapboxgl.Map({
+          container: mapContainerRef.current,
+          style: "mapbox://styles/jawshv/ckrfuew3j1n8j17o1bppw1n5z",
+          center: [-118.2, 34], // starting position [lng, lat]
+          zoom: 9, // starting zoom
+        });
 
-    map.current.on("load", () => {
-      map.current.addSource("routes", {
+        // error handling
+        mapRef.current.on("error", (e) => {
+          console.error("Mapbox error:", e);
+        });
+
+        mapRef.current.on("load", () => {
+          console.log("Map loaded successfully");
+        });
+      } catch (error) {
+        console.error("Error initializing map:", error);
+      }
+    }
+
+    mapRef.current.on("load", () => {
+      mapRef.current.addSource("routes", {
         type: "geojson",
-        data: "../data/bus_delay_routes.geojson",
+        data: "/data/bus_delay_routes.geojson",
       });
 
-      // map.current.addLayer({
-      //   id: 'routes',
-      //   type: 'circle',
-      //   source: 'routes',
-      //   // filter: ['==', ['get', 'Severe_Injury'], true],
-      //   paint: {
-      //   },
-      // });
+      mapRef.current.addLayer({
+        id: "routes",
+        type: "fill",
+        source: "routes",
+        // filter: ['==', ['get', 'Severe_Injury'], true],
+        paint: {
+          "fill-color": [
+            "interpolate",
+
+            ["linear"],
+
+            ["get", "minutes_lost_per_mile"], // Property from your data
+
+            0,
+             "rgb(0, 255, 0)", // green
+
+            2500,
+
+            "rgb(255,165,0)", // orange
+
+            10000,
+
+            "rgb(255, 0, 0)", // red
+          ],
+          "fill-opacity": 0.8,
+        },
+      });
     });
     return () => {
-      mapRef.current.remove()
-    }
-  }, [])
+      if (mapRef.current) {
+        ``;
+        mapRef.current.remove();
+      }
+    };
+  }, []);
 
   return (
     <div>
-      <p>{props.title}</p>
       <div
-        className="map-container"
+        id="map-container"
         ref={mapContainerRef}
         style={{
           width: "100%",
-          height: "400px",
+          height: "500px",
           borderRadius: "8px",
           overflow: "hidden",
         }}
       />
+      <p class="subtitle">{props.desc}</p>
     </div>
   );
 };

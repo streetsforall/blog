@@ -92,6 +92,7 @@ img {
 	height: auto;
 	border-radius: 8px;
 }
+
 code {
 	padding: 2px 5px;
 	background-color: rgb(var(--gray-light));
@@ -122,6 +123,12 @@ hr {
 	main {
 		padding: 1em;
 	}
+}
+
+.subtitle {
+	font-family: monospace;
+	color: #616161;
+	font-size: .8rem;
 }
 
 .sr-only {
