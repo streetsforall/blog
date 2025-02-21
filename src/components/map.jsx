@@ -15,8 +15,8 @@ const MapView = (props) => {
         mapRef.current = new mapboxgl.Map({
           container: mapContainerRef.current,
           style: "mapbox://styles/jawshv/ckrfuew3j1n8j17o1bppw1n5z",
-          center: [-118.2, 34], // starting position [lng, lat]
-          zoom: 9, // starting zoom
+          center: [-118.25, 34.05], // starting position [lng, lat]
+          zoom: 10.5, // starting zoom
         });
 
         // error handling
