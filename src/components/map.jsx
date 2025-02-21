@@ -38,34 +38,51 @@ const MapView = (props) => {
         data: "/data/bus_delay_routes.geojson",
       });
 
+      if (props.load == 'all') {
+
+        mapRef.current.addLayer({
+          id: "routes",
+          type: "fill",
+          source: "routes",
+          // filter: ['==', ['get', 'Severe_Injury'], true],
+          paint: {
+            "fill-color": [
+              "interpolate",
+              ["linear"],
+              ["get", "minutes_lost_per_mile"], // Property from your data
+              0,
+              "rgb(0, 255, 0)", // green
+              2500,
+              "rgb(255,165,0)", // orange
+              10000,
+              "rgb(255, 0, 0)", // red
+            ],
+            "fill-opacity": 0.8,
+          },
+        });
+    } else if (props.load == 'percentiles') {
       mapRef.current.addLayer({
         id: "routes",
         type: "fill",
         source: "routes",
-        // filter: ['==', ['get', 'Severe_Injury'], true],
+        filter: ['>', ['get', 'corridor_group_id_90'], 0],
         paint: {
           "fill-color": [
             "interpolate",
-
             ["linear"],
-
             ["get", "minutes_lost_per_mile"], // Property from your data
-
             0,
-             "rgb(0, 255, 0)", // green
-
+            "rgb(0, 255, 0)", // green
             2500,
-
             "rgb(255,165,0)", // orange
-
             10000,
-
             "rgb(255, 0, 0)", // red
           ],
           "fill-opacity": 0.8,
         },
       });
-    });
+    }
+  });
     return () => {
       if (mapRef.current) {
         ``;
