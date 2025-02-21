@@ -43,17 +43,15 @@ The starting point is CalTrans’s Cal-ITP California Transit Speed map, which p
 
 The CalTrans’s Cal-ITP California Transit Speed data measured bus travel speeds at the 20th, 50th, and 80th percentiles for each segment of the network at the different service time periods throughout the day, defined as follows:
 
-Early AM: 04:00-07:00
+| Time of Day | Hours |
+| -------- | ------- |
+| Early AM | 04:00-07:00 |
+| AM Peak | 07:00-10:00 |
+| Midday | 10:00-15:00 |
+| PM Peak | 15:00-20:00 |
+| Evening | 20:00-24:00 |
+| Owl | 00:00-04:00 |
 
-AM Peak: 07:00-10:00
-
-Midday: 10:00-15:00
-
-PM Peak: 15:00-20:00
-
-Evening: 20:00-24:00
-
-Owl: 00:00-04:00
 
 The time lost due to delays is calculated based on the difference in time to travel the segment between the highest 80th percentile speed across all non-Owl time periods and average 50th percentile speed among the core transit time periods: AM Peak, PM Peak, and Midday. 
 
