@@ -106,6 +106,8 @@ pre {
 pre > code {
 	all: unset;
 }
+
+
 blockquote {
 	border-left: 4px solid var(--accent);
 	padding: 0 0 0 20px;
@@ -129,6 +131,10 @@ hr {
 	font-family: monospace;
 	color: #616161;
 	font-size: .8rem;
+}
+
+.katex-html {
+	display: none;
 }
 
 .sr-only {

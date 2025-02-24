@@ -38,6 +38,7 @@ const MapView = (props) => {
         data: "/data/bus_delay_routes.geojson",
       });
 
+      // load different layers in different places
       if (props.load == 'all') {
 
         mapRef.current.addLayer({
@@ -75,6 +76,40 @@ const MapView = (props) => {
         },
       });
     }
+
+    // const popup = new mapboxgl.Popup({
+    //   closeButton: false,
+    //   closeOnClick: false
+    // });
+
+    mapRef.current.on('click', 'routes', (e) => {
+      const coordinates = e.features[0].geometry.coordinates[0][0];
+      const description = `
+      <b>Daily Delay: </b> ${e.features[0].properties.minutes_lost_per_mile.toFixed(0)} rider minutes</br>
+      <b>Segment Ridership: </b> ${e.features[0].properties.calculated_segment_ridership} </br>
+      <b>50th Percentile Speed: </b>  ${parseFloat(e.features[0].properties.p50_mph).toFixed(1)} MPH </br>
+      `;
+
+      console.log(coordinates)
+
+      while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+      }
+
+      new mapboxgl.Popup()
+        .setLngLat(coordinates)
+        .setHTML(description)
+        .addTo(mapRef.current);
+    });
+
+    mapRef.current.on('mouseenter', 'routes', () => {
+      mapRef.current.getCanvas().style.cursor = 'pointer';
+    });
+
+    mapRef.current.on('mouseleave', 'routes', () => {
+      mapRef.current.getCanvas().style.cursor = '';
+    });
+
   });
     return () => {
       if (mapRef.current) {
@@ -91,8 +126,8 @@ const MapView = (props) => {
         ref={mapContainerRef}
         style={{
           width: "100%",
-          height: "500px",
-          borderRadius: "8px",
+          height: "600px",
+          borderRadius: "10px",
           overflow: "hidden",
         }}
       />

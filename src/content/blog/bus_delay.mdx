@@ -55,7 +55,11 @@ The CalTrans’s Cal-ITP California Transit Speed data measured bus travel speed
 
 The time lost due to delays is calculated based on the difference in time to travel the segment between the highest 80th percentile speed across all non-Owl time periods and average 50th percentile speed among the core transit time periods: AM Peak, PM Peak, and Midday. 
 
-$$segment minutes lost = (segment lengthaggregated segment p50 speed - segment lengthhighest non-owl segment p80 speed) * 60$$
+$$ 
+\text{segment minutes lost} = (\tfrac{\text{segment length}}{\text{aggregated segment p50 speed}} - \tfrac{\text{segment length highest non-owl}} {\text{segment p80 speed}} * 60 
+$$
+
+
  
 Some data cleaning and processing work was needed here to deal with duplicate values where there were multiple data points for a given segment of a route at a specific type of day. Many of these duplicates hold dirty and/or useless speed data, such as numeric values being all zeroes, which are filtered out. For remaining duplicates, the rows with the largest difference between 80th and 50th percentile speed are chosen. This was chosen after observing that many of the non-informative duplicates had the same values for both percentiles. 
 
