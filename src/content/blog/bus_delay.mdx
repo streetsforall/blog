@@ -27,11 +27,44 @@ For example, between Washington and Venice along Western Ave our analysis found 
 
 ## 5% of lane miles are responsible for 30% of delays
 
-Another finding is that while most streets see some rider delay - there are clear hotspots with extreme amounts of both congestion and ridership. These are the areas that would benefit the most from transit improvements - allowing buses to move more reliably and significantly increasing the throughput of the street.
+Another finding is that, while most streets see some rider delay, there are clear hotspots with extreme amounts of both congestion and ridership. These are the areas that would benefit the most from transit improvements - allowing buses to move more reliably and significantly increasing the throughput of the street.
 
-This map shows the 90th percentile of segments by rider delay. It represents 183 lane miles of street segments, or about 5% of Metro's routes and makes up 1,698,950 minutes or rider delay, or 30% of the regions daily delay..
+This map shows the corridor groupings of 90th percentile of segments by rider delay per mile. These corridors are sequences of adjacent segments of the bus network grouped together if their level of rider delay per mile is in the 90th percentile and if their total length is at least one mile. This map represents 183 lane miles of street segments, or about 5% of Metro’s routes and makes up 1,698,950 minutes or rider delay, or 30% of the region's daily delay.
 
 <MapView client:load load="percentiles" desc="Map of 90th percentile segments by rider delay minutes" />
+
+Certain sections of the network clearly generate significantly more delay than others. The section of Los Feliz Blvd between Vermont Ave and Griffith Park Blvd, served by the 180 and 217 routes, is made up by four segments totaling just over a mile and cumulatively sees 9,729 minutes of rider delay daily. The same section in the opposite direction generates just 2,280 minutes of rider delay daily. These two sections of the network are the same length and served by the same routes but one generates over four times the delay to riders. 
+
+The total rider delay across the network is clearly disproportionately driven by a specific set of major transportation corridors. This means that we have sections of our transportation that are drastically underperforming compared to the high demand for reliable mobility through them, but it also means that total system throughput can be significantly increased by improving a relatively small section of the network. 
+
+
+__Implementation of dedicated bus lanes and signal priority in high impact segments can yield the highest return on transportation investment.__
+
+
+## Where are bus lanes planned and where are they most needed?
+
+Looking at the 90th percentile of rider delay per mile many of the highlighted corridors will not come as a surprise. For example, Vermont and Wilshire Boulevards jump out as many riders face significant delays. Some of these streets have worked their way into planned projects, while others need prioritization or improvements. 
+
+Vermont, Broadway, and Venice all are planned to have been prioritized for the 2028 Olympics and will receive 24/7 bus lanes within the next 3 years. Similarly, Sunset Blvd and Olympic Blvd will likely be reconfigured with peak hour bus lanes added before the games.
+
+System wide, [all door boarding](https://www.metro.net/riding/all-door-boarding-on-metro-bus/) will lead to significant dwell time reductions on all routes and the [bus lane enforcement program](https://www.metro.net/projects/ble-program/) should improve the efficacy of transit only lanes.  These will speed up buses across the region. 
+
+Our analysis also shows where existing lanes may not be doing enough. Wilshire Blvd, despite largely having peak hour bus lanes, has cumulatively over 300,000 minutes of daily rider delay.  D Line construction is likely a contributor - but heavy ridership, gridlock, and limited peak hour lanes all severely limit the line’s effectiveness.
+
+__Projects we recommend prioritizing short term based on significant rider delay:__
+| Street | Treatement |
+| -------- | ------- |
+| Wilshire Blvd | Upgrade bus lanes to 24/7 |
+| Santa Monica Blvd | Add bus lanes |
+| Western Ave | Add bus lanes |
+| Alvarado | Upgrade to 24/7 and extend to Hoover |
+| 5th/6th Street in DTLA | Upgrade to 24/7 |
+| Slauson and Pacific | Add bus lanes in Huntington Park |
+| 3rd street | Add bus lanes |
+
+Other segments on the 90th percentile list should receive tactical improvements or bus lanes where possible. All told, improvements to just these 183 lane miles of improvements could reduce the daily delay of bus riders by nearly 1/3rd and save Angeleno's a collective 283,000 hours each weekday. 
+
+It’s also important to acknowledge that there are other reasons to support bus lanes that our analysis does not address. Bus reliability is a significant indicator of a route's health both for operating a line effectively and for riders trying to plan trips. A segment may not show serious delay but may have significant volatility in speeds which could be solved with a bus lane.
 
 
 
@@ -39,7 +72,7 @@ This map shows the 90th percentile of segments by rider delay. It represents 183
 
 This analysis is based on accessible, transparent methods for calculating delay impacts to riders across the entire LA Metro bus network. The ultimate goal is to produce a dataset describing, for every physical section of street that is covered by an LA Metro bus, how much time bus riders lose on that section of the street due to buses sitting in traffic. This is reflected in the calculated metric of ‘Total Segment Rider-Minutes Lost’, which is the number of minutes lost due to the bus delay on that segment, defined as a portion of a route between two stops, multiplied by the segment’s average number of riders, then summed across the different bus routes that serve that segment. 
 
-The starting point is CalTrans’s Cal-ITP California Transit Speed map, which publishes data describing the speed of transit vehicles across a transit network for every route at every segment. In addition to the segment geometry and basic descriptive information, this dataset features the most common speed along with common better and worse performing speeds at the different times of day that the bus routes operate. By comparing the most common speeds with the better performing speeds for a segment, we calculate the number of minutes that delay on this segment wastes for riders. Next, using data featuring the average number of people who get on and off the bus at every stop, we can calculate the average riders on that segment of a bus route. The number of riders is multiplied by the minutes lost and then totalled across the buses operating on that segment to produce the ‘Total Segment Rider-Minutes Lost’’.
+The starting point is CalTrans’s [Cal-ITP California Transit Speed map project](https://rt--cal-itp-data-analyses.netlify.app/district_07-los-angeles-ventura/23__01_new_speedmaps__district_07-los-angeles-ventura__organization_source_record_id_recpngkwdpnr8jmhb), which publishes data describing the speed of transit vehicles across a transit network for every route at every segment. In addition to the segment geometry and basic descriptive information, this dataset features the most common speed along with common better and worse performing speeds at the different times of day that the bus routes operate. By comparing the most common speeds with the better performing speeds for a segment, we calculate the number of minutes that delay on this segment wastes for riders. Next, using data featuring the average number of people who get on and off the bus at every stop, we can calculate the average riders on that segment of a bus route. The number of riders is multiplied by the minutes lost and then totalled across the buses operating on that segment to produce the ‘Total Segment Rider-Minutes Lost’’.
 
 The CalTrans’s Cal-ITP California Transit Speed data measured bus travel speeds at the 20th, 50th, and 80th percentiles for each segment of the network at the different service time periods throughout the day, defined as follows:
 
