@@ -6,6 +6,14 @@ import "mapbox-gl/dist/mapbox-gl.css";
 const MapView = (props) => {
   const mapRef = useRef();
   const mapContainerRef = useRef();
+  const [activeFilter, setActiveFilter] = useState("corridor_group_id_90");
+
+  const applyFilter = (filterType) => {
+    if (mapRef.current && mapRef.current.isStyleLoaded() && mapRef.current.getLayer('routes')) {
+      setActiveFilter(filterType);
+      mapRef.current.setFilter('routes', ['>', ['get', filterType], 0]);
+    }
+  };
 
   useEffect(() => {
     mapboxgl.accessToken = import.meta.env.PUBLIC_MAPBOX_ACCESS_TOKEN;
@@ -68,7 +76,7 @@ const MapView = (props) => {
         id: "routes",
         type: "fill",
         source: "routes",
-        filter: ['>', ['get', 'corridor_group_id_90'], 0],
+        filter: ['>', ['get', activeFilter], 0],
         paint: {
           "fill-color":
             "rgb(255, 0, 0)",
@@ -119,6 +127,11 @@ const MapView = (props) => {
     };
   }, []);
 
+   // Handle filter button click to update the map layer filter
+   const handleFilterChange = (filterType) => {
+    applyFilter(filterType);
+  };
+
   return (
     <div>
       <div
@@ -131,6 +144,28 @@ const MapView = (props) => {
           overflow: "hidden",
         }}
       />
+
+{props.load === 'percentiles' && (
+        <div className="filter-controls">
+                    <button style={{color: activeFilter === 'corridor_group_id_85' ? 'black' : ''}}
+            onClick={() => handleFilterChange('corridor_group_id_85')}
+          >
+            85th Percentile
+          </button>
+          <button  style={{color: activeFilter === 'corridor_group_id_90' ? 'black' : ''}}
+            onClick={() => handleFilterChange('corridor_group_id_90')}
+          >
+            90th Percentile
+          </button>
+          <button style={{color: activeFilter === 'corridor_group_id_95' ? 'black' : ''}}
+            onClick={() => handleFilterChange('corridor_group_id_95')}
+          >
+            95th Percentile
+          </button>
+        </div>
+      )}
+
+
       <p class="subtitle">{props.desc}</p>
     </div>
   );
