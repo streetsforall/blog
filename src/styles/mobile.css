@@ -1,0 +1,26 @@
+@media only screen 
+and (max-device-width: 800px)
+{
+
+    body {
+        font-size: .9rem;
+        line-height: 1.3rem;
+    }   
+
+    main {
+        padding: .5rem
+    }
+
+    h1 {
+        font-size: 1.7rem;
+    }
+
+
+.katex-display {
+    font-size: .8rem;
+}
+
+
+
+
+}
