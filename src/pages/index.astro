@@ -15,6 +15,51 @@ const posts = (await getCollection("blog")).sort(
 <html lang="en">
   <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <style>
+      /* blog roll */
+
+      .blog_roll {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      ul li {
+        margin-bottom: 2rem;
+		border-bottom: 1px dotted var(--gray);
+      }
+
+      ul li:hover .title{
+        text-decoration: underline;
+        transition: 0.2s ease;
+      }
+
+      ul li a {
+		display: block;
+		text-decoration: none;
+        width: 100%;
+
+      }
+
+      .title {
+        margin: 0;
+        color: var(--black);
+        line-height: 1.2;
+		font-size: 1.5rem;
+		font-weight: 700;
+      }
+
+	  img {
+		width: auto;
+		object-fit: cover;
+		max-width: 30rem;
+	  }
+
+      .description {
+        color: var(--gray);
+      }
+
+    </style>
   </head>
   <body>
     <Header />
@@ -25,17 +70,17 @@ const posts = (await getCollection("blog")).sort(
             posts.map((post) => (
               <li>
                 <a href={`/blog/${post.id}/`}>
-                  {post.data.heroImage && (
+                  {/* {post.data.heroImage && (
                     <img
                       width={1020}
                       height={510}
                       src={post.data.heroImage}
                       alt=""
                     />
-                  )}
-                  <b class="title">{post.data.title}</b>
+                  )} */}
+                  <p class="title">{post.data.title}</p>
                   <p class="date">
-                  <FormattedDate date={post.data.pubDate} />
+                    <FormattedDate date={post.data.pubDate} />
                   </p>
                   <p class="description">{post.data.description}</p>
                 </a>

@@ -22,20 +22,7 @@ const {
   <head>
     <BaseHead title={title} description={description} />
     <style>
-      main {
-        width: calc(100% - 2em);
-        max-width: 100%;
-        margin: 0;
-      }
-      .hero-image {
-        width: 100%;
-      }
-      .hero-image img {
-        display: block;
-        margin: 0 auto;
-        border-radius: 12px;
-        box-shadow: var(--box-shadow);
-      }
+
       .prose {
         width: 100%;
         max-width: calc(100%);
@@ -69,6 +56,11 @@ const {
 		padding-left: 0;
 		color: var(--gray);
       }
+
+	  .hero-image {
+		margin-bottom: 0
+	  }
+
 
       .last-updated-on {
         font-style: italic;
