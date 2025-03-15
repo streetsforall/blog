@@ -32,12 +32,11 @@ const {
       }
 
       .title {
-        padding: 1em 0;
         margin: 2rem 0;
         text-align: left;
         line-height: 1;
         color: rgb(var(--gray-dark));
-		border-bottom: 1px dotted var(--gray);
+		
       }
 
       .date {
@@ -48,13 +47,14 @@ const {
 
       .authors {
 		margin: 1rem 0;
+		padding: 2rem 0;
 		font-size: .9rem;
 		line-height: 1.2;
         white-space: pre-line;
 		font-family: monospace;
-		list-style: none;
-		padding-left: 0;
 		color: var(--gray);
+		border-bottom: 1px dotted var(--gray);
+		border-top: 1px dotted var(--gray);
       }
 
 	  .hero-image {
@@ -76,9 +76,9 @@ const {
           {
             heroImage && (
               <img width={1020} height={510} src={heroImage} alt="" />
+			  <p class="subtitle">{heroImageCredit}</p>
             )
           }
-          {heroImageCredit && <p class="subtitle">{heroImageCredit}</p>}
         </div>
         <div class="prose">
           <div class="title">

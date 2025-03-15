@@ -93,8 +93,8 @@ const MapView = (props) => {
     mapRef.current.on('click', 'routes', (e) => {
       const coordinates = e.features[0].geometry.coordinates[0][0];
       const description = `
-      <b>Daily Delay: </b> ${e.features[0].properties.minutes_lost_per_mile.toFixed(0)} rider minutes</br>
-      <b>Segment Ridership: </b> ${e.features[0].properties.calculated_segment_ridership} </br>
+      <b>Daily Delay: </b> ${(e.features[0].properties.minutes_lost_per_mile.toFixed(1)).toLocaleString()} rider minutes</br>
+      <b>Segment Ridership: </b> ${e.features[0].properties.calculated_segment_ridership.toLocaleString()} </br>
       <b>50th Percentile Speed: </b>  ${parseFloat(e.features[0].properties.p50_mph).toFixed(1)} MPH </br>
       `;
 
