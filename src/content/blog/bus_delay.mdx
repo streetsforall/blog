@@ -5,17 +5,20 @@ heroImageCredit: "Bus riders stuck on the 4. Image by Gabe Gaurano"
 heroImage: "/images/bus_delay/bus_traffic_hla.jpg"
 description: "In a new analysis, we have found bus riders in LA are losing over 5.5 million minutes — equivalent to more than ten years every weekday due to inefficient street design and lack of dedicated bus lanes. We break down our findings, maps out delay hotspots, and proposes targeted solutions to significantly improve transit efficiency and equity in Los Angeles."
 authors: "Technical Analysis by Joey Shoyer \n \n Report Written by Joey Shoyer and Josh Vredevoogd \n \n Additional thanks to the entire SFA Data/Dev team, especially Noah Mercer and Elena Sunchugasheva for support on this report and the accompanying technical analysis"
+
+
 ---
+import { Image } from 'astro:assets';
 
 import MapView from '../../components/bus_maps.jsx';
 
 In a new analysis, the Streets for All Data/Dev team has found that on the average weekday LA Metro bus riders are delayed by 5,538,500 minutes — or more than ten years of lost time per day.  
 
-The bus system is the backbone of LA’s transit network, with many individual bus lines moving more people than some of our dedicated rail or BRT (Bus Rapid Transit) lines. Despite massive ridership, these routes largely lack any sort of dedicated lane or tactical improvement to speed up service. Hundreds of thousands of passengers sit in the same traffic as private vehicles each day — a failure in planning efficient streets and failure of equitable mobility.
+The bus system is the backbone of LA’s transit network, with many individual bus lines moving more people than some of our dedicated rail or BRT (Bus Rapid Transit) lines. Despite massive ridership, these routes largely lack any sort of dedicated lane or tactical improvement to speed up service. 
 
-In LA 89% of bus riders have a median household income less than $50k and 78% do not have access to a car. Often, the bus is a mobility lifeline for riders. At the same time, it’s clear existing service quality does not incentivize riders who otherwise could afford alternative modes. 
+Hundreds of thousands of passengers waste hours in the same traffic as private vehicles each day — a failure in planning efficient streets and failure of equitable mobility.
 
-Bus riders in LA are at the forefront of advancing the region’s climate and congestion goals, reducing air pollution and reducing cars on the road. But in turn our road design rewards them with slow, delayed, and unreliable trips. 
+In LA 89% of bus riders have a median household income less than $50k and 78% do not have access to a car. Often, the bus is a mobility lifeline for riders. At the same time, it’s clear existing service quality does not incentivize riders who otherwise could afford alternative modes. Bus riders in LA are at the forefront of advancing the region’s climate and congestion goals, reducing air pollution and reducing cars on the road. But in turn our road design rewards them with slow, delayed, and unreliable trips. 
 
 <MapView client:load load="all" desc="Map of weekday bus delay by rider minutes by segment" />
 
@@ -29,11 +32,13 @@ Speeding up buses also creates more efficient service, allowing the same frequen
 
 While many streets see some rider delay, there are clear hotspots with both high congestion and high ridership. These are the areas that would benefit the most from transit improvements - allowing buses to move more reliably and significantly increasing the throughput of the street
 
-This map shows our analysis of the worst street segments in Los Angeles on a rider delay basis. (Our definition of segments are that they are at least a mile long and are in the worst 10% for rider delay per mile). This map shows that 183 lane miles, or about 5% of Metro’s routes, make up 30% of the region's daily delay (1,698,950 minutes). 
+This map shows our analysis of the worst street segments in Los Angeles on a rider delay basis. (Our definition of segments are that they are at least a mile long and are in the worst 10% for rider delay per mile). 
 
 <MapView client:load load="percentiles" desc="Map of top percentile segments by rider delay minutes" />
 
-For example, the section of Los Feliz Blvd between Vermont Ave and Griffith Park Blvd, served by the 180 and 217 routes, is made up by four segments totaling just over a mile and cumulatively sees 9,729 minutes of rider delay daily. The same section in the opposite direction generates just 2,280 minutes of rider delay daily. These two sections of the network are the same length and served by the same routes but one generates over four times the delay to riders. 
+183 lane miles, or about 5% of Metro’s routes, make up 30% (1.80 million minutes) of the region's daily delay.
+
+For example, Los Feliz Blvd between Vermont Ave and Griffith Park Blvd, served by the 180 and 217 routes, is made up by four segments totaling just over a mile and cumulatively sees 9,729 minutes of rider delay daily. The same section in the opposite direction generates just 2,280 minutes of rider delay daily. These two sections of the network are the same length and served by the same routes but one generates over four times the delay to riders. 
 
 The total rider delay across the network is clearly disproportionately driven by a specific set of major transportation corridors. This means that we have sections of our transportation that are drastically underperforming compared to the high demand for reliable mobility through them, but it also means that total system throughput can be significantly increased by improving a relatively small section of the network. 
 
@@ -64,17 +69,22 @@ __Projects we recommend prioritizing short term based on the delay analysis:__
 
 Other segments on the 90th percentile list should receive tactical improvements or bus lanes where possible. All told, improvements to just these 183 lane miles of improvements could reduce the daily delay of bus riders by nearly 1/3rd and save Angelenos a collective 28,300 hours each weekday. 
 
+<img src="/images/bus_delay/bus_lane.webp" alt="Image of an LA Metro bus in a bright red bus lane in Downtown Los Angeles." />
+<p class="subtitle">Bus lane on Figueroa in DTLA. Image by Joe Linton at Streetsblog LA.</p>
+
 ## Limitations and Future Research
 
-It’s important to acknowledge that there are other reasons to support bus lanes that our analysis does not address. Bus reliability is a significant indicator of a route's health both for operating a line effectively and for riders trying to plan trips. A segment may not show serious delay but may have significant volatility in consistency which could be solved with a bus lane.
+It’s important to acknowledge that there are other reasons to support bus lanes that our analysis does not address. Bus reliability is a significant indicator of a route's health both for operating a line effectively and for riders trying to plan trips. A segment may not show serious delay but may have significant volatility in consistency which could be solved with a bus lane. Similarly, bus bunching and passenger crowding may influence bus lane consideration.
 
-Our dataset could also be used to predict how many service hours could be recovered by adding a bus lane by comparing how many buses are delayed how much each day. We will likely be writing a blog post about this in the future.
+Although LA Metro operates the majority of bus service in LA County - with over 40 other bus operators (including Big Blue Bus, Dash, and Long Beach Transit) there are many additional streets where significant numbers of riders also suffer from congestion hotspots. This is worth further research but may need to be done by individual agencies or a parent body like SCAG, Metro, or Caltrans as aggregating ridership data across agencies is difficult. 
 
-The last thing to note is that our analysis only looked at LA Metro operated routes. Other services like Big Blue Bus, Dash, and Long Beach Transit all have significant numbers of riders and likely also suffer from congestion hotspots. 
+We may continue this research further in the future. One idea is using our dataset to predict how many service hours could be recovered by adding a bus lane to a street that sees significant delay. This is an efficiency gain for transit operator budgets and logistics, allowing for more bus frequency with the same amount of driver time. 
+
+Our street segment calculation could also be modified to study how effective bus lanes in LA are against adjacent sections of street that do not have dedicated lanes for transit. Similarly, we could score sections of LA Metro rail lines by rider delay (although these hotspots are likely few and already known to Metro and riders alike).
 
 ## Methodology
 
-*If you are interested in exploring the code, the datasets are in a [Github repo](https://github.com/streetsforall/metro-bus-lane-prioritization) along with a single jupyter notebook file that can be re-ran.*
+*If you are interested in exploring the code, the datasets are in a [Github repo](https://github.com/streetsforall/metro-bus-lane-prioritization) along with a single jupyter notebook file for re-running our calculations.*
 
 This analysis is based on accessible, transparent methods for calculating delay impacts to riders across the entire LA Metro bus network. The ultimate goal is to produce a dataset describing, for every physical section of street that is covered by an LA Metro bus, how much time bus riders lose on that section of the street due to buses sitting in traffic. This is reflected in the calculated metric of ‘Total Segment Rider-Minutes Lost’, which is the number of minutes lost due to the bus delay on that segment, defined as a portion of a route between two stops, multiplied by the segment’s average number of riders, then summed across the different bus routes that serve that segment. This dataset can then be used as an input for valuable secondary analysis of the bus network. In this work, we use it for identifying potentially high impact bus corridors for network improvements.
 

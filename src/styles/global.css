@@ -1,11 +1,12 @@
 :root {
-  --accent: #3495e5;
+  --accent: #2986d2;
   --accent-dark: #616161;
   --black: #2d2b2b;
-  --gray: #7b7b7b;
-  --gray-light: 229, 233, 240;
+  --gray: #686746;
+  --gray-light: #9e9a81;
   --gray-dark: 34, 41, 57;
   --background: #f0ede9;
+  --block: #e9e4d0;
 }
 
 body {
@@ -80,11 +81,32 @@ input {
 }
 table {
   width: 100%;
+  border-collapse: collapse;
+  font-family: monospace;
+  font-size: .8rem;
+  overflow: scroll;
+  margin-bottom: 3em;
+  margin-top: -.5rem;
 }
+
+th {
+  margin-top: 0;
+}
+
+td {
+  vertical-align: top;
+  border: var(--gray) 1px dotted;
+  padding: 0 .2rem;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: var(--block);
+}
+
 img {
   max-width: 100%;
   height: auto;
-  border-radius: 8px;
+  border-radius: 5px;
 }
 
 code {
@@ -97,6 +119,7 @@ pre {
   padding: 1.5em;
   border-radius: 8px;
 }
+
 pre > code {
   all: unset;
 }
@@ -107,7 +130,7 @@ pre > code {
   overflow-y: hidden;
   display: block;
   padding: 1.5rem 1rem;
-  background-color: rgb(229, 219, 211);
+  background-color: var(--block);
   border-radius: 1rem;
   font-size: 1.1rem;
 }
