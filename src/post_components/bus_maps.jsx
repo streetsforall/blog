@@ -75,6 +75,18 @@ const MapView = (props) => {
             "fill-opacity": 0.8,
           },
         });
+      } else if (props.load == 'percentiles') {
+        mapRef.current.addLayer({
+          id: "routes",
+          type: "fill",
+          source: "routes",
+          filter: ['>', ['get', activeFilter], 0],
+          paint: {
+            "fill-color":
+              "rgb(255, 0, 0)",
+            "fill-opacity": 0.8,
+          },
+        });
       }
 
       mapRef.current.on("click", "routes", (e) => {
