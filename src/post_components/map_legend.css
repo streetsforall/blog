@@ -1,0 +1,32 @@
+.map_legend {
+    font-family: monospace;
+    font-size: .8rem;
+    background-color: var(--background);
+    position: relative;
+    top: -11.5rem;
+    width: max-content;
+    padding: .5rem;
+    margin-left: .5rem;
+    z-index: 10;
+    border: var(--gray-light) 1px solid;
+    border-radius: .2rem;
+    max-width: 10rem;
+    margin-bottom: -11rem;
+}
+
+.map_legend .legend_title {
+    margin-bottom: .5rem;
+    line-height: 1.2rem;
+}
+
+.legend_item div {
+    width: 1rem;
+    height: 1rem;
+    margin-right: .5rem;
+}
+
+.legend_item {
+    display: flex;
+    line-height: 1.2rem;
+}
+
