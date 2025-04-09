@@ -116,7 +116,7 @@ const zoningUtility = (props) => {
         const acres = Number(z.acres);
 
         // Ensure that acres is a valid number and not NaN
-        if (!isNaN(acres) && acres >= 0) {
+        if (!isNaN(acres) && acres > 0) {
           // make sure we aren't making zoning amount negative
           const newFromZoneAcreage = f_zone.zoneAcreage - acres;
           if (newFromZoneAcreage > 0) {
@@ -156,8 +156,8 @@ const zoningUtility = (props) => {
   return (
     <div>
       <hr />
-      <p>
-        BUDGET DEFICIT:
+      <p class="budget_head">
+        CITY BUDGET DEFICIT:
         {
           <span
             className={
@@ -176,12 +176,12 @@ const zoningUtility = (props) => {
             )}
           </span>
         }
-        <br />
-        2024 Property Tax Income:
-        {formatter.format(zoningData.City.totalPropertyTaxes)}
+        </p>
+        <p class="budget_sub">
+        2024 Property Tax Income: {formatter.format(zoningData.City.totalPropertyTaxes)}
         <br />
         New Property Tax Income: {formatter.format(totalPropertyTaxesSum)}
-      </p>
+        </p>
       Current Zone Data
       <table>
         <thead>
@@ -204,7 +204,20 @@ const zoningUtility = (props) => {
         </tbody>
       </table>
       <div id="zone_charts">
-        <p>Zone by area</p>
+        <p>Zones by area</p>
+        <div class="zone_chart marker">
+          {zoningData.zones.map((z) => (
+            <div
+              class=""
+              style={{
+                width:
+                  (z.zoneAcreage / zoningData.City.zoneAcreage) * 100 + "%",
+                  backgroundColor: z.color,
+              }}
+            >
+            </div>
+          ))}
+        </div>
         <div class="zone_chart">
           {zones.map((z) => (
             <div
@@ -219,7 +232,20 @@ const zoningUtility = (props) => {
             </div>
           ))}
         </div>
-        <p>Zone by revenue</p>
+        <p>Zones by revenue</p>
+        <div class="zone_chart marker">
+          {zoningData.zones.map((z) => (
+            <div
+              class=""
+              style={{
+                width:
+                  (z.totalPropertyTaxes / zoningData.City.totalPropertyTaxes) * 100 + "%",
+                  backgroundColor: z.color,
+              }}
+            >
+            </div>
+          ))}
+        </div>
         <div class="zone_chart">
           {zones.map((zone) => (
             <div
@@ -238,10 +264,9 @@ const zoningUtility = (props) => {
           ))}
         </div>
       </div>
-      <div>
-        Zoning Adjustments
-        <br />
-        <button onClick={newRezone}>Add New Rezone</button>
+      <br/>
+      <div class="rezones">
+        <button class="rezone_button" onClick={newRezone}>Add New Rezone</button>
         <div>
           {reZones &&
             reZones.map((rezone) => (
