@@ -1,0 +1,43 @@
+---
+title: "Can rezoning fix LA's Budget?"
+pubDate: "April 20 2025"
+heroImageCredit: ""
+heroImage: ""
+description: ""
+authors: ""
+published: false
+
+---
+import { Image } from 'astro:assets';
+
+import ZoningUtility from '../../post_components/zoning/zoning.jsx';
+
+
+The City of LA is facing a massive nearly $1 Billion budget shortfall in 2025, largely due to a combination of salary increases and massive lawsuit settlement payouts. It's hard to overstate the dire consequences of this deficit which threatens vital services and may result in entire departments being dismantled.
+
+The largest single source of dollars in the LA City budget comes from property taxes, which make up just over 1/3rd of LA's general fund. Our high level analysis explores how zoning impacts property tax revenue - and if rezoning can help the City reach solvency.
+
+The basic thesis is this: 75% of residential zoning in the City of LA is set aside for single family homes. Generally, higher density uses have higher property tax values. If that holds true in LA, how much of the City would need to be rezoned to increase property tax revenue enough to solve the budget hole?
+
+First, here is a quick explainer for how property tax works in the City of LA:
+
+1. Every property is assessed for the value of the land and the value of any improvements built on top of it (in LA, this is done by the County Assessor)
+2. The value of the property (land + improvements) is called the “assessed value”. In California, 1978’s Proposition 13 limits the annual rate of assessed value increase to 2% per year unless the property is sold or significantly modified. This means there are many properties paying taxes on assessed values far below market value for their home. Prop 13 did something else that reduces how much City’s can rely on property taxes as a revenue source - it limited the maximum tax on a property to 1%. That’s what’s used in the City of LA.
+3. Armed with an assessed value and the relevant property tax (1%), the County Assessor collects taxes. LA County property taxes are split between a variety of countywide services and local cities. How much each city gets is determined by its size - for the City of LA it works out to roughly 25 cents of every dollar collected locally makes its way to the general fund. 
+
+While property taxes are a little obtuse, City of LA zoning is a byzantine kaleidoscope of rules and bandaids. There are hundreds of unique zoning categories and multiple layers of overlaying specific plans, community plans, and state laws. We’ve done our best to accurately simplify the different zoning categories into relevant residential zoning categories. 
+
+
+{/* | Zones    | Zone Acreage | Total Property Taxes | Average Property Tax/Acre |
+|----------|--------------|----------------|---------------------------|
+| Citywide | 151,208       | $1,833,669,567 | $12,127                   |
+|-- | | | |
+| R5       | 315          | $38,867,062    | $123,207                  |
+| R4       | 3,999         | $145,301,116   | $36,335                   |
+| R3       | 13,833        | $340,792,478   | $24,637                   |
+| R2       | 23,251        | $276,019,601   | $11,871                   |
+| Parking  | 648          | $6,675,011     | $10,304                   |
+| R1       | 109,162       | $1,026,014,300 | $9,399                    | */}
+
+
+<ZoningUtility client:load load="all" />

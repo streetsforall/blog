@@ -1,0 +1,90 @@
+.zone_selector {
+    display: flex;
+    margin-bottom: .5rem;
+}
+
+.zone_selector div{
+    margin-right: 1rem;
+}
+
+.zone_component  {
+    padding: .5rem;
+    border: 1px dotted var(--gray-light);   
+    border-radius: .3rem;
+    margin: .5rem 0;
+}
+
+.zone_component label {
+    font-family: monospace;
+    font-size: .8rem;
+    color: var(--gray-light);
+    margin-right: .5rem;
+}
+
+
+.zone_header {
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
+}
+
+.green {
+    color: green;
+    margin-left: .5rem;
+}
+
+.red {
+    color: red;
+    margin-left: .5rem;
+}
+
+.zone_chart {
+    width: 100%;
+    display: flex;
+}
+
+#zone_charts p {
+    margin: 0;
+    font-size: .7rem;
+    font-family: monospace;
+    text-align: center;
+}
+
+.zone_chart div{
+    white-space:  nowrap;
+    font-size: .7rem;
+    font-family: monospace;
+    text-align: center;
+    overflow: hidden;
+    padding: .25rem;
+    border: .5px solid var(--background);
+}
+
+.zone_chart.marker div {
+    border-width: .5px;
+    opacity: 40%;
+    border-style: solid;
+}
+
+.budget_head {
+    text-align: center;
+    font-family: monospace;
+    margin-bottom: 0 !important;
+}
+
+.budget_sub {
+    font-size: .8rem;
+    text-align: center;
+    font-family: monospace;
+}
+
+.rezones {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.rezone_button {
+margin: auto;
+font-size: 1.1rem;
+}
