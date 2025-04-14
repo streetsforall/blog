@@ -21,11 +21,49 @@
     margin-right: .5rem;
 }
 
+.zone_container {
+    width: 100%;
+    display: flex;
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
 
 .zone_header {
     display: flex;
     justify-content: space-between;
     text-align: left;
+}
+
+.zone {
+    padding: .2rem;
+    text-align: center;
+    position: relative;
+    border: .1em white solid;
+    min-height: 120px;
+    font-family: monospace;
+    white-space: nowrap;
+    font-size: .7rem;
+}
+
+.zone div { 
+
+}
+.slider_handle {
+    width: 1rem;
+    height: 1rem;
+    background-color: white;
+    position: absolute;
+    border-radius: 2rem;
+    right: calc(-.6rem);
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 0;
+    margin: auto;
+    z-index: 10;
+    cursor: ew-resize;
+    user-select: none;
 }
 
 .green {
@@ -39,8 +77,10 @@
 }
 
 .zone_chart {
+    margin-top: 3rem;
     width: 100%;
     display: flex;
+    
 }
 
 #zone_charts p {
