@@ -154,17 +154,19 @@ const zoningUtility = () => {
       // console.log(currentAcreage, modAcres + originalAcreage)
 
       if (modAcres > 0) {
-        // For increased acreage, apply higher rate to new development
-        // console.log(modAcres)
+
         const newDev =
           modAcres * zone.ten_averagePropertyTaxPerAcre * (sliderValue / 100);
+
         const oldDev =
-          originalAcreage * zone.averagePropertyTaxPerAcre +
+          originalAcreage * 
+          zone.averagePropertyTaxPerAcre +
           modAcres *
             zone.averagePropertyTaxPerAcre *
             ((100 - sliderValue) / 100);
 
-        newTotalTaxes = newDev + oldDev + 162400000;
+        newTotalTaxes = (newDev + oldDev) * 1.52;
+
       } else {
         newTotalTaxes = currentAcreage * zone.averagePropertyTaxPerAcre;
       }
@@ -298,7 +300,10 @@ const zoningUtility = () => {
           step="10"
         />
 
-        <label><span style={{color: 'black'}}>{slider}%</span> of rezoning redeveloped</label>
+        <label>
+          <span style={{ color: "black" }}>{slider}%</span> of rezoning
+          redeveloped
+        </label>
       </div>
 
       <div class="zone_chart marker">
@@ -314,112 +319,112 @@ const zoningUtility = () => {
       </div>
 
       <div ref={SliderRef} class="zone_container">
-          {zones.map((zone, index) => (
-            <ZoneSection
-              key={index}
-              zone={zone.zone}
-              zoneAcreage={zone.zoneAcreage}
-              color={zone.color}
-              width={widths[index]}
-              noSliderButton={index === zones.length - 1}
-              onSliderSelect={(e) => {
+        {zones.map((zone, index) => (
+          <ZoneSection
+            key={index}
+            zone={zone.zone}
+            zoneAcreage={zone.zoneAcreage}
+            color={zone.color}
+            width={widths[index]}
+            noSliderButton={index === zones.length - 1}
+            onSliderSelect={(e) => {
+              e.preventDefault();
+              document.body.style.cursor = "ew-resize";
+
+              const startDragX = e.pageX;
+              const sliderWidth = SliderRef.current.offsetWidth;
+
+              const resize = (e) => {
                 e.preventDefault();
-                document.body.style.cursor = "ew-resize";
+                const endDragX = e.touches ? e.touches[0].pageX : e.pageX;
+                const distanceMoved = endDragX - startDragX;
+                const maxPercent = widths[index] + widths[index + 1];
 
-                const startDragX = e.pageX;
-                const sliderWidth = SliderRef.current.offsetWidth;
+                const percentageMoved = nearestN(
+                  0.1,
+                  getPercentage(sliderWidth, distanceMoved)
+                );
 
-                const resize = (e) => {
-                  e.preventDefault();
-                  const endDragX = e.touches ? e.touches[0].pageX : e.pageX;
-                  const distanceMoved = endDragX - startDragX;
-                  const maxPercent = widths[index] + widths[index + 1];
+                const _widths = [...widths];
+                const _zones = [...zones];
 
-                  const percentageMoved = nearestN(
-                    0.1,
-                    getPercentage(sliderWidth, distanceMoved)
-                  );
+                const prevPercentage = _widths[index];
+                const newPercentage = prevPercentage + percentageMoved;
+                const currentSectionWidth = limitNumberWithinRange(
+                  newPercentage,
+                  0,
+                  maxPercent
+                );
+                _widths[index] = currentSectionWidth;
 
-                  const _widths = [...widths];
-                  const _zones = [...zones];
+                const nextSectionIndex = index + 1;
+                const nextSectionNewPercentage =
+                  _widths[nextSectionIndex] - percentageMoved;
+                const nextSectionWidth = limitNumberWithinRange(
+                  nextSectionNewPercentage,
+                  0,
+                  maxPercent
+                );
+                _widths[nextSectionIndex] = nextSectionWidth;
 
-                  const prevPercentage = _widths[index];
-                  const newPercentage = prevPercentage + percentageMoved;
-                  const currentSectionWidth = limitNumberWithinRange(
-                    newPercentage,
-                    0,
-                    maxPercent
-                  );
-                  _widths[index] = currentSectionWidth;
+                // Update acreages based on new widths
+                const totalAcreage = zoningData.City.zoneAcreage;
+                _zones[index].zoneAcreage =
+                  (currentSectionWidth / 100) * totalAcreage;
+                _zones[nextSectionIndex].zoneAcreage =
+                  (nextSectionWidth / 100) * totalAcreage;
 
-                  const nextSectionIndex = index + 1;
-                  const nextSectionNewPercentage =
-                    _widths[nextSectionIndex] - percentageMoved;
-                  const nextSectionWidth = limitNumberWithinRange(
-                    nextSectionNewPercentage,
-                    0,
-                    maxPercent
-                  );
-                  _widths[nextSectionIndex] = nextSectionWidth;
+                var newZoneIncome =
+                  _zones[index].averagePropertyTaxPerAcre *
+                  _zones[index].zoneAcreage;
 
-                  // Update acreages based on new widths
-                  const totalAcreage = zoningData.City.zoneAcreage;
-                  _zones[index].zoneAcreage =
-                    (currentSectionWidth / 100) * totalAcreage;
-                  _zones[nextSectionIndex].zoneAcreage =
-                    (nextSectionWidth / 100) * totalAcreage;
+                var modAcres =
+                  _zones[index].zoneAcreage - _zones[index].ogAcreage;
 
-                  var newZoneIncome =
+                if (modAcres > 0) {
+                  newZoneIncome =
+                    modAcres * _zones[index].ten_averagePropertyTaxPerAcre +
                     _zones[index].averagePropertyTaxPerAcre *
-                    _zones[index].zoneAcreage;
+                      _zones[index].ogAcreage;
+                }
 
-                  var modAcres =
-                    _zones[index].zoneAcreage - _zones[index].ogAcreage;
+                // Update property taxes based on new acreages
+                if (newZoneIncome > 0) {
+                  _zones[index].totalPropertyTaxes = newZoneIncome;
+                } else {
+                  _zones[index].totalPropertyTaxes = 0;
+                }
 
-                  if (modAcres > 0) {
-                    newZoneIncome =
-                      modAcres * _zones[index].ten_averagePropertyTaxPerAcre +
-                      _zones[index].averagePropertyTaxPerAcre *
-                        _zones[index].ogAcreage;
-                  }
+                _zones[nextSectionIndex].totalPropertyTaxes =
+                  _zones[nextSectionIndex].averagePropertyTaxPerAcre *
+                  _zones[nextSectionIndex].zoneAcreage;
 
-                  // Update property taxes based on new acreages
-                  if (newZoneIncome > 0) {
-                    _zones[index].totalPropertyTaxes = newZoneIncome;
-                  } else {
-                    _zones[index].totalPropertyTaxes = 0;
-                  }
+                setWidths(_widths);
+                setZones(_zones);
+              };
 
-                  _zones[nextSectionIndex].totalPropertyTaxes =
-                    _zones[nextSectionIndex].averagePropertyTaxPerAcre *
-                    _zones[nextSectionIndex].zoneAcreage;
+              window.addEventListener("pointermove", resize);
+              window.addEventListener("touchmove", resize);
 
-                  setWidths(_widths);
-                  setZones(_zones);
-                };
+              const removeEventListener = () => {
+                window.removeEventListener("pointermove", resize);
+                window.removeEventListener("touchmove", resize);
+              };
 
-                window.addEventListener("pointermove", resize);
-                window.addEventListener("touchmove", resize);
+              const handleEventUp = (e) => {
+                e.preventDefault();
+                document.body.style.cursor = "initial";
+                removeEventListener();
+                window.removeEventListener("touchend", handleEventUp);
+                window.removeEventListener("pointerup", handleEventUp);
+              };
 
-                const removeEventListener = () => {
-                  window.removeEventListener("pointermove", resize);
-                  window.removeEventListener("touchmove", resize);
-                };
-
-                const handleEventUp = (e) => {
-                  e.preventDefault();
-                  document.body.style.cursor = "initial";
-                  removeEventListener();
-                  window.removeEventListener("touchend", handleEventUp);
-                  window.removeEventListener("pointerup", handleEventUp);
-                };
-
-                window.addEventListener("touchend", handleEventUp);
-                window.addEventListener("pointerup", handleEventUp);
-              }}
-            />
-          ))}
-        </div>
+              window.addEventListener("touchend", handleEventUp);
+              window.addEventListener("pointerup", handleEventUp);
+            }}
+          />
+        ))}
+      </div>
 
       <div>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
