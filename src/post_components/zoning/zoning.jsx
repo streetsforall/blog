@@ -93,13 +93,6 @@ const ZoneSection = ({
   onSliderSelect,
   noSliderButton,
 }) => {
-  const formatter = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
-  });
-
   return (
     <div
       className="zone"
@@ -158,20 +151,23 @@ const zoningUtility = () => {
       const modAcres = currentAcreage - originalAcreage;
       let newTotalTaxes;
 
-
       // console.log(currentAcreage, modAcres + originalAcreage)
 
-        if (modAcres > 0) {
-          // For increased acreage, apply higher rate to new development
-          // console.log(modAcres)
-          const newDev = modAcres * zone.ten_averagePropertyTaxPerAcre * (sliderValue / 100) ;
-          const oldDev = originalAcreage * zone.averagePropertyTaxPerAcre + modAcres * zone.averagePropertyTaxPerAcre * ((100 - sliderValue) / 100)
+      if (modAcres > 0) {
+        // For increased acreage, apply higher rate to new development
+        // console.log(modAcres)
+        const newDev =
+          modAcres * zone.ten_averagePropertyTaxPerAcre * (sliderValue / 100);
+        const oldDev =
+          originalAcreage * zone.averagePropertyTaxPerAcre +
+          modAcres *
+            zone.averagePropertyTaxPerAcre *
+            ((100 - sliderValue) / 100);
 
-
-          newTotalTaxes = newDev + oldDev + 162400000
-        } else {
-          newTotalTaxes = currentAcreage * zone.averagePropertyTaxPerAcre;
-        }
+        newTotalTaxes = newDev + oldDev + 162400000;
+      } else {
+        newTotalTaxes = currentAcreage * zone.averagePropertyTaxPerAcre;
+      }
 
       if (newTotalTaxes < 0) {
         newTotalTaxes = 0;
@@ -218,62 +214,91 @@ const zoningUtility = () => {
     setWidths(calculateWidths(resetZones));
   };
 
+  // useEffect(() => {
+  //   resetZoning(79);
+  // }, []);
+
   const handleChange = (event) => {
     setSlider(parseInt(event.target.value));
   };
 
   return (
     <div className="zoning-slider">
+      <h4>Zoning Property Tax Calculator</h4>
+
       <div className="budget-info" style={{ marginBottom: "20px" }}>
+        <button onClick={() => resetZoning(79)} style={{}}>
+          Show SB 79 Model
+        </button>
+
+        <button onClick={() => resetZoning(2024)} style={{}}>
+          Show 2024 Zoning
+        </button>
+
         <div
-          style={{
-            fontSize: "1.2rem",
-            fontWeight: "bold",
-            marginBottom: "10px",
-          }}
+          style={
+            {
+              // fontSize: "1.2rem",
+              // fontWeight: "bold",
+              // marginBottom: "10px",
+            }
+          }
         >
-          CITY BUDGET DEFICIT:
-          <span
-            style={{
-              color:
-                totalPropertyTaxes -
-                  zoningData.City.totalPropertyTaxes -
-                  931000000 >
-                0
-                  ? "green"
-                  : "red",
-              marginLeft: "10px",
-            }}
-          >
-            {formatter.format(
-              totalPropertyTaxes -
-                zoningData.City.totalPropertyTaxes -
-                931000000
-            )}
-          </span>
-        </div>
-        <div style={{ fontSize: "0.9rem" }}>
-          2024 Property Tax Roll:{" "}
-          {formatter.format(zoningData.City.totalPropertyTaxes)}
-          <br />
-          Modeled Property Tax Roll: {formatter.format(totalPropertyTaxes)}
-            <br />
-            Net Property Taxes: {formatter.format(totalPropertyTaxes - zoningData.City.totalPropertyTaxes)}
+          <table>
+            <tbody>
+              <tr>
+                <td>City Budget Deficit:</td>
+                <td
+                  style={{
+                    color:
+                      totalPropertyTaxes -
+                        zoningData.City.totalPropertyTaxes -
+                        931000000 >
+                      0
+                        ? "green"
+                        : "red",
+                    marginLeft: "10px",
+                  }}
+                >
+                  {formatter.format(
+                    totalPropertyTaxes -
+                      zoningData.City.totalPropertyTaxes -
+                      931000000
+                  )}
+                </td>
+              </tr>
+              <tr>
+                <td>2024 Property Tax Roll:</td>
+                {formatter.format(zoningData.City.totalPropertyTaxes)}
+              </tr>
+              <tr>
+                <td>Modeled Property Tax Roll:</td>
+                <td>{formatter.format(totalPropertyTaxes)}</td>
+              </tr>
+              <tr>
+                <td>Net Property Taxes:</td>
+                <td>
+                  {formatter.format(
+                    totalPropertyTaxes - zoningData.City.totalPropertyTaxes
+                  )}
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
 
-      <div style={{ marginBottom: "20px" }}>
+      <div className="dev_slider">
         <input
           type="range"
           min="10"
           max="90"
           value={slider}
-          defaultValue={slider}
           onChange={handleChange}
           step="10"
         />
 
-        <label>{slider}% of rezoning redeveloped</label>
+        <label><span style={{color: 'black'}}>{slider}%</span> of rezoning redeveloped</label>
       </div>
 
       <div class="zone_chart marker">
@@ -289,112 +314,112 @@ const zoningUtility = () => {
       </div>
 
       <div ref={SliderRef} class="zone_container">
-        {zones.map((zone, index) => (
-          <ZoneSection
-            key={index}
-            zone={zone.zone}
-            zoneAcreage={zone.zoneAcreage}
-            color={zone.color}
-            width={widths[index]}
-            noSliderButton={index === zones.length - 1}
-            onSliderSelect={(e) => {
-              e.preventDefault();
-              document.body.style.cursor = "ew-resize";
-
-              const startDragX = e.pageX;
-              const sliderWidth = SliderRef.current.offsetWidth;
-
-              const resize = (e) => {
+          {zones.map((zone, index) => (
+            <ZoneSection
+              key={index}
+              zone={zone.zone}
+              zoneAcreage={zone.zoneAcreage}
+              color={zone.color}
+              width={widths[index]}
+              noSliderButton={index === zones.length - 1}
+              onSliderSelect={(e) => {
                 e.preventDefault();
-                const endDragX = e.touches ? e.touches[0].pageX : e.pageX;
-                const distanceMoved = endDragX - startDragX;
-                const maxPercent = widths[index] + widths[index + 1];
+                document.body.style.cursor = "ew-resize";
 
-                const percentageMoved = nearestN(
-                  0.1,
-                  getPercentage(sliderWidth, distanceMoved)
-                );
+                const startDragX = e.pageX;
+                const sliderWidth = SliderRef.current.offsetWidth;
 
-                const _widths = [...widths];
-                const _zones = [...zones];
+                const resize = (e) => {
+                  e.preventDefault();
+                  const endDragX = e.touches ? e.touches[0].pageX : e.pageX;
+                  const distanceMoved = endDragX - startDragX;
+                  const maxPercent = widths[index] + widths[index + 1];
 
-                const prevPercentage = _widths[index];
-                const newPercentage = prevPercentage + percentageMoved;
-                const currentSectionWidth = limitNumberWithinRange(
-                  newPercentage,
-                  0,
-                  maxPercent
-                );
-                _widths[index] = currentSectionWidth;
+                  const percentageMoved = nearestN(
+                    0.1,
+                    getPercentage(sliderWidth, distanceMoved)
+                  );
 
-                const nextSectionIndex = index + 1;
-                const nextSectionNewPercentage =
-                  _widths[nextSectionIndex] - percentageMoved;
-                const nextSectionWidth = limitNumberWithinRange(
-                  nextSectionNewPercentage,
-                  0,
-                  maxPercent
-                );
-                _widths[nextSectionIndex] = nextSectionWidth;
+                  const _widths = [...widths];
+                  const _zones = [...zones];
 
-                // Update acreages based on new widths
-                const totalAcreage = zoningData.City.zoneAcreage;
-                _zones[index].zoneAcreage =
-                  (currentSectionWidth / 100) * totalAcreage;
-                _zones[nextSectionIndex].zoneAcreage =
-                  (nextSectionWidth / 100) * totalAcreage;
+                  const prevPercentage = _widths[index];
+                  const newPercentage = prevPercentage + percentageMoved;
+                  const currentSectionWidth = limitNumberWithinRange(
+                    newPercentage,
+                    0,
+                    maxPercent
+                  );
+                  _widths[index] = currentSectionWidth;
 
-                var newZoneIncome =
-                  _zones[index].averagePropertyTaxPerAcre *
-                  _zones[index].zoneAcreage;
+                  const nextSectionIndex = index + 1;
+                  const nextSectionNewPercentage =
+                    _widths[nextSectionIndex] - percentageMoved;
+                  const nextSectionWidth = limitNumberWithinRange(
+                    nextSectionNewPercentage,
+                    0,
+                    maxPercent
+                  );
+                  _widths[nextSectionIndex] = nextSectionWidth;
 
-                var modAcres =
-                  _zones[index].zoneAcreage - _zones[index].ogAcreage;
+                  // Update acreages based on new widths
+                  const totalAcreage = zoningData.City.zoneAcreage;
+                  _zones[index].zoneAcreage =
+                    (currentSectionWidth / 100) * totalAcreage;
+                  _zones[nextSectionIndex].zoneAcreage =
+                    (nextSectionWidth / 100) * totalAcreage;
 
-                if (modAcres > 0) {
-                  newZoneIncome =
-                    modAcres * _zones[index].ten_averagePropertyTaxPerAcre +
+                  var newZoneIncome =
                     _zones[index].averagePropertyTaxPerAcre *
-                      _zones[index].ogAcreage;
-                }
+                    _zones[index].zoneAcreage;
 
-                // Update property taxes based on new acreages
-                if (newZoneIncome > 0) {
-                  _zones[index].totalPropertyTaxes = newZoneIncome;
-                } else {
-                  _zones[index].totalPropertyTaxes = 0;
-                }
+                  var modAcres =
+                    _zones[index].zoneAcreage - _zones[index].ogAcreage;
 
-                _zones[nextSectionIndex].totalPropertyTaxes =
-                  _zones[nextSectionIndex].averagePropertyTaxPerAcre *
-                  _zones[nextSectionIndex].zoneAcreage;
+                  if (modAcres > 0) {
+                    newZoneIncome =
+                      modAcres * _zones[index].ten_averagePropertyTaxPerAcre +
+                      _zones[index].averagePropertyTaxPerAcre *
+                        _zones[index].ogAcreage;
+                  }
 
-                setWidths(_widths);
-                setZones(_zones);
-              };
+                  // Update property taxes based on new acreages
+                  if (newZoneIncome > 0) {
+                    _zones[index].totalPropertyTaxes = newZoneIncome;
+                  } else {
+                    _zones[index].totalPropertyTaxes = 0;
+                  }
 
-              window.addEventListener("pointermove", resize);
-              window.addEventListener("touchmove", resize);
+                  _zones[nextSectionIndex].totalPropertyTaxes =
+                    _zones[nextSectionIndex].averagePropertyTaxPerAcre *
+                    _zones[nextSectionIndex].zoneAcreage;
 
-              const removeEventListener = () => {
-                window.removeEventListener("pointermove", resize);
-                window.removeEventListener("touchmove", resize);
-              };
+                  setWidths(_widths);
+                  setZones(_zones);
+                };
 
-              const handleEventUp = (e) => {
-                e.preventDefault();
-                document.body.style.cursor = "initial";
-                removeEventListener();
-                window.removeEventListener("touchend", handleEventUp);
-                window.removeEventListener("pointerup", handleEventUp);
-              };
+                window.addEventListener("pointermove", resize);
+                window.addEventListener("touchmove", resize);
 
-              window.addEventListener("touchend", handleEventUp);
-              window.addEventListener("pointerup", handleEventUp);
-            }}
-          />
-        ))}
-      </div>
+                const removeEventListener = () => {
+                  window.removeEventListener("pointermove", resize);
+                  window.removeEventListener("touchmove", resize);
+                };
+
+                const handleEventUp = (e) => {
+                  e.preventDefault();
+                  document.body.style.cursor = "initial";
+                  removeEventListener();
+                  window.removeEventListener("touchend", handleEventUp);
+                  window.removeEventListener("pointerup", handleEventUp);
+                };
+
+                window.addEventListener("touchend", handleEventUp);
+                window.addEventListener("pointerup", handleEventUp);
+              }}
+            />
+          ))}
+        </div>
 
       <div>
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
@@ -433,13 +458,6 @@ const zoningUtility = () => {
           </tbody>
         </table>
       </div>
-
-      <button onClick={() => resetZoning(79)} style={{}}>
-        SB 79 Model
-      </button>
-      <button onClick={() => resetZoning(2024)} style={{}}>
-        Reset to 2024 Roll
-      </button>
     </div>
   );
 };
