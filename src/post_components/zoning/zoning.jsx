@@ -79,7 +79,7 @@ const initialZoningData = {
       SB_Acreage: 470.94,
       totalPropertyTaxes: 6675010.69,
       averagePropertyTaxPerAcre: 9979.3488,
-      ten_averagePropertyTaxPerAcre: 29663.70931,
+      ten_averagePropertyTaxPerAcre: 29663.71,
       color: "#b8b5b4",
     },
   ],
@@ -119,7 +119,7 @@ const ZoneSection = ({
 const zoningUtility = () => {
   const zoningData = JSON.parse(JSON.stringify(initialZoningData));
   const [zones, setZones] = useState(zoningData.zones);
-  const [slider, setSlider] = useState(50);
+  const [slider, setSlider] = useState(100);
 
   // Calculate percentages based on zoneAcreage
   const calculateWidths = (zonesData) => {
@@ -151,22 +151,27 @@ const zoningUtility = () => {
       const modAcres = currentAcreage - originalAcreage;
       let newTotalTaxes;
 
-      // console.log(currentAcreage, modAcres + originalAcreage)
+      console.log('modAcres', modAcres)
+
+
+      let newDev = 0;
+      let oldDev =
+      currentAcreage * zone.averagePropertyTaxPerAcre
 
       if (modAcres > 0) {
+        newDev = modAcres * zone.ten_averagePropertyTaxPerAcre * (sliderValue / 100);
 
-        const newDev =
-          modAcres * zone.ten_averagePropertyTaxPerAcre * (sliderValue / 100);
+        oldDev =
+          originalAcreage * zone.averagePropertyTaxPerAcre +
+          modAcres * zone.averagePropertyTaxPerAcre *  (1 -  sliderValue / 100)
+      }
 
-        const oldDev =
-          originalAcreage * 
-          zone.averagePropertyTaxPerAcre +
-          modAcres *
-            zone.averagePropertyTaxPerAcre *
-            ((100 - sliderValue) / 100);
+      console.log(zone.zone + ' oldDev:', Math.round(oldDev), ' newDev:', Math.round(newDev))
 
-        newTotalTaxes = (newDev + oldDev) * 1.52;
+      console.log('slider', (sliderValue / 100),  (1 - sliderValue / 100));
 
+      if (modAcres > 0) {
+        newTotalTaxes = newDev + oldDev;
       } else {
         newTotalTaxes = currentAcreage * zone.averagePropertyTaxPerAcre;
       }
@@ -216,9 +221,9 @@ const zoningUtility = () => {
     setWidths(calculateWidths(resetZones));
   };
 
-  // useEffect(() => {
-  //   resetZoning(79);
-  // }, []);
+  useEffect(() => {
+    resetZoning(79);
+  }, []);
 
   const handleChange = (event) => {
     setSlider(parseInt(event.target.value));
@@ -285,6 +290,12 @@ const zoningUtility = () => {
                   )}
                 </td>
               </tr>
+              <tr>
+                <td>Goal:</td>
+                <td>
+                $1,166,197,092.96
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -293,8 +304,8 @@ const zoningUtility = () => {
       <div className="dev_slider">
         <input
           type="range"
-          min="10"
-          max="90"
+          min="0"
+          max="100"
           value={slider}
           onChange={handleChange}
           step="10"
@@ -319,7 +330,10 @@ const zoningUtility = () => {
       </div>
 
       <div ref={SliderRef} class="zone_container">
+      
         {zones.map((zone, index) => (
+
+          // loop each zone
           <ZoneSection
             key={index}
             zone={zone.zone}
@@ -336,6 +350,7 @@ const zoningUtility = () => {
 
               const resize = (e) => {
                 e.preventDefault();
+                
                 const endDragX = e.touches ? e.touches[0].pageX : e.pageX;
                 const distanceMoved = endDragX - startDragX;
                 const maxPercent = widths[index] + widths[index + 1];
@@ -378,14 +393,15 @@ const zoningUtility = () => {
                   _zones[index].averagePropertyTaxPerAcre *
                   _zones[index].zoneAcreage;
 
+                // how many acres have been adjusted
                 var modAcres =
                   _zones[index].zoneAcreage - _zones[index].ogAcreage;
 
+                var newValue =  modAcres * _zones[index].ten_averagePropertyTaxPerAcre
+                var oldValue = _zones[index].averagePropertyTaxPerAcre * _zones[index].ogAcreage
+
                 if (modAcres > 0) {
-                  newZoneIncome =
-                    modAcres * _zones[index].ten_averagePropertyTaxPerAcre +
-                    _zones[index].averagePropertyTaxPerAcre *
-                      _zones[index].ogAcreage;
+                  var newZoneIncome = newValue + oldValue;
                 }
 
                 // Update property taxes based on new acreages
@@ -394,6 +410,9 @@ const zoningUtility = () => {
                 } else {
                   _zones[index].totalPropertyTaxes = 0;
                 }
+
+                _zones[index].totalPropertyTaxes =  _zones[index].averagePropertyTaxPerAcre * _zones[index].zoneAcreage;
+
 
                 _zones[nextSectionIndex].totalPropertyTaxes =
                   _zones[nextSectionIndex].averagePropertyTaxPerAcre *
