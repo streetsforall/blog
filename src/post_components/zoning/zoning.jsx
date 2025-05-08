@@ -119,7 +119,7 @@ const ZoneSection = ({
 const zoningUtility = () => {
   const zoningData = JSON.parse(JSON.stringify(initialZoningData));
   const [zones, setZones] = useState(zoningData.zones);
-  const [slider, setSlider] = useState(100);
+  const [slider, setSlider] = useState(25);
 
   // Calculate percentages based on zoneAcreage
   const calculateWidths = (zonesData) => {
@@ -253,7 +253,7 @@ const zoningUtility = () => {
         >
           <table>
             <tbody>
-              <tr>
+              {/* <tr>
                 <td>City Budget Deficit:</td>
                 <td
                   style={{
@@ -273,7 +273,7 @@ const zoningUtility = () => {
                       931000000
                   )}
                 </td>
-              </tr>
+              </tr> */}
               <tr>
                 <td>2024 Property Tax Roll:</td>
                 {formatter.format(zoningData.City.totalPropertyTaxes)}
@@ -295,20 +295,17 @@ const zoningUtility = () => {
         </div>
       </div>
 
-      <div className="dev_slider">
-        <input
-          type="range"
-          min="0"
-          max="100"
-          value={slider}
-          onChange={handleChange}
-          step="10"
-        />
+      <div>
+      <select
+          onChange={handleChange} >
+        <option value="25">25%</option>
+        <option value="50">50%</option>
+        <option value="75">75%</option>
+        <option value="100">100%</option>
+      </select>
+      
 
-        <label>
-          <span style={{ color: "black" }}>{slider}%</span> of rezoning
-          redeveloped
-        </label>
+        <label> of rezoning redeveloped </label>
       </div>
 
       <div class="zone_chart marker">
