@@ -26,7 +26,7 @@ const initialZoningData = {
       zone: "R5",
       zoneAcreage: 603.07,
       ogAcreage: 603.07,
-      SB_Acreage: 1691.05,
+      SB_Acreage: 2000.53,
       totalPropertyTaxes: 89706846.22,
       averagePropertyTaxPerAcre: 148750.3058,
       ten_averagePropertyTaxPerAcre: 392560.5201,
@@ -36,7 +36,7 @@ const initialZoningData = {
       zone: "R4",
       zoneAcreage: 13718.34,
       ogAcreage: 13718.34,
-      SB_Acreage: 17320.4,
+      SB_Acreage: 18845.24,
       totalPropertyTaxes: 332342622.51,
       averagePropertyTaxPerAcre: 24226.16204,
       ten_averagePropertyTaxPerAcre: 64660.93448,
@@ -46,7 +46,7 @@ const initialZoningData = {
       zone: "R3",
       zoneAcreage: 26958.1,
       ogAcreage: 26958.1,
-      SB_Acreage: 32795.6,
+      SB_Acreage: 30961.33,
       totalPropertyTaxes: 439214517.95,
       averagePropertyTaxPerAcre: 16292.49069,
       ten_averagePropertyTaxPerAcre: 36963.23072,
@@ -288,12 +288,6 @@ const zoningUtility = () => {
                   {formatter.format(
                     totalPropertyTaxes - zoningData.City.totalPropertyTaxes
                   )}
-                </td>
-              </tr>
-              <tr>
-                <td>Goal:</td>
-                <td>
-                $1,166,197,092.96
                 </td>
               </tr>
             </tbody>
