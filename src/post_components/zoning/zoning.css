@@ -19,7 +19,7 @@
     font-size: .8rem;
     color: var(--gray-light);
     margin-right: .5rem;
-}
+} 
 
 .zone_container {
     width: 100%;
@@ -43,6 +43,10 @@
     font-family: monospace;
     white-space: nowrap;
     font-size: .7rem;
+}
+
+select {
+ margin: 0 .5rem;
 }
 
 .zone div { 

@@ -119,7 +119,7 @@ const ZoneSection = ({
 const zoningUtility = () => {
   const zoningData = JSON.parse(JSON.stringify(initialZoningData));
   const [zones, setZones] = useState(zoningData.zones);
-  const [slider, setSlider] = useState(25);
+  const [slider, setSlider] = useState(20);
 
   // Calculate percentages based on zoneAcreage
   const calculateWidths = (zonesData) => {
@@ -148,33 +148,27 @@ const zoningUtility = () => {
       const currentAcreage = zone.zoneAcreage;
       const originalAcreage = zone.ogAcreage;
 
-      const modAcres = currentAcreage - originalAcreage;
-      let newTotalTaxes;
+      // solve for new zoning that has been redeveloped
+      // subtract any any parcels that have been redeveloped from OG zoning
+      // new acres changed if above 0
 
-      console.log('modAcres', modAcres)
+      const redevedAcres =
+        zone.zoneAcreage - originalAcreage < 0
+          ? 0
+          : zone.zoneAcreage - originalAcreage;
 
+      const unChangedAcres = currentAcreage - redevedAcres;
 
-      let newDev = 0;
-      let oldDev =
-      currentAcreage * zone.averagePropertyTaxPerAcre
+      let newDev = redevedAcres * zone.ten_averagePropertyTaxPerAcre;
 
-      if (modAcres > 0) {
-        newDev = modAcres * zone.ten_averagePropertyTaxPerAcre * (sliderValue / 100);
+      let oldDev = unChangedAcres * zone.averagePropertyTaxPerAcre;
 
-        oldDev =
-          originalAcreage * zone.averagePropertyTaxPerAcre +
-          modAcres * zone.averagePropertyTaxPerAcre *  (1 -  sliderValue / 100)
-      }
+      // console.log(zone.zone, 'total', currentAcreage, 'redevedAcres', Math.round(redevedAcres), ' unChangedAcres:', Math.round(unChangedAcres))
+      // console.log(zone.zone, 'Net Acres', Math.round(redevedAcres) - Math.round(unChangedAcres))
 
-      console.log(zone.zone + ' oldDev:', Math.round(oldDev), ' newDev:', Math.round(newDev))
+      // console.log('slider', (sliderValue / 100),  (1 - sliderValue / 100));
 
-      console.log('slider', (sliderValue / 100),  (1 - sliderValue / 100));
-
-      if (modAcres > 0) {
-        newTotalTaxes = newDev + oldDev;
-      } else {
-        newTotalTaxes = currentAcreage * zone.averagePropertyTaxPerAcre;
-      }
+      let newTotalTaxes = newDev + oldDev;
 
       if (newTotalTaxes < 0) {
         newTotalTaxes = 0;
@@ -193,13 +187,19 @@ const zoningUtility = () => {
       (sum, zone) => sum + zone.totalPropertyTaxes,
       0
     );
-    setTotalPropertyTaxes(updatedTotal);
+
+    let redevRatio =
+      updatedTotal * (slider / 100) +
+      zoningData.City.totalPropertyTaxes * (1 - slider / 100);
+
+    console.log(redevRatio, updatedTotal, zoningData.City.totalPropertyTaxes);
+    setTotalPropertyTaxes(redevRatio);
   }, [zones, slider]);
 
   useEffect(() => {
     const updatedZones = calculatePropertyTaxes(zones, slider, 0);
     setZones(updatedZones);
-  }, [slider]);
+  }, [slider, zones]);
 
   // Reset function
   const resetZoning = (modelType) => {
@@ -233,47 +233,32 @@ const zoningUtility = () => {
     <div className="zoning-slider">
       <h4>Zoning Property Tax Calculator</h4>
 
+      <p class="label">
+        This calculator allows you to adjust zoning buckets and see how much
+        revenue could be brought in by property taxes. It currently assumes a redevolpement ratio of 
+        <select onChange={handleChange}>
+        <option value="0">0%</option>
+          <option selected value="20">20%</option>
+          <option value="40">40%</option>
+          <option value="60">60%</option>
+          <option value="80">80%</option>
+          <option value="100">100%</option>
+        </select>
+      </p>
+
       <div className="budget-info" style={{ marginBottom: "20px" }}>
         <button onClick={() => resetZoning(79)} style={{}}>
-          Show SB 79 Model
+          Reset to SB 79 Model
         </button>
 
         <button onClick={() => resetZoning(2024)} style={{}}>
-          Show 2024 Zoning
+          Reset to 2024 Zoning
         </button>
 
         <div
-          style={
-            {
-              // fontSize: "1.2rem",
-              // fontWeight: "bold",
-              // marginBottom: "10px",
-            }
-          }
         >
           <table>
             <tbody>
-              {/* <tr>
-                <td>City Budget Deficit:</td>
-                <td
-                  style={{
-                    color:
-                      totalPropertyTaxes -
-                        zoningData.City.totalPropertyTaxes -
-                        931000000 >
-                      0
-                        ? "green"
-                        : "red",
-                    marginLeft: "10px",
-                  }}
-                >
-                  {formatter.format(
-                    totalPropertyTaxes -
-                      zoningData.City.totalPropertyTaxes -
-                      931000000
-                  )}
-                </td>
-              </tr> */}
               <tr>
                 <td>2024 Property Tax Roll:</td>
                 {formatter.format(zoningData.City.totalPropertyTaxes)}
@@ -283,8 +268,17 @@ const zoningUtility = () => {
                 <td>{formatter.format(totalPropertyTaxes)}</td>
               </tr>
               <tr>
-                <td>Net Property Taxes:</td>
-                <td>
+                <td>Gross Property Taxes:</td>
+                <td
+                  style={{
+                    color:
+                      totalPropertyTaxes - zoningData.City.totalPropertyTaxes >
+                      0
+                        ? "green"
+                        : "red",
+                    marginLeft: "10px",
+                  }}
+                >
                   {formatter.format(
                     totalPropertyTaxes - zoningData.City.totalPropertyTaxes
                   )}
@@ -295,18 +289,6 @@ const zoningUtility = () => {
         </div>
       </div>
 
-      <div>
-      <select
-          onChange={handleChange} >
-        <option value="25">25%</option>
-        <option value="50">50%</option>
-        <option value="75">75%</option>
-        <option value="100">100%</option>
-      </select>
-      
-
-        <label> of rezoning redeveloped </label>
-      </div>
 
       <div class="zone_chart marker">
         {zoningData.zones.map((z) => (
@@ -321,9 +303,7 @@ const zoningUtility = () => {
       </div>
 
       <div ref={SliderRef} class="zone_container">
-      
         {zones.map((zone, index) => (
-
           // loop each zone
           <ZoneSection
             key={index}
@@ -341,7 +321,7 @@ const zoningUtility = () => {
 
               const resize = (e) => {
                 e.preventDefault();
-                
+
                 const endDragX = e.touches ? e.touches[0].pageX : e.pageX;
                 const distanceMoved = endDragX - startDragX;
                 const maxPercent = widths[index] + widths[index + 1];
@@ -380,30 +360,48 @@ const zoningUtility = () => {
                 _zones[nextSectionIndex].zoneAcreage =
                   (nextSectionWidth / 100) * totalAcreage;
 
-                var newZoneIncome =
-                  _zones[index].averagePropertyTaxPerAcre *
-                  _zones[index].zoneAcreage;
+                let redevedAcres =
+                  _zones[index].zoneAcreage - _zones[index].ogAcreage < 0
+                    ? 0
+                    : _zones[index].zoneAcreage - _zones[index].ogAcreage;
 
-                // how many acres have been adjusted
-                var modAcres =
-                  _zones[index].zoneAcreage - _zones[index].ogAcreage;
+                let unChangedAcres = _zones[index].zoneAcreage - redevedAcres;
 
-                var newValue =  modAcres * _zones[index].ten_averagePropertyTaxPerAcre
-                var oldValue = _zones[index].averagePropertyTaxPerAcre * _zones[index].ogAcreage
+                let newDev =
+                  redevedAcres * _zones[index].ten_averagePropertyTaxPerAcre;
 
-                if (modAcres > 0) {
-                  var newZoneIncome = newValue + oldValue;
+                let oldDev =
+                  unChangedAcres * _zones[index].averagePropertyTaxPerAcre;
+
+                let newTotalTaxes = newDev + oldDev;
+
+                if (newTotalTaxes < 0) {
+                  newTotalTaxes = 0;
                 }
 
-                // Update property taxes based on new acreages
-                if (newZoneIncome > 0) {
-                  _zones[index].totalPropertyTaxes = newZoneIncome;
-                } else {
-                  _zones[index].totalPropertyTaxes = 0;
-                }
+                // var newZoneIncome =
+                //   _zones[index].averagePropertyTaxPerAcre *
+                //   _zones[index].zoneAcreage;
 
-                _zones[index].totalPropertyTaxes =  _zones[index].averagePropertyTaxPerAcre * _zones[index].zoneAcreage;
+                // // how many acres have been adjusted
+                // var modAcres =
+                //   _zones[index].zoneAcreage - _zones[index].ogAcreage;
 
+                // var newValue =  modAcres * _zones[index].ten_averagePropertyTaxPerAcre
+                // var oldValue = _zones[index].averagePropertyTaxPerAcre * _zones[index].ogAcreage
+
+                // if (modAcres > 0) {
+                //   var newZoneIncome = newValue + oldValue;
+                // }
+
+                // // Update property taxes based on new acreages
+                // if (newZoneIncome > 0) {
+                //   _zones[index].totalPropertyTaxes = newZoneIncome;
+                // } else {
+                //   _zones[index].totalPropertyTaxes = 0;
+                // }
+
+                _zones[index].totalPropertyTaxes = newTotalTaxes;
 
                 _zones[nextSectionIndex].totalPropertyTaxes =
                   _zones[nextSectionIndex].averagePropertyTaxPerAcre *
