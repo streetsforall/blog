@@ -15,56 +15,65 @@ const {
   heroImage,
   heroImageCredit,
   authors,
+  headings,
 } = Astro.props;
+
+const hasTableOfContents = headings.length > 0;
 ---
 
 <html lang="en">
   <head>
     <BaseHead title={title} description={description} />
     <style>
-
-      .prose {
-        width: 100%;
-        max-width: calc(100%);
-        margin: auto;
-        /* padding: 1em; */
-        color: rgb(var(--gray-dark));
-      }
-
-      .title {
-        margin: 2rem 0;
-        text-align: left;
-        line-height: 1;
-        color: rgb(var(--gray-dark));
-		
-      }
-
-      .date {
-        margin: 1rem 0;
-        color: var(--gray);
-		font-family: monospace;
-      }
-
-      .authors {
-		margin: 1rem 0;
-		padding: 2rem 0;
-		font-size: .9rem;
-		line-height: 1.2;
-        white-space: pre-line;
-		font-family: monospace;
-		color: var(--gray);
-		border-bottom: 1px dotted var(--gray);
-		border-top: 1px dotted var(--gray);
-      }
-
+    .prose {
+      width: 100%;
+      max-width: calc(100%);
+      margin: auto;
+      /* padding: 1em; */
+      color: rgb(var(--gray-dark));
+    }
+    .title {
+      margin: 2rem 0;
+      text-align: left;
+      line-height: 1;
+      color: rgb(var(--gray-dark));
+    }
+    .date {
+      margin: 1rem 0;
+      color: var(--gray);
+		  font-family: monospace;
+    }
+    .authors {
+		  margin: 1rem 0;
+		  padding: 2rem 0;
+		  font-size: .9rem;
+		  line-height: 1.2;
+      white-space: pre-line;
+		  font-family: monospace;
+		  color: var(--gray);
+		  border-bottom: 1px dotted var(--gray);
+		  border-top: 1px dotted var(--gray);
+    }
 	  .hero-image {
-		margin-bottom: 0
+		  margin-bottom: 0
 	  }
-
-
-      .last-updated-on {
-        font-style: italic;
-      }
+    .last-updated-on {
+      font-style: italic;
+    }
+    .toc-section {
+      margin-bottom: 1rem;
+    }
+    .toc-link {
+      text-decoration: none;
+      color: var(--gray-dark);
+    }
+    .toc-link:hover {
+      text-decoration: underline;
+      color: var(--black);
+    }
+    .toc-item {
+      padding: .5rem 0 .5rem 0rem;
+    }
     </style>
   </head>
 
@@ -94,7 +103,25 @@ const {
             </div>
 
             <h1>{title}</h1>
-            {authors && <div class="authors">{authors}</div>}
+            {authors && <div class="authors">
+              {hasTableOfContents && (
+                <div class="toc-section">
+                  <h4>Table of Contents</h4>
+                  <div>
+                    {headings.map((heading) => (
+                    <div class="toc-item">
+                      <a class="toc-link" href={`#${heading.slug}`}>{heading.text}</a>
+                    </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+              <div>
+                <h4>Authors</h4>
+                {authors}
+              </div>
+            </div>
+            }
           </div>
           <slot />
         </div>
