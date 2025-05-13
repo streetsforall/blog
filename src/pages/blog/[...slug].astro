@@ -5,17 +5,17 @@ import { render } from 'astro:content';
 
 
 export async function getStaticPaths() {
-	const posts = await getCollection('blog');
-	const headings = await Promise.all(
+  const posts = await getCollection('blog');
+  const headings = await Promise.all(
     posts.map(async (post) => {
       const { headings } = await render(post);
       return headings;
     })
   );
-	return posts.map((post, index) => ({
-		params: { slug: post.id },
-		props: {post, headings: headings[index] },
-	}));
+  return posts.map((post, index) => ({
+    params: { slug: post.id },
+    props: {post, headings: headings[index] },
+  }));
 }
 
 type Props = CollectionEntry<'blog'>;
@@ -25,5 +25,5 @@ const { Content } = await render(post);
 ---
 
 <BlogPost {...post.data} {headings}>
-	<Content />
+  <Content />
 </BlogPost>
