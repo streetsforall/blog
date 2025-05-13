@@ -235,7 +235,7 @@ const zoningUtility = () => {
 
       <p class="label">
         This calculator allows you to adjust zoning buckets and see how much
-        revenue could be brought in by property taxes. It currently assumes a redevolpement ratio of 
+        revenue could be brought in by property taxes. It currently assumes a redevelopment ratio of 
         <select onChange={handleChange}>
         <option value="0">0%</option>
           <option selected value="20">20%</option>

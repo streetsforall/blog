@@ -159,6 +159,11 @@ hr {
   }
 }
 
+.hero-image img {
+  max-height: 20rem;
+  object-fit: cover;
+}
+
 
 .date {
   margin: 0;

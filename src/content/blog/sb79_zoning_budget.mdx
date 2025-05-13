@@ -1,11 +1,11 @@
 ---
-title: "Can SB 79 fix LA's Budget?"
+title: "Land Use Reform Can Solve the Los Angeles Budget Crisis"
 pubDate: "April 20 2025"
-heroImageCredit: ""
-heroImage: ""
-description: ""
-authors: ""
-published: false
+heroImageCredit: "Height map of property tax revenue per parcel in the core of Los Angeles."
+heroImage: "/images/sb79/prop_rev_2.jpeg"
+description: "Our high-level analysis shows how restrictive, exclusionary zoning has accentuated the City’s financial crisis, and how targeting upzoning could help balance budgets. Senate Bill 79 would create capacity to grow the City of LA’s annual property tax income by nearly $1 billion."
+authors: "Report Written by Josh Vredevoogd, Joey Shoyer, and Michael Le  \n \n Technical Analysis by Joey Shoyer \n \n Additional thanks to the SFA Data/Dev team, Associate Director of State Policy Kirsten Bladh, and Director of State Policy Marc Vukcevich"
+published: true
 
 ---
 import { Image } from 'astro:assets';
@@ -15,9 +15,9 @@ import ZoningUtility from '../../post_components/zoning/zoning.jsx';
 
 The City of LA is facing a massive nearly $1 Billion budget shortfall in 2025, largely due to a combination of salary increases and settlement payouts. It's hard to overstate the dire consequences of this deficit, which threatens many vital services, but specifically would be catastrophic for progress on SFA’s core mission to build safer, more efficient roads in Los Angeles. 
 
-Our high-level analysis shows how restrictive, exclusionary zoning has accentuated the City’s financial crisis, and how targeting upzoning could help balance budgets. It’s important to note that property taxes and redevelopment happen slowly over time, so associated revenue increases are a long term structural fix to the city’s deficit. 
+Our high-level analysis shows how restrictive, exclusionary zoning has accentuated the City’s financial crisis, and how targeting upzoning could help balance budgets. It’s important to note that property taxes and redevelopment happen slowly over time, so associated revenue increases are a long term structural solution to the city’s deficit as opposed to a quick fix. 
 <b>
-1. Multi-family housing and commercial parcels represent 12% of land in the City of LA, but nearly half of its property tax revenue. . 
+1. Multi-family housing and commercial parcels represent 12% of land in the City of LA, but nearly half of its property tax revenue. 
 2. SB 79 would create capacity to grow the City of LA’s annual property tax income by nearly $1 billion
 3. Redeveloping 20% of parcels upzoned under SB 79 would increase property tax revenue enough to avoid layoffs
 </b>
@@ -26,32 +26,52 @@ The largest single source of dollars in the LA City budget comes from property t
 
 <ZoningUtility client:load load="all" />
 
+It’s important to be clear that rezoning won’t solve the city of LA’s deficit immediately. Additional revenue requires redevelopment to take place first (this is both because of Prop 13, and the higher value of denser buildings). If passed, will SB 79 solve the budget next year? No. But in 5 or 10 years? Its impact will be significant. 
+
 
 ### SB 79
 
 SB 79 (sponsored by Streets for All) is one of the largest housing bills moving through the state legislature this session. It does two things: sets minimum zoning densities across the state near high capacity transit, and allows transit agencies more flexibility in developing land that they own. We are focused on the former impact in this study.
 
-Transit oriented housing brings many benefits, it allows people to live closer to work and amenities, it reduces vehicle miles driven, and overall brings new housing capacity to the City of LA.
+In LA, 45% (10,421 acres) of potential residential parcels near Metro stops are limited by  zoning to either single family homes, duplexes, or parking lots. As a region we are spending billions in taxpayer dollars to build high quality transit but suffocating ridership with poor land use.
 
-SB 79 would impact around 7.5% of the City of Los Angeles - mostly concentrated on already dense parts of the City such as DTLA, Hollywood, Koreatown, and Century City.  
+SB79 would upzone along existing and planned transit lines. The upzones come in 3 levels, the highest density would be concentrated along the D and B lines through DTLA, Hollywood, Koreatown, and Century City, with medium density added along light rail and bus projects (including new transit projects like the Vermont BRT and East San Fernando Valley Light Rail). 
 
-To understand the impacts of rezoning we first aggregated hundreds of individual zoning categories in the City of Los Angeles to simple zoning buckets (R5, R4, R3, R2, R1) which we could then attribute to the new zoning permitted under SB 79. While this is a coarse model, it means that we are comparing what is actually being built in different zoning conditions in the City of LA without trying to model complicated attributes like setbacks, FAR, or community overlays. 
+All told, SB 79 would impact around 7.5% of residential zoning in LA and 3.3% of the City as a whole. 
 
-With simple zoning buckets, we were able to use County Assessor data to find the average property tax value per acre per zoning category. Below you can find a utility where you can modify zoning ratios and see their impact on the city budget. 
+Allowing multi-family housing near transit also brings other benefits: it allows people to live closer to work and amenities, it reduces vehicle miles driven, and overall brings much needed new housing capacity to the City of LA. Notable for this study, new multi-family transit oriented development would also be a significant increase in property tax revenue for the City compared to previous uses. 
 
-It’s important to be clear that rezoning won’t solve the city of LA deficit immediately. Additional revenue requires redevelopment (this is both because of Prop 13, and the larger value of larger buildings). Our analysis shows potential revenue uncaptured - one way to think about this is if SB 79 passed 10 years ago the current deficit would be much smaller or non-existent.
+### Building a Simplified Zoning Model of LA
+
+Los Angeles has hundreds of unique combinations of zoning codes. The first step of our analysis was to figure out how to translate this complicated system into simpler categories that reflected, at a high level, what could be built per parcel.
+
+We decided to use codes that are simple to understand and reflect different levels of residential density: R5, R4, R3, R2, R1. Specific category decisions were made looking at existing zoning, buildings, and in consultation with land use attorneys. While this is a coarse model, it means that we are comparing what is actually being built in different zoning conditions in the City of LA without trying to model complicated attributes like setbacks, floor-to-area ratio (FAR), or community overlays.
+
+Consolidating multi-family zoning was generally straightforward. Commercial lots were determined by zone height. We ignored all park space, municipal land (such as schools), agricultural land, and manufacturing zoning. 
+
+In relating zoning to SB79 - we use R5 to represent Level 1, R4 to represent Level 2, and R3 to represent Level 1. These aren’t perfect analogies - many existing R5 buildings in the City of LA are much taller than allowed under the State bill.
+
+However, because we are averaging against the wide bucket of current land use per zoning category, the average City revenue here is pulled down by underutilized lots. In fact, comparing recent examples of redevelopment that match the building envelopes allowed under SB79 we find property tax revenue is often more than our model estimates. For example, the apartment building at 3980 Wilshire Blvd is 8 stories tall with 228 units, a reasonable proxy for what would be allowed under SB79’s most generous tier combined with state density law. This property brings in $887,527 per acre - more than two times our estimate for R5 parcels. For this reason we consider our analysis conservative, and the ceiling for increased property tax revenue is likely higher.
+
+Another place where our model is likely over simplistic is Downtown Los Angeles. We used zoning classifications set before the new Downtown Community Plan was passed last November (considering it is too recent to impact any ongoing development). However, by ignoring all manufacturing zoning we ignore the eastern parts of DTLA, including any development in Skid Row and the Arts District. 
 
 
 <img src="/images/sb79/4_11_zoning_pass_1.jpg" alt="Map of the City of Los Angeles color coded by zoning bucket." />
 <p class="subtitle">Map of the simplified zoning catagories used for our analysis.</p>
 
+### Property Taxes and the LA City Budget
 
-### How Property Taxes Work in LA City
+These are things Angeleno’s feel. Our street lights are out. Our pavement quality is the third worst in the nation. 2025 is just a notably bad budget year for a budget that is consistently and systemically stretched to the breaking point.
+
+Like many municipalities, property taxes are the largest single contributor to the Los Angeles city budget, making up a third of the general fund. Property taxes are considered more stable than other contributors such as sales taxes which fall and rise closely with the economy.
+
+Every property is assessed for the value of the land and the value of any improvements built on top of it (in LA, this is done by the County Assessor). The value of the property (land + improvements) is called the “assessed value”. In California, 1978’s Proposition 13 limits the annual rate of assessed value increase to 2% per year unless the property is sold or significantly modified. This means there are many properties paying taxes on assessed values far below market value for their home. Prop 13 did something else that reduces how much Cities can rely on property taxes as a revenue source - it limited the maximum tax on a property to 1%. That’s what’s used in the City of LA.
+
+Armed with an assessed value and the relevant property tax (1%), the County Assessor collects taxes. LA County property taxes are split between a variety of countywide services and local cities. How much each city gets is determined by its size - for the City of LA it works out to roughly 25 cents of every dollar collected locally making its way to the general fund. 
 
 
-1. Every property is assessed for the value of the land and the value of any improvements built on top of it (in LA, this is done by the County Assessor)
-2. The value of the property (land + improvements) is called the “assessed value”. In California, 1978’s Proposition 13 limits the annual rate of assessed value increase to 2% per year unless the property is sold or significantly modified. This means there are many properties paying taxes on assessed values far below market value for their home. Prop 13 did something else that reduces how much City’s can rely on property taxes as a revenue source - it limited the maximum tax on a property to 1%. That’s what’s used in the City of LA.
-3. Armed with an assessed value and the relevant property tax (1%), the County Assessor collects taxes. LA County property taxes are split between a variety of countywide services and local cities. How much each city gets is determined by its size - for the City of LA it works out to roughly 25 cents of every dollar collected locally makes its way to the general fund. 
+<img src="/images/sb79/5_13_per_acre.jpg" alt="Map of property tax revenue per acre in the City of LA" />
+<p class="subtitle">Map of property tax revenue per acre in the City of LA</p>
 
 
 ### Methodology on Modeling Property Tax Revenue
