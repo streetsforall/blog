@@ -199,7 +199,7 @@ const zoningUtility = () => {
   useEffect(() => {
     const updatedZones = calculatePropertyTaxes(zones, slider, 0);
     setZones(updatedZones);
-  }, [slider]);
+  }, [zones, slider]);
 
   // Reset function
   const resetZoning = (modelType) => {
@@ -239,9 +239,9 @@ const zoningUtility = () => {
         This calculator allows you to adjust zoning buckets and see how much
         revenue could be brought in by property taxes. It currently assumes a
         redevelopment ratio of
-        <select value="20" onChange={handleChange}>
+        <select onChange={handleChange}>
           <option value="0">0%</option>
-          <option value="20">20%</option>
+          <option selected value="20">20%</option>
           <option value="40">40%</option>
           <option value="60">60%</option>
           <option value="80">80%</option>
