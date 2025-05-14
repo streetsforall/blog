@@ -63,17 +63,18 @@ __All told, SB 79 would impact around 7.5% of residential zoning in LA and 3.3% 
 
 Allowing multi-family housing near transit also brings other benefits: it allows people to live closer to work and amenities, it reduces vehicle miles driven, and overall brings much needed new housing capacity to the City of LA. Notable for this study, new multi-family transit oriented development would also be a significant increase in property tax revenue for the City compared to previous uses. 
 
+## Building a Simplified Zoning Model for Los Angeles
+
+Los Angeles has hundreds of unique combinations of zoning codes. The first step of our analysis was to figure out how to translate this complicated system into a generalized zoning map that reflected, at a high level, what could be built per parcel.
+
+We decided to use codes that are simple to understand and reflect different levels of residential density: R5, R4, R3, R2, R1. Specific category decisions were made looking at existing zoning, buildings, and in consultation with land use attorneys. While this is a coarse model, it means that we are comparing what is actually being built in different zoning conditions in the City of LA without trying to model complicated attributes like setbacks, floor-to-area ratio (FAR), or community overlays. For a full list of our generalized zoning codes see <a target="_blank" href="https://docs.google.com/spreadsheets/d/1SpdafH6pvrP9rrxcueybcNyttvxN117oIPx5lkhpXIM/edit?usp=sharing">this spreadsheet</a>.
+
+What we are calling “residentially suitable land” means all land in the city NOT zoned for park space, municipal uses (such as schools), agricultural uses, manufacturing, open space, or roads. The land we’ve excluded you can see in the map below in green. 
+
+__Using our zoning map, we find that over 100,000 acres of land, or 45% of all residentially suitable land, is zoned for low density (R1, R2, or Parking), within a ½ mile radius of SB79’s definition of a high quality transit stop.__
 
 <img src="/images/sb79/4_11_zoning_pass_1.jpg" alt="Map of the City of Los Angeles color coded by zoning bucket." />
 <p class="subtitle">Map of simplified existing zoning categories used for our analysis</p>
-
-### Building a Simplified Zoning Model of LA
-
-Los Angeles has hundreds of unique combinations of zoning codes. The first step of our analysis was to figure out how to translate this complicated system into simpler categories that reflected, at a high level, what could be built per parcel.
-
-We decided to use codes that are simple to understand and reflect different levels of residential density: R5, R4, R3, R2, R1. Specific category decisions were made looking at existing zoning, buildings, and in consultation with land use attorneys. While this is a coarse model, it means that we are comparing what is actually being built in different zoning conditions in the City of LA without trying to model complicated attributes like setbacks, floor-to-area ratio (FAR), or community overlays.
-
-Consolidating multi-family zoning was generally straightforward. Commercial lots were determined by zone height. We ignored all park space, municipal land (such as schools), agricultural land, and manufacturing zoning. 
 
 In relation to SB79 upzoning - we use R5, R4, and R3 to represent the three buckets included in the bill. 
 
@@ -83,21 +84,34 @@ In relation to SB79 upzoning - we use R5, R4, and R3 to represent the three buck
 | R4 |  1/2 Mile of Tier 1 Transit Stops (Heavy Rail transit) <br/><br/> 1/4 Mile of Tier 2 Transit Stops (Light Rail, BRT, Frequent Commuter Rail) | 65 feet | 100 units/acre |
 | R3 |  1/2 Mile of Tier 2 Transit Stops (Light Rail, BRT, Frequent Commuter Rail) | 55 feet | 80 units/acre |
 
-However, because we are averaging against the wide bucket of current land use per zoning category, the average City revenue here is pulled down by underutilized lots. In fact, comparing recent examples of redevelopment that match the building envelopes allowed under SB79 we find property tax revenue is often more than our model estimates. For example, the apartment building at 3980 Wilshire Blvd is 8 stories tall with 228 units, a reasonable proxy for what would be allowed under SB79’s most generous tier combined with state density law. This property brings in $887,527 per acre - more than two times our estimate for R5 parcels. For this reason we consider our analysis conservative, and the ceiling for increased property tax revenue is likely higher.
+These buckets aren’t fully accurate. For example in DTLA many “R5” parcels in our map clearly are taller than 75 feet - but we believe they act as a reasonable guide when it comes to property tax revenue.  Because we are averaging against the wide bucket of current land use per zoning category, the average City revenue here is pulled down by underutilized lots. 
 
-Another place where our model is likely over simplistic is Downtown Los Angeles. We used zoning classifications set before the new Downtown Community Plan was passed last November (considering it is too recent to impact any ongoing development). However, by ignoring all manufacturing zoning we ignore the eastern parts of DTLA, including any development in Skid Row and the Arts District. 
+In fact, comparing recent examples of redevelopment that match the building envelopes allowed under SB79 we find property tax revenue is often more than our model estimates. For example, an apartment building at 3980 Wilshire Blvd is 8 stories tall with 228 units, a reasonable proxy for what would be allowed under SB79’s most generous tier combined with state density law. This property brings in $887,527 per acre - more than two times our estimate for recent R5 parcels. By checking our model against real development  we consider our analysis conservative, and the ceiling for increased property tax revenue is likely higher.
+
+## Property Taxes in Los Angeles
+
+Like many municipalities, property taxes are the largest single contributor to the Los Angeles city budget, making up a third of the general fund. Property taxes are considered more stable than other contributors such as sales taxes which fall and rise closely with the economy.
+
+In Los Angeles, property taxes are collected by the County Assessor. For every dollar collected inside the City of LA, about 24 cents are returned to the City budget. The rest help fund other bodies like LAUSD and the County Department of Health. In 2025 the City is expected to receive $2.8 Billion dollars.
 
 <img src="/images/sb79/5_13_per_acre.jpg" alt="Map of property tax revenue per acre in the City of LA" />
 <p class="subtitle">Map of property tax revenue per acre in the City of LA</p>
 
-### Property Taxes and the LA City Budget
+A parcel is assessed based on two things, the value of the land and the value of any improvements built on top of it. Looking at a map of property tax revenue normalized by area - we see two patterns. One is a general trend of increasing property values as you get closer to the beach and Santa Monica mountains. This land is some of the most expensive real estate on earth and in high demand. The other obvious pattern is high density areas, like Downtown LA and Hollywood, have high property values because sizable improvements have been built there. 
+ 
+No discussion of property taxes in California is complete without explaining Prop 13. Passed in 1978, Proposition 13 limits the annual rate of assessed value increase to 2% per year unless the property is sold or significantly modified (the only time a property can be reassessed).  This means there are many properties paying taxes on assessed values far below market value for their home - and that two identical properties may pay wildly different property taxes (as much as 10x). This has a spoiler effect on property turnover in California, as property owners hold onto homes to avoid the tax hike of moving. 
 
-Every property is assessed for the value of the land and the value of any improvements built on top of it (in LA, this is done by the County Assessor). The value of the property (land + improvements) is called the “assessed value”. In California, 1978’s Proposition 13 limits the annual rate of assessed value increase to 2% per year unless the property is sold or significantly modified. This means there are many properties paying taxes on assessed values far below market value for their home. Prop 13 did something else that reduces how much Cities can rely on property taxes as a revenue source - it limited the maximum tax on a property to 1%. That’s what’s used in the City of LA.
+What it means for our study is that the longer ago a property was reassessed, the less accurate it is as a benchmark for what new construction would pay. To get around this we carved out properties reassessed in the last 10 years to act as our reference to represent new development. 
 
-Armed with an assessed value and the relevant property tax (1%), the County Assessor collects taxes. LA County property taxes are split between a variety of countywide services and local cities. How much each city gets is determined by its size - for the City of LA it works out to roughly 25 cents of every dollar collected locally making its way to the general fund. 
+Generating two averages, one for all parcels of a type, and another for just recent redevelopment, shows how much Prop 13 is limiting property tax revenue. __In our analysis, 76% of the value of redevelopment in SB79 parcels comes from the added value of denser housing. 24% of the value of redevelopment comes simply from properties being reassessed.__
+
+We can also analyze the ratio of improvements to land value in a parcels property tax to see things like vacant properties. We estimated the number of vacant or near vacant parcels by looking to see if the value of improvements was less than 10% of the value of the parcel’s total land plus improvement value. We found over 400 near-vacant parcels (862 acres of land) within ½ mile of major transit stops in the City of LA.
+
+Because these lots are empty, they are likely candidates for redevelopment. Currently these parcels pay \$31,598,400 in property taxes, of which the City of LA receives about \$7,830,000. __Under SB79 rezoning, we estimate the potential property tax revenue just from vacant lots near transit is $244,279,000. Nearly a quarter of a billion dollars.__
 
 
-### Methodology on Modeling Property Tax Revenue
+
+## Methodology on Modeling Property Tax Revenue
 
 *If you are interested in exploring the code, the datasets are hosted in a <a href="https://github.com/streetsforall/parcel_analysis" target="_blank">Github repo</a> along with a jupyter notebook file for re-running our calculations.*
 
@@ -116,26 +130,22 @@ With the full parcel dataset prepared, we can finally calculate the aforemention
 
 The initial efficiency analysis completed, the next step is attempting to build more granular models for predicting tax values for each bucket based on parcel data. The efficiency metric for predicting property values is ultimately a Linear Regression while assuming a zero intercept, so there is likely area to improve on accuracy.  We built a training pipeline to build various regression models on different mixtures and treatments of features and compare their R2 values to determine best fit among all runs for each bucket. There are only a few features appropriate to use for training for this task due to the ultimate goal of employing these models for upzoning and therefore simulating something of an “average zone redevelopment” for that parcel. If the parcel is redeveloped, we can obviously not rely on any features such as number of units, square footage, bedrooms, etc. to predict property tax. Instead, our predictors are reduced to just location and geometry in the form of acreage. To encode location we experimented with using zip codes as a categorical feature as well as using latitude and longitude in their original format. The final consideration was handling the Prop 13 effect. We experimented with both the same filtering we used for efficiency calculations as well as using the full dataset but entering “parcel age” as a training feature. Instead of arbitrarily choosing a feature and encoding mix and type of regression model, we chose to train and evaluate every combination of model and feature set, including outlier trimming, to determine the best model for each zone at predicting property tax values. The entire process results are too large to include in this report, but can be viewed in the GitHub repo. Below features descriptions of the best-performing models for each zone.
 
-| Zone | Sample Size | Feature Set | Model | R² |
+| Zone | Sample Size | Feature Set | Model | R2 |
 |------|-------------|-------------|-------|-----|
-| R5 | 613 | Acreage, Parcel Age, Lat/Lon | Random Forest | 0.2033 |
-| R4 | 706 | Acreage, Lat/Lon | Random Forest | 0.5918 |
-| R3 | 1871 | Acreage, Lat/Lon | Random Forest | 0.6643 |
-| R2 | 4787 | Acreage, Lat/Lon | Random Forest | 0.6390 |
-| R1 | 14447 | Acreage, Lat/Lon | Random Forest | 0.6840 |
-| P | 456 | Acreage, Parcel Age, Lat/Lon | Linear Regression | 0.3204 |
+| R5 | 993 | Acreage, Parcel Age, Lat/Lon | Random Forest | **0.6040** |
+| R4 | 37164 | Acreage, Parcel Age, Lat/Lon | Random Forest | **0.3446** |
+| R3 | 105905 | Acreage, Parcel Age, Zip Code | Random Forest | **0.3805** |
 
 A few things are worth nothing about these results. First, the R5 and P zones likely suffered in their models’ ability to fit the data due to small sample size of values with effective years after 2015. The R5 zone only has 37 samples whose Prop 13 relevant year is 2015 or later and the Parking zone has only 90. The performance of these models is then intuitively better when using a larger sample size by not filtering the data and then using the Parcel Age as a predictor, however this still means a much larger variance in property tax values. Second, the standout performance of Random Forest across the plurality of zones is appropriate given the use of latitude and longitude as an input. Tree-based regression models are able to break down these location values into useful groups instead of relying on categorical zip codes, which may be more arbitrary in terms of property values.
 
 With the best-performing models prepared, the final step of the analysis is to apply the models to parcels affected by SB79 and compare the predicted gain in property taxes to the gains based on efficiency. To determine those parcels, we use a dataset of transit stops affected by SB79 and their associated “tier” and create catchment filters to mark the relevant parcels and determine their new zoning value. Then each model can be applied to the parcel for its new SB79 zoning and the predicted property tax values can be summed and compared to the efficiency-based calculations. These results are below:
 
-
 | Zone | Tax/Acre Gain | Regression Model Gain | Percent Difference |
-|------|---------------|----------------------|-------------------|
-| R5 | $524,705,079.85 | $464,102,045.74 | 11.55% |
-| R4 | $416,204,268.28 | $456,769,225.22 | -9.75% |
-| R3 | $347,631,080.18 | $295,071,661.22 | 15.12% |
-| Total: | $1,288,540,428.32 | $1,215,942,932.18 | 5.63% |
+|------|---------------|------------------------|-------------------|
+| R5 | $548,586,054.24 | $321,680,788.81 | 41.36% |
+| R4 | $331,510,209.64 | $345,812,085.54 | -4.31% |
+| R3 | $147,972,425.02 | $190,151,280.08 | -28.50% |
+| **Total:** | **$1,028,068,688.89** | **$857,644,154.43** | **16.58%** |
 
 
 It is worth noting that these tax gain figures assume that all rezoned parcels are redeveloped to their most likely level given their new zone and individual size and location. Full redevelopment is not realistic, which is why the above tax increase calculator allows that level to be adjusted, but for the purposes of comparing the models to the efficiency metrics we apply the same redevelopment level to both. 

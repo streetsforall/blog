@@ -188,11 +188,9 @@ const zoningUtility = () => {
       zoningData.City.totalPropertyTaxes * (1 - redev / 100);
 
     setTotalPropertyTaxes(redevRatio);
-
   }, [zones]);
 
-
-// update zones
+  // update zones
   useEffect(() => {
     const updatedZones = calculatePropertyTaxes(zones, redev, 0);
     setZones(updatedZones);
@@ -247,19 +245,21 @@ const zoningUtility = () => {
       </p>
 
       <div className="budget-info" style={{ marginBottom: "20px" }}>
-        <button  
-             style={{
-              color: button === 79 ? "black" : "",
-            }}
-        onClick={() => resetZoning(79)}>
+        <button
+          style={{
+            color: button === 79 ? "black" : "",
+          }}
+          onClick={() => resetZoning(79)}
+        >
           SB 79 Model
         </button>
 
-        <button 
+        <button
           style={{
             color: button === 2024 ? "black" : "",
           }}
-          onClick={() => resetZoning(2024)}>
+          onClick={() => resetZoning(2024)}
+        >
           2024 Zoning
         </button>
 
@@ -268,14 +268,18 @@ const zoningUtility = () => {
             <tbody>
               <tr>
                 <td>2024 Property Tax Roll:</td>
-                <td>{formatter.format(zoningData.City.totalPropertyTaxes + 998281212)}</td>
+                <td>
+                  {formatter.format(
+                    zoningData.City.totalPropertyTaxes + 998281212
+                  )}
+                </td>
               </tr>
               <tr>
                 <td>Modeled Property Tax Roll:</td>
                 <td>{formatter.format(totalPropertyTaxes + 998281212)}</td>
               </tr>
               <tr>
-                <td>Gross Property Taxes:</td>
+                <td>New Property Tax Revenue:</td>
                 <td
                   style={{
                     color:
@@ -322,16 +326,26 @@ const zoningUtility = () => {
               e.preventDefault();
               document.body.style.cursor = "ew-resize";
 
-              const startDragX = e.pageX;
+              const startDragX = e.touches ? e.touches[0].pageX : e.pageX;
               const sliderWidth = SliderRef.current.offsetWidth;
 
-              setButton(0)
+              setButton(0);
 
               const resize = (e) => {
-                e.preventDefault();
+                // Properly handle both touch and mouse events
+                if (e.cancelable) {
+                  e.preventDefault();
+                }
 
-                const endDragX = e.touches ? e.touches[0].pageX : e.pageX;
-                const distanceMoved = endDragX - startDragX;
+                // Get current pointer position, properly handling touch events
+                let currentX;
+                if (e.touches && e.touches.length > 0) {
+                  currentX = e.touches[0].pageX;
+                } else {
+                  currentX = e.pageX;
+                }
+
+                const distanceMoved = currentX - startDragX;
                 const maxPercent = widths[index] + widths[index + 1];
 
                 const percentageMoved = nearestN(
@@ -387,55 +401,64 @@ const zoningUtility = () => {
                   newTotalTaxes = 0;
                 }
 
-                // var newZoneIncome =
-                //   _zones[index].averagePropertyTaxPerAcre *
-                //   _zones[index].zoneAcreage;
-
-                // // how many acres have been adjusted
-                // var modAcres =
-                //   _zones[index].zoneAcreage - _zones[index].ogAcreage;
-
-                // var newValue =  modAcres * _zones[index].ten_averagePropertyTaxPerAcre
-                // var oldValue = _zones[index].averagePropertyTaxPerAcre * _zones[index].ogAcreage
-
-                // if (modAcres > 0) {
-                //   var newZoneIncome = newValue + oldValue;
-                // }
-
-                // // Update property taxes based on new acreages
-                // if (newZoneIncome > 0) {
-                //   _zones[index].totalPropertyTaxes = newZoneIncome;
-                // } else {
-                //   _zones[index].totalPropertyTaxes = 0;
-                // }
-
                 _zones[index].totalPropertyTaxes = newTotalTaxes;
 
-                _zones[nextSectionIndex].totalPropertyTaxes =
-                  _zones[nextSectionIndex].averagePropertyTaxPerAcre *
-                  _zones[nextSectionIndex].zoneAcreage;
+                // Handle the next section
+                redevedAcres =
+                  _zones[nextSectionIndex].zoneAcreage -
+                    _zones[nextSectionIndex].ogAcreage <
+                  0
+                    ? 0
+                    : _zones[nextSectionIndex].zoneAcreage -
+                      _zones[nextSectionIndex].ogAcreage;
+
+                unChangedAcres =
+                  _zones[nextSectionIndex].zoneAcreage - redevedAcres;
+
+                newDev =
+                  redevedAcres *
+                  _zones[nextSectionIndex].ten_averagePropertyTaxPerAcre;
+
+                oldDev =
+                  unChangedAcres *
+                  _zones[nextSectionIndex].averagePropertyTaxPerAcre;
+
+                newTotalTaxes = newDev + oldDev;
+
+                if (newTotalTaxes < 0) {
+                  newTotalTaxes = 0;
+                }
+
+                _zones[nextSectionIndex].totalPropertyTaxes = newTotalTaxes;
 
                 setWidths(_widths);
                 setZones(_zones);
               };
 
-              window.addEventListener("pointermove", resize);
-              window.addEventListener("touchmove", resize);
+              // Use passive: false to allow preventDefault in touchmove
+              window.addEventListener("pointermove", resize, {
+                passive: false,
+              });
+              window.addEventListener("touchmove", resize, { passive: false });
 
-              const removeEventListener = () => {
+              const removeEventListeners = () => {
                 window.removeEventListener("pointermove", resize);
                 window.removeEventListener("touchmove", resize);
-              };
-
-              const handleEventUp = (e) => {
-                e.preventDefault();
-                document.body.style.cursor = "initial";
-                removeEventListener();
                 window.removeEventListener("touchend", handleEventUp);
+                window.removeEventListener("touchcancel", handleEventUp);
                 window.removeEventListener("pointerup", handleEventUp);
               };
 
+              const handleEventUp = (e) => {
+                if (e.cancelable) {
+                  e.preventDefault();
+                }
+                document.body.style.cursor = "initial";
+                removeEventListeners();
+              };
+
               window.addEventListener("touchend", handleEventUp);
+              window.addEventListener("touchcancel", handleEventUp); // Add this for better mobile handling
               window.addEventListener("pointerup", handleEventUp);
             }}
           />
