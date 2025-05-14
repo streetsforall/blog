@@ -20,7 +20,7 @@ body {
   color: var(--black);
   background-color: var(--background);
   font-size: 1rem;
-  line-height: 1.5rem;
+  line-height: 1.6rem;
   max-width: 45rem;
 }
 main {
@@ -79,6 +79,7 @@ textarea {
 input {
   font-size: 1rem;
 }
+
 table {
   width: 100%;
   border-collapse: collapse;
