@@ -14,6 +14,10 @@
     margin: .5rem 0;
 }
 
+.zoning-slider {
+    margin-top: 4rem;
+}
+
 .zoning-slider label {
     font-family: monospace;
     font-size: .8rem;
@@ -63,13 +67,13 @@ select {
 }
 
 .slider-button {
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 1rem;
+    height: 1rem;
     background-color: white;
     outline: 2px solid white;
     position: absolute;
     border-radius: 2rem;
-    right: calc(-.8rem);
+    right: calc(-.6rem);
     top: 0;
     display: flex;
     justify-content: center;
@@ -155,10 +159,4 @@ color: grey;
 .zoning-slider button {
     margin-right: 1rem;
     margin-bottom: 2rem;
-}
-
-.zoning-slider {
-    border: 1px solid var(--);
-    padding: .5rem;
-    border-radius: .5rem;
 }

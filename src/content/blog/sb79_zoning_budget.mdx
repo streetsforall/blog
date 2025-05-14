@@ -1,5 +1,5 @@
 ---
-title: "Land Use Reform Can Solve the Los Angeles Budget Crisis"
+title: "Land Use Reform Could Solve the Los Angeles Budget Crisis"
 pubDate: "May 14 2025"
 heroImageCredit: "Height map of property tax revenue per parcel in the core of Los Angeles."
 heroImage: "/images/sb79/prop_rev_2.jpeg"
@@ -15,11 +15,11 @@ import ZoningUtility from '../../post_components/zoning/zoning.jsx';
 
 The City of LA is facing a massive nearly $1 Billion budget shortfall in 2025, largely due to a combination of salary increases and settlement payouts. It's hard to overstate the dire consequences of this deficit, which threatens many vital services, but specifically would <a target="_blank" href="https://www.latimes.com/opinion/story/2025-05-07/los-angeles-city-budget-transportation-streets">be catastrophic</a> for progress on SFA’s core mission to build safer, more efficient roads in Los Angeles. 
 
-Our high-level analysis shows how restrictive, exclusionary zoning has accentuated the City’s financial crisis, and how targeting upzoning could help balance budgets. Using the potential upzoning that would occur if SB79 passed, we show how the City’s largest single revenue source, property taxes, are currently stifled by poor land use. Key takeaways:
+Our high-level analysis shows how restrictive, exclusionary zoning has accentuated the City’s financial crisis, and how targeting upzoning could help balance budgets. Using the potential upzoning that would occur if Senate Bill 79 passes, we show how the City’s largest single revenue source, property taxes, are currently stifled by poor land use. Key takeaways:
 
 <b  class="highlights">
-1. Multi-family housing and commercial parcels represent just 12% of land in the City of LA, but almost half of its property tax revenue
-2. In LA 45% of residential parcels near high quality transit stops are zoned exclusively for low density 
+1. Multi-family housing and commercial parcels represent 12% of the residential suitable land in the City of LA, but almost half of its property tax revenue.
+2. In LA 45% of residential suitable parcels near high quality transit stops are zoned exclusively for low density
 3. SB 79 would create capacity to grow the City of LA’s annual property tax income by nearly $1 billion
 4. The money saved by this year’s 1,647 layoffs is nearly equal to the estimated revenue created by redeveloping only 20% of parcels rezoned under SB 79
 </b>
@@ -39,7 +39,13 @@ We’ve taken our model of property taxes, zoning, and built a utility for the p
 
 <details>
   <summary>What does the redevelopment ratio mean?</summary>
-The redevelopment ratio allows users to choose what percent of acres adjusted in the calculator are included in the model's estimated property tax revenue. Our model does not make assumptions about the timeline for capturing the value of upzoning but it’s fair to say a 100% redevelopment scenario would be many decades away.  
+The redevelopment ratio allows users to choose what percent of acres adjusted in the calculator are included in the model's estimated property tax revenue. For example, a 20% ratio means 20% of the land near transit stations has been redeveloped. Our model does not make assumptions about the timeline for capturing the value of upzoning but it’s fair to say a 100% redevelopment scenario would be many decades away.  
+</details>
+
+
+<details>
+  <summary>Why is the sum of Property taxes lower than the estimated roll?</summary>
+Our model only looks at what we call ‘residentially suitable parcels’ which represents about half of land in the City and ignores things like parks and manufacturing zoned areas. This year the areas our model ignores will bring in $998,281,212 in property taxes to the City of LA which we simply add to the topline figure. 
 </details>
 
 
@@ -53,13 +59,13 @@ In LA, 45% (10,421 acres) of potential residential parcels near Metro stops are 
 
 SB79 would upzone along existing and planned transit lines. The upzones come in 3 levels, the highest density would be concentrated along the D and B lines through DTLA, Hollywood, Koreatown, and Century City, with medium density added along light rail and bus projects (including new transit projects like the Vermont BRT and East San Fernando Valley Light Rail). 
 
-All told, SB 79 would impact around 7.5% of residential zoning in LA and 3.3% of the City’s land area. 
+__All told, SB 79 would impact around 7.5% of residential zoning in LA and 3.3% of the City’s land area.__
 
 Allowing multi-family housing near transit also brings other benefits: it allows people to live closer to work and amenities, it reduces vehicle miles driven, and overall brings much needed new housing capacity to the City of LA. Notable for this study, new multi-family transit oriented development would also be a significant increase in property tax revenue for the City compared to previous uses. 
 
 
 <img src="/images/sb79/4_11_zoning_pass_1.jpg" alt="Map of the City of Los Angeles color coded by zoning bucket." />
-<p class="subtitle">Map of the simplified zoning catagories used for our analysis.</p>
+<p class="subtitle">Map of simplified existing zoning categories used for our analysis</p>
 
 ### Building a Simplified Zoning Model of LA
 
@@ -74,7 +80,7 @@ In relation to SB79 upzoning - we use R5, R4, and R3 to represent the three buck
 | **Associated Zone**  | **SB79 Area of Impact** | **SB79 Height** | **SB79 Density** |
 |-------------|-------------|------------------|-------------------|
 | R5 | 1/4 Mile of Tier 1 Transit Stops (Heavy Rail transit) | 75 feet | 120 units/acre |
-| R4 |  1/2 Mile of Tier 1 Transit Stops (Heavy Rail transit) <br/> 1/4 Mile of Tier 2 Transit Stops (Light Rail, BRT, Frequent Commuter Rail) | 65 feet | 100 units/acre |
+| R4 |  1/2 Mile of Tier 1 Transit Stops (Heavy Rail transit) <br/><br/> 1/4 Mile of Tier 2 Transit Stops (Light Rail, BRT, Frequent Commuter Rail) | 65 feet | 100 units/acre |
 | R3 |  1/2 Mile of Tier 2 Transit Stops (Light Rail, BRT, Frequent Commuter Rail) | 55 feet | 80 units/acre |
 
 However, because we are averaging against the wide bucket of current land use per zoning category, the average City revenue here is pulled down by underutilized lots. In fact, comparing recent examples of redevelopment that match the building envelopes allowed under SB79 we find property tax revenue is often more than our model estimates. For example, the apartment building at 3980 Wilshire Blvd is 8 stories tall with 228 units, a reasonable proxy for what would be allowed under SB79’s most generous tier combined with state density law. This property brings in $887,527 per acre - more than two times our estimate for R5 parcels. For this reason we consider our analysis conservative, and the ceiling for increased property tax revenue is likely higher.

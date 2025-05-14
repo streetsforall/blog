@@ -89,6 +89,9 @@ table {
   margin-bottom: 2em;
   margin-top: -1rem;
   line-height: 1.2rem;
+  overflow: scroll;
+  max-width: 100%;
+  display: block;
 }
 
 tr {
