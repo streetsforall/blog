@@ -118,7 +118,7 @@ const ZoneSection = ({
 const zoningUtility = () => {
   const zoningData = JSON.parse(JSON.stringify(initialZoningData));
   const [zones, setZones] = useState(zoningData.zones);
-  const [slider, setSlider] = useState(20);
+  const [redev, setRedev] = useState(20);
   const [button, setButton] = useState(79);
 
   // Calculate percentages based on zoneAcreage
@@ -163,11 +163,6 @@ const zoningUtility = () => {
 
       let oldDev = unChangedAcres * zone.averagePropertyTaxPerAcre;
 
-      // console.log(zone.zone, 'total', currentAcreage, 'redevedAcres', Math.round(redevedAcres), ' unChangedAcres:', Math.round(unChangedAcres))
-      // console.log(zone.zone, 'Net Acres', Math.round(redevedAcres) - Math.round(unChangedAcres))
-
-      // console.log('slider', (sliderValue / 100),  (1 - sliderValue / 100));
-
       let newTotalTaxes = newDev + oldDev;
 
       if (newTotalTaxes < 0) {
@@ -189,17 +184,19 @@ const zoningUtility = () => {
     );
 
     let redevRatio =
-      updatedTotal * (slider / 100) +
-      zoningData.City.totalPropertyTaxes * (1 - slider / 100);
+      updatedTotal * (redev / 100) +
+      zoningData.City.totalPropertyTaxes * (1 - redev / 100);
 
-    console.log(redevRatio, updatedTotal, zoningData.City.totalPropertyTaxes);
     setTotalPropertyTaxes(redevRatio);
-  }, [zones, slider]);
 
+  }, [zones]);
+
+
+// update zones
   useEffect(() => {
-    const updatedZones = calculatePropertyTaxes(zones, slider, 0);
+    const updatedZones = calculatePropertyTaxes(zones, redev, 0);
     setZones(updatedZones);
-  }, [zones, slider]);
+  }, [redev]);
 
   // Reset function
   const resetZoning = (modelType) => {
@@ -217,7 +214,7 @@ const zoningUtility = () => {
       });
     }
 
-    const updatedZones = calculatePropertyTaxes(resetZones, slider, modelType);
+    const updatedZones = calculatePropertyTaxes(resetZones, redev, modelType);
 
     setZones(updatedZones);
     setWidths(calculateWidths(resetZones));
@@ -228,7 +225,7 @@ const zoningUtility = () => {
   }, []);
 
   const handleChange = (event) => {
-    setSlider(parseInt(event.target.value));
+    setRedev(parseInt(event.target.value));
   };
 
   return (
@@ -239,9 +236,9 @@ const zoningUtility = () => {
         This calculator allows you to adjust zoning buckets and see how much
         revenue could be brought in by property taxes. It currently assumes a
         redevelopment ratio of
-        <select onChange={handleChange}>
+        <select value={redev} onChange={handleChange}>
           <option value="0">0%</option>
-          <option selected value="20">20%</option>
+          <option value="20">20%</option>
           <option value="40">40%</option>
           <option value="60">60%</option>
           <option value="80">80%</option>
@@ -255,7 +252,7 @@ const zoningUtility = () => {
               color: button === 79 ? "black" : "",
             }}
         onClick={() => resetZoning(79)}>
-          Reset to SB 79 Model
+          SB 79 Model
         </button>
 
         <button 
@@ -263,7 +260,7 @@ const zoningUtility = () => {
             color: button === 2024 ? "black" : "",
           }}
           onClick={() => resetZoning(2024)}>
-          Reset to 2024 Zoning
+          2024 Zoning
         </button>
 
         <div>
@@ -271,11 +268,11 @@ const zoningUtility = () => {
             <tbody>
               <tr>
                 <td>2024 Property Tax Roll:</td>
-                {formatter.format(zoningData.City.totalPropertyTaxes)}
+                <td>{formatter.format(zoningData.City.totalPropertyTaxes + 998281212)}</td>
               </tr>
               <tr>
                 <td>Modeled Property Tax Roll:</td>
-                <td>{formatter.format(totalPropertyTaxes)}</td>
+                <td>{formatter.format(totalPropertyTaxes + 998281212)}</td>
               </tr>
               <tr>
                 <td>Gross Property Taxes:</td>
@@ -453,8 +450,8 @@ const zoningUtility = () => {
               <th>Acreage</th>
               <th>Change</th>
               <th>Total Property Taxes</th>
-              <th>Total Tax/Acre</th>
-              <th>Recent Tax/Acre</th>
+              <th>Avg Tax/Acre</th>
+              <th>Recent Avg Tax/Acre</th>
             </tr>
           </thead>
           <tbody>
