@@ -107,9 +107,8 @@ const ZoneSection = ({
 
       {!noSliderButton && (
         <div
-          class="slider_handle"
+          className="slider_handle slider-button"
           onPointerDown={onSliderSelect}
-          className="slider-button"
         ></div>
       )}
     </div>
@@ -120,6 +119,7 @@ const zoningUtility = () => {
   const zoningData = JSON.parse(JSON.stringify(initialZoningData));
   const [zones, setZones] = useState(zoningData.zones);
   const [slider, setSlider] = useState(20);
+  const [button, setButton] = useState(79);
 
   // Calculate percentages based on zoneAcreage
   const calculateWidths = (zonesData) => {
@@ -199,10 +199,12 @@ const zoningUtility = () => {
   useEffect(() => {
     const updatedZones = calculatePropertyTaxes(zones, slider, 0);
     setZones(updatedZones);
-  }, [slider, zones]);
+  }, [slider]);
 
   // Reset function
   const resetZoning = (modelType) => {
+    setButton(modelType);
+
     const resetZones = JSON.parse(JSON.stringify(zoningData.zones));
 
     if (modelType === 79) {
@@ -233,12 +235,13 @@ const zoningUtility = () => {
     <div className="zoning-slider">
       <h4>Zoning Property Tax Calculator</h4>
 
-      <p class="label">
+      <p className="label">
         This calculator allows you to adjust zoning buckets and see how much
-        revenue could be brought in by property taxes. It currently assumes a redevelopment ratio of 
-        <select onChange={handleChange}>
-        <option value="0">0%</option>
-          <option selected value="20">20%</option>
+        revenue could be brought in by property taxes. It currently assumes a
+        redevelopment ratio of
+        <select value="20" onChange={handleChange}>
+          <option value="0">0%</option>
+          <option value="20">20%</option>
           <option value="40">40%</option>
           <option value="60">60%</option>
           <option value="80">80%</option>
@@ -247,16 +250,23 @@ const zoningUtility = () => {
       </p>
 
       <div className="budget-info" style={{ marginBottom: "20px" }}>
-        <button onClick={() => resetZoning(79)} style={{}}>
+        <button  
+             style={{
+              color: button === 79 ? "black" : "",
+            }}
+        onClick={() => resetZoning(79)}>
           Reset to SB 79 Model
         </button>
 
-        <button onClick={() => resetZoning(2024)} style={{}}>
+        <button 
+          style={{
+            color: button === 2024 ? "black" : "",
+          }}
+          onClick={() => resetZoning(2024)}>
           Reset to 2024 Zoning
         </button>
 
-        <div
-        >
+        <div>
           <table>
             <tbody>
               <tr>
@@ -289,11 +299,10 @@ const zoningUtility = () => {
         </div>
       </div>
 
-
-      <div class="zone_chart marker">
+      <div className="zone_chart marker">
         {zoningData.zones.map((z) => (
           <div
-            class=""
+            key={z.zone}
             style={{
               width: (z.zoneAcreage / zoningData.City.zoneAcreage) * 100 + "%",
               backgroundColor: z.color,
@@ -302,7 +311,7 @@ const zoningUtility = () => {
         ))}
       </div>
 
-      <div ref={SliderRef} class="zone_container">
+      <div ref={SliderRef} className="zone_container">
         {zones.map((zone, index) => (
           // loop each zone
           <ZoneSection
@@ -318,6 +327,8 @@ const zoningUtility = () => {
 
               const startDragX = e.pageX;
               const sliderWidth = SliderRef.current.offsetWidth;
+
+              setButton(0)
 
               const resize = (e) => {
                 e.preventDefault();

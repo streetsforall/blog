@@ -138,9 +138,9 @@ select {
     flex-direction: column;
 }
 
-.rezone_button {
+button {
 margin: auto;
-font-size: 1.1rem;
+color: grey;
 }
 
 .zoning-slider button {
@@ -149,7 +149,6 @@ font-size: 1.1rem;
 }
 
 .zoning-slider {
-    margin-bottom: 4rem;
     border: 1px solid var(--);
     padding: .5rem;
     border-radius: .5rem;
