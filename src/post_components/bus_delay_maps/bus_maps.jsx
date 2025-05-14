@@ -75,15 +75,14 @@ const MapView = (props) => {
             "fill-opacity": 0.8,
           },
         });
-      } else if (props.load == 'percentiles') {
+      } else if (props.load == "percentiles") {
         mapRef.current.addLayer({
           id: "routes",
           type: "fill",
           source: "routes",
-          filter: ['>', ['get', activeFilter], 0],
+          filter: [">", ["get", activeFilter], 0],
           paint: {
-            "fill-color":
-              "rgb(255, 0, 0)",
+            "fill-color": "rgb(255, 0, 0)",
             "fill-opacity": 0.8,
           },
         });
@@ -93,14 +92,15 @@ const MapView = (props) => {
         const coordinates = e.features[0].geometry.coordinates[0][0];
         const description = `
         <b>Weekday Segment Stats</b></br>
-      <span>Rider delay: </span> ${Math.round(e.features[0].properties.minutes_lost_per_mile).toLocaleString()
-        } minutes</br>
+      <span>Rider delay: </span> ${Math.round(
+          e.features[0].properties.minutes_lost_per_mile,
+        ).toLocaleString()} minutes</br>
 
       <span>Segment Ridership: </span> ${e.features[0].properties.calculated_segment_ridership.toLocaleString()} </br>
-      
+
       <span>50th Perc. Speed: </span>  ${parseFloat(
-        e.features[0].properties.p50_mph
-      ).toFixed(1)} MPH </br>
+          e.features[0].properties.p50_mph,
+        ).toFixed(1)} MPH </br>
 
       `;
 
@@ -202,7 +202,7 @@ const MapView = (props) => {
         </div>
       )}
 
-      <p class="subtitle">{props.desc}</p>
+      <p className="subtitle">{props.desc}</p>
     </div>
   );
 };
