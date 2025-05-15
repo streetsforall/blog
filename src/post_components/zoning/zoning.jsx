@@ -118,7 +118,7 @@ const ZoneSection = ({
 const zoningUtility = () => {
   const zoningData = JSON.parse(JSON.stringify(initialZoningData));
   const [zones, setZones] = useState(zoningData.zones);
-  const [redev, setRedev] = useState(20);
+  const [redev, setRedev] = useState(40);
   const [button, setButton] = useState(79);
 
   // Calculate percentages based on zoneAcreage
