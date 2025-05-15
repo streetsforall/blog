@@ -3,8 +3,8 @@ and (max-device-width: 800px)
 {
 
     body {
-        font-size: .9rem;
-        line-height: 1.4rem;
+        font-size: 1rem;
+        line-height: 1.5rem;
     }   
 
     main {
@@ -13,6 +13,10 @@ and (max-device-width: 800px)
 
     h1 {
         font-size: 1.7rem;
+    }
+
+    table {
+        font-size: .8rem;
     }
 
 
