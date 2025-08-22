@@ -12,6 +12,24 @@ import { Image } from 'astro:assets';
 
 __We are excited to announce [SFA’s Metro ridership dashboard](https://ridership.streetsforall.org/)__
 
+We hope this utility can help advocates, policy makers, and maybe even Metro staff more quickly understand ridership trends across Metro’s system. Some primary features are:
+
+- Quickly selecting lines to see ridership over time
+- Line search, filter, and sort functionality
+- Downloading custom ridership selections
+- Easily comparing lines against eachother
+- Aggregating groups of lines to see trends
+
+Have feedback? [Use this form]()
+
+<img src="/images/ridership/dashboard_table.jpg" alt="Table View in our dashbaord" />
+<p className="subtitle">Table View in our dashbaord</p>
+
+
+{/* <a href="https://ridership.streetsforall.org/"> <button style="padding: .5rem; margin-bottom: 1rem">View the Dashboard</button></a> */}
+
+
+## Why we built it
 As advocates, we are often engaged in arm-wrestling for access to data. These battles happen across public records requests, under the table handoffs, or reverse engineering APIs (as we did to run our [Vision Zero Twitter Bot](https://x.com/sfa_alerts) which parasitically posted local traffic crashes from the Citizen App).  
 
 One ongoing pain point for our team has been [Metro’s ridership dashboard](https://opa.metro.net/MetroRidership/). This antiquated ASPX web page provides the number of daily riders across Metro’s bus and rail system. Values are returned per line per time range per request making it impossible to compare lines to other lines, aggregate lines together, or see larger ridership patterns without scraping data or manually copying cells of tables into a separate document. The dashboard is embarrassingly deficient compared to easily downloadable ridership data from [NYC](https://www.mta.info/agency/new-york-city-transit/subway-bus-ridership-2024) or [Chicago’s](https://rtams.org/ridership) transit providers. 
@@ -19,24 +37,6 @@ One ongoing pain point for our team has been [Metro’s ridership dashboard](htt
 
 <img src="/images/ridership/metro_old.jpg" alt="Metro's Existing Ridership Dashboard" />
 <p className="subtitle">Metro's Existing Ridership Dashboard (opa.metro.net/MetroRidership/)</p>
-
-Primarily, the goal of this site is to make reading ridership data easier. We have two different views for analyzing ridership data: line graphs and tables. In the line graphs view, we can select multiple lines we want to compare for a given timeframe along with initial and final monthly ridership numbers. Aggregation allows users to collectively view ridership for a set of lines. If people want to do their own analysis, users can download monthly ridership data as a CSV.
-
-<img src="/images/ridership/dashboard_table.jpg" alt="Table View in our dashbaord" />
-<p className="subtitle">Table View in our dashbaord</p>
-
-
-<a href="https://ridership.streetsforall.org/"> <button style="padding: .5rem; margin-bottom: 1rem">View the Dashboard</button></a>
-
-
-We hope this utility can help advocates, policy makers, and maybe even Metro staff more quickly understand ridership trends across Metro’s system. Some primary features are:
-
-- Quickly selecting lines to see ridership over time
-- Downloading custom ridership selections
-- Easily comparing lines against eachother
-- Aggregating groups of lines to see trends
-
-Have feedback? [Use this form]()
 
 ## Collaboration with Metro
 
