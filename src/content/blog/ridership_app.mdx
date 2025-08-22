@@ -1,0 +1,54 @@
+---
+title: "Metro’s ridership dashboard is terrible. So we built a new one."
+pubDate: "August 22 2025"
+heroImageCredit: "A screenshot of our new dashboard at ridership.streetsforall.org"
+heroImage: "/images/ridership/dashboard.jpg"
+description: "Why and how we rebuilt Metro's ridership dashboard."
+authors: "Written by Michael Le and Josh Vredevoogd \n \n Web App developed by Michael Le, Jonathan Chue, and Josh Vredevoogd \n \n Data intake by Elena Sunchugasheva "
+published: false
+
+---
+import { Image } from 'astro:assets';
+
+__We are excited to announce [SFA’s Metro ridership dashboard](https://ridership.streetsforall.org/)__
+
+As advocates, we are often engaged in arm-wrestling for access to data. These battles happen across public records requests, under the table handoffs, or reverse engineering APIs (as we did to run our [Vision Zero Twitter Bot](https://x.com/sfa_alerts) which parasitically posted local traffic crashes from the Citizen App).  
+
+One ongoing pain point for our team has been [Metro’s ridership dashboard](https://opa.metro.net/MetroRidership/). This antiquated ASPX web page provides the number of daily riders across Metro’s bus and rail system. Values are returned per line per time range per request making it impossible to compare lines to other lines, aggregate lines together, or see larger ridership patterns without scraping data or manually copying cells of tables into a separate document. The dashboard is embarrassingly deficient compared to easily downloadable ridership data from [NYC](https://www.mta.info/agency/new-york-city-transit/subway-bus-ridership-2024) or [Chicago’s](https://rtams.org/ridership) transit providers. 
+
+
+<img src="/images/ridership/metro_old.jpg" alt="Metro's Existing Ridership Dashboard" />
+<p className="subtitle">Metro's Existing Ridership Dashboard (opa.metro.net/MetroRidership/)</p>
+
+Primarily, the goal of this site is to make reading ridership data easier. We have two different views for analyzing ridership data: line graphs and tables. In the line graphs view, we can select multiple lines we want to compare for a given timeframe along with initial and final monthly ridership numbers. Aggregation allows users to collectively view ridership for a set of lines. If people want to do their own analysis, users can download monthly ridership data as a CSV.
+
+<img src="/images/ridership/dashboard_table.jpg" alt="Table View in our dashbaord" />
+<p className="subtitle">Table View in our dashbaord</p>
+
+
+<a href="https://ridership.streetsforall.org/"> <button style="padding: .5rem; margin-bottom: 1rem">View the Dashboard</button></a>
+
+
+We hope this utility can help advocates, policy makers, and maybe even Metro staff more quickly understand ridership trends across Metro’s system. Some primary features are:
+
+- Quickly selecting lines to see ridership over time
+- Downloading custom ridership selections
+- Easily comparing lines against eachother
+- Aggregating groups of lines to see trends
+
+Have feedback? [Use this form]()
+
+## Collaboration with Metro
+
+We believe open, standardized, and accessible data is part of a healthy advocacy and research ecosystem. We were lucky to find an ally inside of Metro with the same values. [Nina Kin](https://ninakin.com/) is a staunch open data champion and works to build better digital experiences for riders, primarily ensuring a quality GTFS API so riders know when and if their bus is coming.
+
+Collaborating with Nina and Metro’s operation team we received processed monthly ridership data which we reformatted into a json standard. 
+
+
+## Next Steps
+
+We are engaging with Metro to build out a live API to regularly update the data (currently we are manually updating the site). We also want to build out a ‘context’ functionality that saturates lines with point in time events to help users understand why ridership trends are changing. For example, the A Line collapsing ridership in 2018 (track closure for maintenance), rebounding in 2019 (tracks reopening), collapsing in 2020 (Covid), and then doubling in 2023 (Regional Connector Opening). One could imagine increasing levels of granularity here, eventually including line adjustments, stop closures, or frequency increases.
+
+To make searching and sharing data easier, we may at some point add user profiles with saved aggregation and URL query parameters with set filters.
+
+Other site improvements we’ve discussed include a dashboard for stop level data (as we used in our Bus Delay Analysis), a map based ridership view, and potentially extending the site to include data from other transit providers like Dash, Long Beach Transit, or Big Blue Bus. 
