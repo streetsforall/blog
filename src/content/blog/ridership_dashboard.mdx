@@ -1,11 +1,11 @@
 ---
-title: "It’s hard to use Metro’s ridership data dashboard. We built a new one."
+title: "It’s hard to use LA Metro’s ridership dashboard. We built a new one."
 pubDate: "August 22 2025"
 heroImageCredit: "A screenshot of our new dashboard at ridership.streetsforall.org"
 heroImage: "/images/ridership/dashboard.jpg"
-description: "It’s hard to use Metro’s ridership data dashboard. We built a new one."
-authors: "Written by Michael Le and Josh Vredevoogd \n \n Web App developed by Michael Le, Jonathan Chue, and Josh Vredevoogd \n \n Data intake by Elena Sunchugasheva "
-published: false
+description: "Visualize, filter, and download LA Metro ridership data with our new dashboard. We made it easy see how bus and rail lines have changed over time - a significant improvement over Metro's antiquated dot net dashboard."
+authors: "Written by Michael Le  Jonathan Chue, and Josh Vredevoogd \n \n Web App developed by Michael Le, Jonathan Chue, and Josh Vredevoogd \n \n Data intake by Elena Sunchugasheva "
+published: true
 
 ---
 import { Image } from 'astro:assets';
@@ -40,9 +40,9 @@ One ongoing pain point for our team has been [Metro’s ridership dashboard](htt
 <img src="/images/ridership/metro_old.jpg" alt="Metro's Existing Ridership Dashboard" />
 <p className="subtitle">Metro's Existing Ridership Dashboard (opa.metro.net/MetroRidership/)</p>
 
-## Collaboration with Metro
+## Data Structure
 
-We believe open, standardized, and accessible data is part of a healthy advocacy and research ecosystem. We were fortunate to find an ally at Metro with the same values. [Nina Kin](https://ninakin.com/) is a staunch champion of open data and works to build better digital experiences for riders (a large part being by building a quality GTFS API so riders know when, or if, their bus is coming).
+We believe open, standardized, and accessible data is part of a healthy advocacy and research ecosystem. We were fortunate to receive monthly ridership data from Metro, which we then converted into a standard JSON format. 
 
 Metro currently tracks daily ridership by using sensors to determine how many people enter and exit a train/bus. In addition, this daily ridership data is organized into three different day groups: Weekday, Saturday, and Sunday. Different groups are used because ridership is significantly affected by trends like work days or leisure days. Those data are tracked under months as well.
 
