@@ -67,7 +67,7 @@ $$
 \text{Allowed units (du/acre)} = \text{buildable area} \times \text{max density}
 $$
 
-<br/><br/>
+<br/>
 
 $$
 \text{Allowed units (FAR)} = \frac{\text{buildable area} \times \text{floor area ratio}}{800 \text{ sf}} \times 85\%
@@ -76,5 +76,7 @@ $$
 This approach is somewhat simplistic, and doesn't account for ways that state density bonus law, or the city’s own Transit Oriented Incentive Areas could act to add density to height. Our estimate assumes the City acts to cap potential density as aggressively as legally permissible. 
 
 We also did not study the impact of lot consolidation, which would allow larger buildings on many of the smaller single family parcels near transit stops. Lot consolidation could also act to bring in developable multifamily new land, as parcels outside the 79 radius are merged with those impacted by it. 
+
+Finally, to make sure we were calculating net units, we subtracted any units existing on the lot (of which should only be a max of two).
 
 As always, our calculations can be run locally using [jupyter notebook files](https://github.com/streetsforall/parcel_analysis/blob/main/potential_units.ipynb) here. Please [reach out](https://data.streetsforall.org/about) with questions or datasets.
