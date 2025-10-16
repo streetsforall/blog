@@ -14,9 +14,9 @@ import { Image } from 'astro:assets';
 
 Now that SB 79 has been signed, about 750 transit stops will trigger upzoning under SB 79 across California, and around 150 of those can be found in the City of Los Angeles. This report is an initial attempt to calculate the realistic zoned capacity being added by SB 79 in the City of LA. 
 
-Note: these are preliminary findings. Only when regional Metropolitan planning organizations create official maps will we have a concrete picture of SB 79. Key Takeaways:
+Note: these are preliminary findings. Only when regional Metropolitan planning organizations create official maps will we have a concrete picture of SB 79. Key takeaways:
 <b  class="highlights">
-1. SB 79 will eventually zone more than 1.5 million (1,456,150) new units of housing in the City of LA. This would be enough to double LA's current housing stock of 1.37 million homes
+1. SB 79 will eventually zone nearly 1.5 million (1,456,150) new units of housing in the City of LA. This would be enough to double LA's current housing stock of 1.37 million homes
 3. It will immediately zone for 448,260 new units when SB 79 goes into effect July 1, 2026, and upzone for at least another 1,007,890 units of housing during RHNA Cycle 7 in 2031
 4. SB 79 will impact 17,929 acres, or a little over 5% of the City’s land. Half of impacted acres were previously zoned exclusively for single family homes (9,953 acres).
 </b>
@@ -37,9 +37,7 @@ We also used station entrances when available instead of station centerpoints. T
 
 Some stations on the J Line, may or may not qualify. The buses technically operate in an HOV lane (instead of 24/7 transit only) but do pull into dedicated bus only station areas. We have included them.
 
-We've varied significantly from other maps of the LA area by using new [Cal-ITP](https://github.com/cal-itp/data-analyses/tree/main/high_quality_transit_areas) data (which uses the most up to date definition in AB 2553 (2024)) instead of SCAG data to map high quality transit stops. This ends up capturing far more stops along 24/7 bus lanes in the City of LA, largely on Sepulveda and Venice. 
-
-There is also a pair of bus stops captured on Wilshire near the Los Angeles Country Club that will upzone the nearby single family neighborhoods, including many mansions in Holmby Hills. Will LA choose to use it's limited historic preservation acreage to protect the Playboy Mansion?
+We've varied significantly from other maps of the LA area by using new [Cal-ITP](https://github.com/cal-itp/data-analyses/tree/main/high_quality_transit_areas) data instead of SCAG data to map high quality transit stops (they calculate under the most up to date definition of AB 2553 - 2024). This ends up capturing far more stops along 24/7 bus lanes in the City of LA, largely on Sepulveda and Venice. There is also a pair of bus stops captured on Wilshire near the Los Angeles Country Club that will upzone the nearby single family neighborhoods, including many mansions in Holmby Hills. Will LA choose to use it's limited historic preservation acreage to protect the Playboy Mansion?
 
 <img src="/images/sb79/westwood_sb79.jpg"/>
 <p class="subtitle">Long live condo canyon.</p>
@@ -48,7 +46,7 @@ There is also a pair of bus stops captured on Wilshire near the Los Angeles Coun
 
 The many compromises made to get SB 79 across the finish line result in a complicated bill, with multiple layered exemptions. These fall into two categories: 1) a parcel exemption from any impact due to either explicit language or language that makes the parcel unlikely to be developed and 2) creating the option to postpone parcels from SB 79 short term until the next RHNA cycle in 2031 if they meet specific conditions.
 
-Inside of each station catchment area we’ve fully excluded parcels that aren’t commercial or residential (no public or industrial land). We’ve chosen to also exclude any parcel with more than 2 units as they are very unlikely to be redeveloped.
+Inside of each station catchment area we’ve fully excluded parcels that aren’t commercial or residential (no public or industrial land). We’ve chosen to also exclude any parcel with more than 2 units as they are very unlikely to be redeveloped under the bill.
 
 Similarly, any non R1/R2 zoned parcel with an improvement ratio under 1 is ignored as we consider it an unlikely candidate for development. (this is calculated by dividing the value of assessed land by the value of assessed improvements - i.e. is there a large building here). One caveat is our parcel assessment data is a few years old, so the most recent developments may be analyzed as 'empty lots' and appear on the map as viable parcels.
 
@@ -59,7 +57,7 @@ There are a couple triggers for when a parcel’s zoning can be pushed to the ne
 
 Low resource areas are the largest reason for postponement in LA, covering about half of all impacted parcels. Not a surprise considering the many low income neighborhoods in LA with high displacement risk were one of the main drivers for the exemption to be included in 79.
 
-One qualifier we didn’t mention; parcels with a designated historic resource, was ignored because it is limited to 10% of a given station 1/2 mile catchment, and LA’s historic preservations are generally supersized neighborhood zones. That said, some individual parcels will likely be exempted.
+One qualifier we didn’t mention; parcels with a designated historic resource, was ignored because it is limited to 10% of a given station 1/2 mile catchment, and LA’s historic preservations are generally supersized neighborhood zones. That said, some individual parcels will likely be exempted from upzoning.
 
 Qualifier 3 above, a 50% capacity criteria, is the chewiest, as it requires understanding the max potential build out of a given parcel under City of LA zoning code. This is not easily programmatic.
 
