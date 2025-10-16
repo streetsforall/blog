@@ -1,7 +1,7 @@
 ---
-title: "SB 79 just legalized 1 million new homes near transit in the City of LA"
+title: "SB 79 just legalized 1.5 million new homes near transit in the City of LA"
 pubDate: "October 15 2025"
-heroImageCredit: "We estimate the San Fernando Valley will eventually be upzoned for over 500,000 new units of potential housing, with over 150,000 units unlocked in July 2026."
+heroImageCredit: "We estimate the San Fernando Valley will eventually be upzoned for 500,000 new units of potential housing, with over 150,000 units unlocked in July 2026."
 heroImage: "/images/sb79/valley_impact.jpg"
 description: "With SB 79 signed by the governor we estimate its impacts in the City of LA - finding over 100,000 viable parcels upzoned and enough new zoned housing capacity to double LA's current housing stock of 1.37 million homes."
 authors: "Report Written by Josh Vredevoogd  \n \n  Analysis by Josh Vredevoogd and Joey Shoyer"
@@ -18,33 +18,42 @@ This report is an initial attempt to calculate the realistic zoned capacity bein
 
 Note: these are preliminary findings. Only when regional Metropolitan planning organizations create official maps will we have a concrete picture of SB 79. Key Takeaways:
 <b  class="highlights">
-* SB 79 will eventually zone more than 1 million (1,393,217) new units of housing in the City of LA
+* SB 79 will eventually zone more than 1.5 million (1,456,150) new units of housing in the City of LA
 * This would be enough to double LA's current housing stock of 1.37 million homes
-* It will immediately zone for 396,132 new units when 79 goes into effect July 1, 2026.
-* It will upzone for at least another 997,085 units of housing during RHNA Cycle 7 in 2031
-* SB 79 will impact 17,994 acres, or 5.6% of the City’s land
+* It will immediately zone for 448,260 new units when 79 goes into effect July 1, 2026.
+* It will upzone for at least another 1,007,890 units of housing during RHNA Cycle 7 in 2031
+* SB 79 will impact 17,929 acres, or a little over 5% of the City’s land
 * Half of impacted land was previously zoned exclusively for single family homes (9,953 acres), opening up new parts of the City for both multifamily and afforable housing 
 </b>
 
-<img src="/images/sb79/SB_impact_sml.jpeg"/>
+<img src="/images/sb79/SB_impact_sml.jpg"/>
 <p class="subtitle">Full rezoning map for the City of Los Angeles. <a href="/images/sb79/SB_79_impact_full.jpg">Click here for a high res version</a></p>
 
 
 ## Impacted Stations 
 
-First, we used a combination of internal maps, alongside those released by [City of LA planning](https://planning.lacity.gov/resources/senate-bill-sb-79) and [CA Yimby staff](https://www.google.com/maps/d/u/1/viewer?mid=1KQwq1QivAQHzGgf9Dc4Hb7UL6TMS_cU&ll=34.03622706650348%2C-118.05175616837495&z=10) to establish impacted stations. We’ve followed the city’s lead of including both Sepulveda (Alt 4) and K Line North (Hybrid) despite neither line currently having a preferred alternative (the trigger for 79). Within the next year they will likely be chosen, but stations, radiuses, and affected parcels of course may be different.
+There's been plenty written on how SB 79 will upzone and which stations trigger SB 79 compliance. We assume the reader has some knowledge of the bill, and will point out places where we differ from existing interpretations.
+
+First, we used a combination of internal maps, alongside those released by [City of LA planning](https://planning.lacity.gov/resources/senate-bill-sb-79) and [CA Yimby staff](https://www.google.com/maps/d/u/1/viewer?mid=1KQwq1QivAQHzGgf9Dc4Hb7UL6TMS_cU&ll=34.03622706650348%2C-118.05175616837495&z=10) to establish impacted rail stations. We’ve followed the city’s lead of including both Sepulveda (Alt 4) and K Line North (Hybrid) despite neither line currently having a preferred alternative (the trigger for 79). Within the next year they will likely be chosen, but stations, radiuses, and affected parcels of course may be different.
 
 We also used station entrances when available instead of station centerpoints. This was done using this [Metro dataset](https://developer.metro.net/gis-data/) along with some manual additions. 
 
 Some stations, especially on the J Line, do not definitively qualify. The buses technically operate in an HOV lane (instead of 24/7 transit only) but do pull into dedicated bus only station areas. We have included them.
 
+We've varied significantly from other maps of the LA area by using new [Cal-ITP](https://github.com/cal-itp/data-analyses/tree/main/high_quality_transit_areas) data (which uses the most up to date definition in AB 2553 (2024)) instead of SCAG data to map high quality transit stops. This ends up capturing far more stops along 24/7 bus lanes in the City of LA, largely on Sepulveda and Venice. There is also a pair of bus stops captured on Wilshire near the Los Angeles Country Club that will upzone the nearby single family neighborhoods, including many mansions in Holmby Hills. Will LA choose to use it's limited historic preservation acreage to protect the Playboy Mansion?
+
+<img src="/images/sb79/westwood_sb79.jpg"/>
+<p class="subtitle">Long live condo canyon.</p>
+
 ## Zoning Exclusions
 
 The many compromises made to get SB 79 across the finish line result in a complicated bill, with multiple layered exemptions. These fall into two categories: 1) a parcel exemption from any impact due to either explicit language or language that makes the parcel unlikely to be developed and 2) creating the option to postpone parcels from SB 79 short term until the next RHNA cycle in 2031 if they meet specific conditions.
 
-Inside of each station catchment area we’ve fully excluded parcels that aren’t commercial or residential (no public or industrial land). We’ve chosen to also exclude any parcel with more than 2 units as they are very unlikely to be redeveloped. Similarly, any non R1/R2 zoned parcel with an improvement ratio under 1 is ignored as we consider it an unlikely candidate for development. (this is calculated by dividing the value of assessed land by the value of assessed improvements - ie how much has been built here).
+Inside of each station catchment area we’ve fully excluded parcels that aren’t commercial or residential (no public or industrial land). We’ve chosen to also exclude any parcel with more than 2 units as they are very unlikely to be redeveloped.
 
-There are a couple triggers for when a parcel’s zoning can be pushed to the next RHNA cycle. These require new zoning ordinances to be passed, but LA has already suggested it will try and utilize any possible postponement so we are assuming every option is used.
+Similarly, any non R1/R2 zoned parcel with an improvement ratio under 1 is ignored as we consider it an unlikely candidate for development. (this is calculated by dividing the value of assessed land by the value of assessed improvements - i.e. is there a large building here). One caveat is our parcel assessment data is a few years old, so the most recent developments may be analyzed as 'empty lots' and appear on the map as viable parcels.
+
+There are a couple triggers for when a parcel’s zoning can be pushed to the next RHNA cycle. These require new zoning ordinances, but LA has already suggested it will try and utilize any tools to slow SB 79 mandated upzoning. We consider our scenario 'max possible postponement'.
 1. Parcels in a very high fire severity zone can be postponed.
 2. parcels designated in low-resource areas can be postponed.
 3. Parcels in a station area where the local zoning already allows 50% of the units and floor area that would have been allowed by SB 79 can be postponed.
@@ -55,11 +64,16 @@ One qualifier we didn’t mention; parcels with a designated historic resource, 
 
 Qualifier 3 above, a 50% capacity criteria, is the chewiest, as it requires understanding the max potential build out of a given parcel under City of LA zoning code. This is not easily programmatic.
 
-The City of LA recently passed its Citywide Housing Incentive Program (CHIP) to satisfy state requirements to zone for new potential units. Instead of an explicit zoning change, LA layered multiple incentives that developers can choose to take in specific areas. This makes creating a simplified zoning model so complex that we chose to ignore it for the original analysis. 
+The City of LA recently passed its [Citywide Housing Incentive Program (CHIP)](https://planning.lacity.gov/plans-policies/citywide-housing-incentive-program) to satisfy state requirements to zone for new potential units. Instead of an explicit zoning change, LA layered multiple incentives that developers can choose to take in specific areas. This makes creating a simplified zoning model so complex that we chose to ignore it for the original analysis. 
 
 CHIP is a layer on top of an already very dense nest of qualifiers like height limits, FAR limits, setbacks, ‘special zones’ denoted by a ‘Q-’ defined in explicit ordinances, TOC areas, etc, that make up the meat of LA zoning (on top of a fully new zoning system beginning to be rolled out community by community). Fortunately (for us), the vast majority of SB 79 zoning overlaps relevantly with one component of CHIP: Transit Oriented Incentive Areas (TOIA). 
 
-Under TOIA, only R1, R2 are universally unable to meet the 50% threshold. Within ¼ mile of a tier; the base zoning must be commercial, R5, or R4 to qualify, even with density bonuses. That means all commercial, R4, R5, and the vast majority of R3 parcels near stations will likely have their upzoning postponed until 2031 if the City decides to. Fortunately, the other main component of CHIP, Opportunity Corridors, has almost full overlap with what we've already exempted and doesn't need to be separately calculated. 
+Under TOIA, only R1 and R2 ([click here](https://data.streetsforall.org/blog/sb79_zoning_budget/) to read about how we generalize LA zoning) are universally unable to meet the 50% threshold. Within ¼ mile of a tier; the base zoning must be commercial, R5, or R4 to qualify, even with density bonuses. That means all commercial, R4, R5, and the vast majority of R3 parcels near stations will likely have their upzoning postponed until 2031 if the City decides to. Fortunately, the other main component of CHIP, Opportunity Corridors, has almost full overlap with what we've already exempted and doesn't need to be separately calculated. 
+
+
+<img src="/images/sb79/westside_zoning.jpeg"/>
+<p class="subtitle">Come July, the Westside will be upzoned for an additional 100,000 units with another 60,000 unlocking in 2031. This is on the back of the Citywide Housing Incentive Program passsing in 2024, allowing significantly more homes in the area - especially on commercial corridors. Not mapped are SB 79 triggered upzonings in Santa Monica, Beverly Hills, and Culver City.</p>
+
 
 ## Calculating New Apartments
 
@@ -75,7 +89,7 @@ $$
 \text{Allowed units (FAR)} = \frac{\text{buildable area} \times \text{floor area ratio}}{800 \text{ sf}} \times 85\%
 $$
 
-This approach is somewhat simplistic, and doesn't account for ways that state density bonus law, or the city’s own Transit Oriented Incentive Areas could act to add density to height. Our estimate assumes the City acts to cap potential density as aggressively as legally permissible. 
+__This approach is somewhat simplistic, and doesn't account for ways that state density bonus law, or the city’s own Transit Oriented Incentive Areas could act to add density to height. Our estimate assumes the City acts to cap potential density as aggressively as legally permissible.__
 
 We also did not study the impact of lot consolidation, which would allow larger buildings on many of the smaller single family parcels near transit stops. Lot consolidation could also act to bring in developable multifamily new land, as parcels outside the 79 radius are merged with those impacted by it. 
 
