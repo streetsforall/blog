@@ -1,7 +1,7 @@
 ---
 title: "SB 79 just legalized 1 million new homes near transit in the City of LA"
 pubDate: "October 15 2025"
-heroImageCredit: "Come July 2026, we estimate the San Fernando Valley may be upzoned for nearly 300,000 units of potential housing "
+heroImageCredit: "Come July 2026, we estimate the San Fernando Valley will be upzoned for over 200,000 units of potential housing "
 heroImage: "/images/sb79/valley_impact.jpg"
 description: "With SB 79 signed by the governor we estimate its impacts in the City of LA; finding over 100,000 viable parcels upzoned and more than 1 million potential units of housing able to be built."
 authors: "Report Written by Josh Vredevoogd  \n \n  Analysis by Josh Vredevoogd and Joey Shoyer"
@@ -19,12 +19,13 @@ Note: these are preliminary findings. Only when regional Metropolitan planning o
 Key Takeaways:
 * SB 79 will eventually zone more than 1 million (1,393,217) new units of housing in the City of LA
 * This would be enough to double LA's current housing stock of 1.37 million homes
-* It will immediately zone for half a million (551,688) new units when it goes into effect July 1, 2026.
-* It will upzone for at least another 841,529 units of housing during RHNA Cycle 7 in 2031
-* SB 79 will impact 17,994 acres, or 5.6% of the City’s land. Half of which is made up of what was previously zoned exclusively for single family homes (9,953 acres)
+* It will immediately zone for 396,132 new units when it goes into effect July 1, 2026.
+* It will upzone for at least another 997,085 units of housing during RHNA Cycle 7 in 2031
+* SB 79 will impact 17,994 acres, or 5.6% of the City’s land
+* Half of impacted land was previously zoned exclusively for single family homes (9,953 acres)
 
 <img src="/images/sb79/SB_impact_sml.jpeg"/>
-<p class="subtitle">Full rezoning map for the City of Los Angeles. <a href="/images/sb79/SB_impact_sml.jpeg">Click here for a high res version</a></p>
+<p class="subtitle">Full rezoning map for the City of Los Angeles. <a href="/images/sb79/SB_79_impact_full.jpg">Click here for a high res version</a></p>
 
 
 ## Impacted Stations 
@@ -60,3 +61,19 @@ Under TOIA, only R1, R2 are universally unable to meet the 50% threshold. Within
 
 ## Calculating New Apartments
 
+To calculate the number of new potential apartment per parcel we heavily leaned on work in [this UCLA research paper](https://www.lewis.ucla.edu/research/chiping-in-evaluating-the-effects-of-las-citywide-housing-incentive-program-on-neighborhood-development-potential/) by Aaron Barrall and Shane Phillips. We calculated the number of potential units twice with two different potential limiters, then took the more restrictive of the two on a per parcel basis. The first equation simply uses density (max number of units per acre) and multiplied that by the acreage of the parcel. The second equation takes the max FAR per acre, multiplies that by the parcel acreage, then divides by a reasonable unit size and residential efficiency (to account for hallways/egress space). 
+
+$$
+\text{Allowed units (FAR)} = \frac{\text{buildable area} \times \text{floor area ratio}}{800 \text{ sf}} \times 85\%
+$$
+
+<br/><br/>
+$$
+\text{Allowed units (du/acre)} = \text{buildable area} \times \text{max density}
+$$
+
+This approach is somewhat simplistic, and doesn't account for ways that state density bonus law, or the city’s own Transit Oriented Incentive Areas could act to add density to height. Our estimate assumes the City acts to cap potential density as aggressively as legally permissible. 
+
+We also did not study the impact of lot consolidation, which would allow larger buildings on many of the smaller single family parcels near transit stops. Lot consolidation could also act to bring in developable multifamily new land, as parcels outside the 79 radius are merged with those impacted by it. 
+
+As always, our calculations can be run locally using [jupyter notebook files](https://github.com/streetsforall/parcel_analysis/blob/main/potential_units.ipynb) here. Please [reach out](https://data.streetsforall.org/about) with questions or datasets.
