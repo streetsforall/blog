@@ -6,7 +6,7 @@ heroImage: "/images/sb79/valley_impact.jpg"
 description: "With SB 79 signed by the governor we estimate its impacts in the City of LA; finding over 100,000 viable parcels upzoned and more than 1 million potential units of housing able to be built."
 authors: "Report Written by Josh Vredevoogd  \n \n  Analysis by Josh Vredevoogd and Joey Shoyer"
 
-published: false
+published: true
 
 ---
 import { Image } from 'astro:assets';
@@ -47,29 +47,30 @@ Parcels in a very high fire severity zone can be postponed.
 Parcels designated in low-resource areas can be postponed.
 Parcels in a station area where the local zoning already allows 50% of the units and floor area that would have been allowed by SB 79 can be postponed.
 
-Low resource areas are the largest driver of postponement in LA, covering about half of all impacted parcels. Not a surprise considering the many low income neighborhoods in LA with high displacement risk were one of the main drivers for the exemption to be included in 79.
+Low resource areas are the largest reason for postponement in LA, covering about half of all impacted parcels. Not a surprise considering the many low income neighborhoods in LA with high displacement risk were one of the main drivers for the exemption to be included in 79.
 
-One qualifier we didn’t mention; parcels with a designated historic resource, was ignored because it is limited to 10% of a given station 1/2 mile catchment, and LA’s historic preservations are generally supersized neighborhood zones. That said, individual parcels will likely be exempted (but trivial for our citywide analysis).
+One qualifier we didn’t mention; parcels with a designated historic resource, was ignored because it is limited to 10% of a given station 1/2 mile catchment, and LA’s historic preservations are generally supersized neighborhood zones. That said, some individual parcels will likely be exempted.
 
-Qualifier 3 above, a 50% capacity criterion, is the chewiest, as it requires understanding the max potential build out of a given parcel under City of LA zoning code. This is not easily programmatic.
+Qualifier 3 above, a 50% capacity criteria, is the chewiest, as it requires understanding the max potential build out of a given parcel under City of LA zoning code. This is not easily programmatic.
 
 The City of LA recently passed its Citywide Housing Incentive Program (CHIP) to satisfy state requirements to zone for new potential units. Instead of an explicit zoning change, LA layered multiple incentives that developers can choose to take in specific areas. This makes creating a simplified zoning model so complex that we chose to ignore it for the original analysis. 
 
 CHIP is a layer on top of an already very dense nest of qualifiers like height limits, FAR limits, setbacks, ‘special zones’ denoted by a ‘Q-’ defined in explicit ordinances, TOC areas, etc, that make up the meat of LA zoning (on top of a fully new zoning system beginning to be rolled out community by community). Fortunately (for us), the vast majority of SB 79 zoning overlaps relevantly with one component of CHIP: Transit Oriented Incentive Areas (TOIA). 
 
-Under TOIA, only R1, R2 are universally unable to meet the 50% threshold. Within ¼ mile of a tier; the base zoning must be commercial, R5, or R4 to qualify, even with density bonuses. That means all commercial, R4, R5, and the vast majority of R3 parcels near stations will likely have their upzoning postponed until 2031. 
+Under TOIA, only R1, R2 are universally unable to meet the 50% threshold. Within ¼ mile of a tier; the base zoning must be commercial, R5, or R4 to qualify, even with density bonuses. That means all commercial, R4, R5, and the vast majority of R3 parcels near stations will likely have their upzoning postponed until 2031 if the City decides to. Fortunately, the other main component of CHIP, Opportunity Corridors, has almost full overlap with what we've already exempted and doesn't need to be separately calculated. 
 
 ## Calculating New Apartments
 
 To calculate the number of new potential apartment per parcel we heavily leaned on work in [this UCLA research paper](https://www.lewis.ucla.edu/research/chiping-in-evaluating-the-effects-of-las-citywide-housing-incentive-program-on-neighborhood-development-potential/) by Aaron Barrall and Shane Phillips. We calculated the number of potential units twice with two different potential limiters, then took the more restrictive of the two on a per parcel basis. The first equation simply uses density (max number of units per acre) and multiplied that by the acreage of the parcel. The second equation takes the max FAR per acre, multiplies that by the parcel acreage, then divides by a reasonable unit size and residential efficiency (to account for hallways/egress space). 
 
 $$
-\text{Allowed units (FAR)} = \frac{\text{buildable area} \times \text{floor area ratio}}{800 \text{ sf}} \times 85\%
+\text{Allowed units (du/acre)} = \text{buildable area} \times \text{max density}
 $$
 
 <br/><br/>
+
 $$
-\text{Allowed units (du/acre)} = \text{buildable area} \times \text{max density}
+\text{Allowed units (FAR)} = \frac{\text{buildable area} \times \text{floor area ratio}}{800 \text{ sf}} \times 85\%
 $$
 
 This approach is somewhat simplistic, and doesn't account for ways that state density bonus law, or the city’s own Transit Oriented Incentive Areas could act to add density to height. Our estimate assumes the City acts to cap potential density as aggressively as legally permissible. 
