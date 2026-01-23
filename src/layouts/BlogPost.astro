@@ -17,6 +17,7 @@ const {
   heroImageCredit,
   authors,
   headings,
+  published,
 } = Astro.props;
 
 const hasTableOfContents = headings.length > 0;
@@ -24,28 +25,28 @@ const hasTableOfContents = headings.length > 0;
 
 <html lang="en">
   <head>
-    <BaseHead title={title} description={description} />
-    <style>
-  
-    </style>
+    <BaseHead title={title} description={description} image={heroImage} />
+    <style></style>
   </head>
 
   <body>
     <Header />
     <main>
       <article>
-        
         <div class="hero-image">
-          {heroImage && (
-            <>
-              <img width={1020} height={510} src={heroImage} alt="" />
-              <p class="subtitle">{heroImageCredit}</p>
-            </>
-          )}
+          {
+            heroImage && (
+              <>
+                <img width={1020} height={510} src={heroImage} alt="" />
+                <p class="subtitle">{heroImageCredit}</p>
+              </>
+            )
+          }
         </div>
-      
+
         <div class="prose">
           <div class="title">
+                   {!published && <div class="draft-banner">DRAFT</div>}
             <div class="date">
               <FormattedDate date={pubDate} />
               {
@@ -58,34 +59,42 @@ const hasTableOfContents = headings.length > 0;
             </div>
 
             <h1>{title}</h1>
-            {authors && <div class="authors">
-              <div>
-                {authors}
-              </div>
-            </div>
+            {
+              authors && (
+                <div class="authors">
+                  <div>{authors}</div>
+                </div>
+              )
             }
           </div>
-          {hasTableOfContents && (
-            <div class="toc-section">
-              <p class="subtitle">Table of Contents</p>
-              <ul>
-                <li class="toc-item">
-                    <a class="toc-link" href={`#`}> Intro</a>
-                  </li>
-                {headings.map((heading) => (
+          {
+            hasTableOfContents && (
+              <div class="toc-section">
+                <p class="subtitle">Table of Contents</p>
+                <ul>
                   <li class="toc-item">
-                    <a class="toc-link" href={`#${heading.slug}`}>
-                      {heading.text}
+                    <a class="toc-link" href={`#`}>
+                      {" "}
+                      Intro
                     </a>
                   </li>
-                ))}
-              </ul>
-            </div>
-          )}
+                  {headings.map((heading) => (
+                    <li class="toc-item">
+                      <a class="toc-link" href={`#${heading.slug}`}>
+                        {heading.text}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )
+          }
           <slot />
         </div>
+      
       </article>
     </main>
+
     <Footer />
   </body>
 </html>

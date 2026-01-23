@@ -1,8 +1,8 @@
 ---
 title: "How LA County Can Pay for High Speed Rail to Union Station"
 pubDate: "January 20 2025"
-heroImageCredit: "High speed rail alignment into LA County"
-heroImage: "/images/CAHSR/route_catchment.png"
+heroImageCredit: "Union Station 2 mile catchment area with CAHSR alignment. Parcels shaded my land value."
+heroImage: "/images/CAHSR/palmdale.jpeg"
 description: "By building an in-house EIFD model, we show how LA County could capture billions in new revenue to fund high speed rail to Union Station while being revenue positive."
 authors: "Technical Analysis by Joey Shoyer and Josh Vredevoogd \n \n Report Written by Joey Shoyer and Josh Vredevoogd"
 published: false
@@ -24,6 +24,7 @@ By leveraging property value increases within two miles of stations, an Enhanced
 </b>
 
 <img src="/images/CAHSR/MAIN_CHART.png" alt="High speed rail alignment into LA County" />
+<p class="subtitle">Our 'high confidence' scenario' shows the County can fund CAHSR to the tune of $15-23B while recouping the majority of it's costs through an EIFD.</p>
 
 ## Proposal Overview
 In California, EIFDs are used to capture future property value growth and set it aside for specific purposes ([Streetsblog has an excellent explainer](https://cal.streetsblog.org/2025/09/16/streetsmart-episode-9-what-is-an-eifd-and-should-your-city-be-using-them)). This special fund can then be bonded against to expedite infrastructure delivery. Locally, this funding strategy is being studied for both the K Line North Extension and the DTLA segment of Southeast Gateway Line. 
@@ -63,6 +64,7 @@ While this study focuses on the ability of LA County to leverage value capture t
 There is currently no funding plan or timeline to advance California High Speed Rail into the LA Basin despite it being the largest population center in the state with over 15 million residents. With estimated costs of $36.8B (2033 dollars) according to the [2024 Business](https://hsr.ca.gov/wp-content/uploads/2024/05/2024-Business-Plan-FINAL.pdf) Plan, most Angeleno’s, even enthusiastic supporters, don’t expect to ride a high speed train into Union Station in their lifetime. Building one of the fastest High Speed Rail lines in the world across two mountain ranges and the San Andreas fault is no easy feat. 
 
 <img src="/images/CAHSR/CAHSR_MAP.png" alt="High speed rail alignment into LA County" />
+<p class="subtitle">Connecting the initial operating segment to the Bay Area or LA Basin is essential to reaching profitability but requires crossing multiple costly mountain ranges. Note: the sum of segment costs are below the total project cost.</p>
 
 With the initial operating segment of HSR between Bakersfield and Merced beginning to lay tracks and an expected 2032 opening getting closer, the Authority is looking at where to build next. This will likely be  an extension from the Central Valley to Gilroy to access the Bay Area. With an expected cost of around $20B, Cap and Trade funding and private-public partners will fund the project. The recent [CAHSR 2025 Supplemental Project Report](https://hsr.ca.gov/about/project-update-reports/2025-project-update-report/) shows the urgent necessity of reaching either Girloy or Palmdale, whereafter passenger revenue generates $1 - 2 Billion for the Authority annually. 
 
@@ -90,9 +92,7 @@ We hope two things are clear. First, an LA County EIFD represents a critical ste
 
 Note: While we won’t get into details about bonding against EIFD revenue, bond terms will likely result in less funding than simple net present values used above, typically in the realm of a 10-20% reduction. This is something that a formal analysis of this proposal should investigate further. 
 
-
-### Link Union Station and SCORE
-
+<img src="/images/CAHSR/NET_REV.png" alt="High speed rail alignment into LA County" />
 
 ## Property Value Appreciation Boosting Scenarios
 
@@ -111,7 +111,8 @@ This high quality study looked specifically at land values within 1.9m (3 km) of
 **Florida: Brightline** - [Green Street / WSJ (2023)](https://www.wsj.com/articles/brightline-florida-high-speed-rail-residential-home-values-4f1e3f2c)
 While no peer reviewed study exists, reporting indicates that Brightline in Florida led to significant land value increases. “In Fort Lauderdale, home values for residences within the ZIP Code near the station have appreciated by 67%... The difference was most stark in Miami. Property values near the station were up 83%.” These urban zip codes represent catchment areas of around 1-3 miles, and make a reasonable equivalent to our EIFD catchment areas in LA County. 
 
-<img src="/images/CAHSR/BOOSTS.png" alt="High speed rail alignment into LA County" />
+<img src="/images/CAHSR/BOOSTS.png" alt="A chart of the different boost scenarios that a 30% EIFD could capture." />
+<p class="subtitle">A small boost at the beginning of the EIFD period leads in a wide range of results. These are all 30% capture scenarios</p>
 <br/><br/>
 
 #### Our ‘High Confidence Scenario”
@@ -133,7 +134,18 @@ As a counterpoint, Brightline, a rail project with worse coverage, service, and 
 
 Palmdale, a satellite city where travel times into LA will be reduced from over around 90 minutes driving to around 25 minutes, represents a major beneficiary of CAHSR. The combination of LA’s pressurized housing market and numerous underdeveloped parcels near the station will likely lead to significant parcel value appreciation along with commercial and residential development. Beijing to Shanghai showed increased residential land values by 87% near stations where developed, but undeveloped land increased by more than 250%. We consider a 75% property value boost in Palmdale a realistic scenario.
 
-<img src="/images/CAHSR/NET_REV.png" alt="High speed rail alignment into LA County" />
+<img src="/images/CAHSR/palmdale.jpeg" alt="High speed rail alignment into LA County" />
+**Palmdale Station Catchment Area**
+With significant underdeveloped and vacant land combined with a major reduction in travel time to LA, Palmdale is likely to see significant property value appreciation with the opening of a HSR station.
+
+<img src="/images/CAHSR/burbank.jpeg" alt="High speed rail alignment into LA County" />
+**Burbank Airport Station Catchment Area**
+With many small parcels and limited vacant land, Burbank is likely to see more modest property value appreciation with the opening of a HSR station. 
+
+
+<img src="/images/CAHSR/union.jpeg" alt="High speed rail alignment into LA County" />
+**Union Station Catchment Area**
+Downtown LA is a combination of highly developed and underdeveloped land. There are numerous plans near the Arts District for significant development.
 
 ## Methodology
 
@@ -154,7 +166,7 @@ We developed our EIFD calculation methods by following the details featured thro
 After initially implementing this EIFD model as-stated, a few issues arose that required us to apply knowledge about EIFDs and property value appreciation to create a useful model. Most of these gaps were simply questions of how to implement general EIFD logic in our code. One example was limiting parcels turning over multiple times within the span of the 45 year West Hollywood EIFD. This initially caused inflated property growth and EIFD increment values and was solved by implementing a “parcel tracker” which maintained state for all parcels in the analysis and only opened a parcel for turnover a second time after a specific period of years had elapsed. In most cases we set this period to 45 years, meaning parcels could only turnover once during the EIFD, but we also experimented with 20 and 30 year turnover cooldowns.
 
 
-### Building Our CAHSR EIFD Mode
+### Building Our CAHSR EIFD Model
 
 As we built our model and developed our understanding of EIFDs and California property taxes, several considerations arose where we felt that we needed to depart from preexisting methods and/or add additional granularity to have a more rigorous model for applying to the areas surrounding the three LA County CAHSR stations in DTLA, Burbank, and Palmdale.
 
@@ -184,9 +196,101 @@ The most significant departure we made from preexisting models, in terms of EIFD
 
 It is difficult to model property assessments today, let alone 40+ years in the future, however we decided on the following method of calculating reassessed property values:
 
+### Market Reassessment After Turnover
+
+When a parcel turns over, Proposition~13 appreciation is removed and the parcel
+is reassessed at an estimate of current market value grown from its Improvement
+Base Year assessed value.
+
+
+$$
+V^{\text{market}}_{i,t}
+=
+V^{\text{IBY}}_{i}
+\left(
+1 + r_i + \mathbb{1}_{t \in \mathcal{B}} \cdot r^{\text{boost}}
+\right)^{\tau_{i,t}}
+$$
+
+The effective growth horizon is capped to prevent explosive appreciation from
+very old Improvement Base Years:
+
+$$
+\tau_{i,t}
+=
+\min\!\left(
+(t_0 + t) - y^{\text{IBY}}_i,
+\;\bar{\tau}
+\right)
+$$
+
+The parcel is reassessed only if market value exceeds its current assessed value:
+
+$$
+V^{\text{assessed}}_{i,t}
+=
+\max\!\left(
+V^{\text{assessed}}_{i,t-1},
+\;
+V^{\text{market}}_{i,t}
+\right)
+$$
+
+Upon reassessment, the Improvement Base Year is reset, establishing a new
+Proposition~13 lock-in:
+
+$$
+y^{\text{IBY}}_i \leftarrow t_0 + t,
+\qquad
+V^{\text{IBY}}_{i} \leftarrow V^{\text{assessed}}_{i,t}
+$$
+
+---
+
+### Term Definitions
+
+$$
+\begin{array}{r l}
+V^{\text{market}}_{i,t} & \text{Market value of parcel } i \text{ in year } t \text{ upon turnover} \\[6pt]
+V^{\text{assessed}}_{i,t} & \text{Assessed value of parcel } i \text{ in year } t \\[6pt]
+V^{\text{IBY}}_{i} & \text{Improvement Base Year value (Prop 13 lock-in)} \\[6pt]
+y^{\text{IBY}}_i & \text{Improvement Base Year of parcel } i \\[6pt]
+r_i & \text{Market appreciation rate (residential or commercial)} \\[6pt]
+r^{\text{boost}} & \text{Additional appreciation in booster years} \\[6pt]
+\mathbb{1}_{t \in \mathcal{B}} & \text{Indicator: 1 if year } t \text{ is a booster year, else 0} \\[6pt]
+t_0 & \text{Simulation start year (freeze year)} \\[6pt]
+\bar{\tau} & \text{Maximum lookback cap on appreciation years} \\[6pt]
+\tau_{i,t} & \text{Effective appreciation years applied}
+\end{array}
+$$
+
+---
+
+
+
 Essentially this method “removes” the Prop 13 2% annual growth from the current year of the EIFD back to the original assessment year and then applies market growth back to the current year. We cap this back-calculation of growth at 1978, when Prop 13 was passed. We use the K Line North 4% and 6% rates for the market growth, which is conservative when compared to the [8.62% average](https://www.gatsbyinvestment.com/education-center/appreciation-rates-los-angeles) increase in residential values in LA County over the last 32 years.
 
 It is worth understanding how much of an impact this Prop 13 accounting makes. When accurately modeling this reassessment, parcel turnover becomes the highest contributor to EIFD value, far eclipsing development of vacant lots.
+
+Consider a residential home purchased in 1985 at the value of $100,000 and turned over in 2025:
+
+| Metric | Value |
+|---|---|
+| Original Assessment (1985) | $100,000 |
+| Prop 13 Value in 2025 (2%/year growth) | $220,804 |
+| Market Value in 2025 (6%/year growth) | $1,028,572 |
+| **Value Increment from Turnover** | **$807,768** |
+| **Market Value Multiplier** | **4.66x** |
+
+Turnover unlocked massive gains in value by resetting the Prop 13 protection on the parcel. At scale, with thousands of parcels turning over (at historical rates) as the EIFD progresses, turnover creates the vast majority of the value captured by the EIFD. These massive differences in parcel value are not limited to properties held for many decades, as parcels of all kinds lead to significant differences in turnover. The following shows several different parcel scenarios and their turnover effects with respect to Prop 13:
+
+| Scenario | Property Type | Years Under Prop 13 | Prop 13 Value | Market Value | Turnover Increment | Multiplier |
+|---|---|---|---|---|---|---|
+| Recent Assessment | Residential | 15 years | $336,467 | $599,140 | $262,672 | 1.78x |
+| Typical Long-Held | Residential | 35 years | $299,983 | $1,152,913 | $852,930 | 3.84x |
+| Maximum Effect (1978) | Residential | 47 years | $190,226 | $1,159,944 | $969,718 | 6.10x |
+| Commercial | Commercial | 30 years | $362,272 | $648,680 | $286,407 | 1.79x |
+
 
 #### Scenario Planning
 

@@ -43,6 +43,7 @@ article {
   
 
 .prose {
+  z-index: 10;
     width: 100%;
     max-width: calc(100%);
     margin: auto;
@@ -84,6 +85,16 @@ article {
     white-space: pre-line;
     font-family: monospace;
     color: var(--gray);
+  }
+
+  .draft-banner {
+
+    width: 100%;
+    border: 3px dotted orange;
+    font-size: 5rem;
+    text-align: center;
+    padding: 1rem;
+    color: orange;
   }
 
   .toc-link:hover {
