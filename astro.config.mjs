@@ -11,7 +11,9 @@ export default defineConfig({
 	site: 'https:///data.streetsforall.org',
 	integrations: [mdx(), sitemap(), react()],
 	markdown: {
-		remarkPlugins: [remarkMath],
+		remarkPlugins: [
+			[remarkMath, { singleDollarTextMath: false }]
+		],
 		rehypePlugins: [
 			[
 				rehypeKatex,
