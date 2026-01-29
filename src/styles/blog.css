@@ -101,3 +101,14 @@ article {
     text-decoration: underline;
     color: var(--black);
   }
+
+
+.highlights ol{
+  border: 1px dotted var(--gray-light);
+    padding: 1rem  2rem;
+}
+  
+.highlights li {
+    margin-top: .75rem;
+    margin-bottom: .75rem;
+}

@@ -20,7 +20,8 @@ const {
   published,
 } = Astro.props;
 
-const hasTableOfContents = headings.length > 0;
+const filteredHeadings = headings.filter((h: { depth: number; slug: string; text: string }) => h.depth <= 2);
+const hasTableOfContents = filteredHeadings.length > 0;
 ---
 
 <html lang="en">
@@ -73,12 +74,9 @@ const hasTableOfContents = headings.length > 0;
                 <p class="subtitle">Table of Contents</p>
                 <ul>
                   <li class="toc-item">
-                    <a class="toc-link" href={`#`}>
-                      {" "}
-                      Intro
-                    </a>
+                    <a class="toc-link" href="#">Intro</a>
                   </li>
-                  {headings.map((heading) => (
+                  {filteredHeadings.map((heading: { slug: string; text: string }) => (
                     <li class="toc-item">
                       <a class="toc-link" href={`#${heading.slug}`}>
                         {heading.text}
