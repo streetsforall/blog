@@ -4,7 +4,7 @@ pubDate: "January 20 2025"
 heroImageCredit: "Palmdale 2 mile catchment area with CAHSR alignment. Parcels shaded by land value."
 heroImage: "/images/CAHSR/palmdale.jpeg"
 description: "By building an in-house EIFD model, we show how LA County could capture tens of billions in new revenue to fund high speed rail to Union Station while being revenue positive."
-authors: "Technical Analysis by Joey Shoyer and Josh Vredevoogd \n \n Report Written by Joey Shoyer and Josh Vredevoogd"
+authors: "Report and technical analysis by Joey Shoyer and Josh Vredevoogd \n \n Additional thanks to the SFA Data/Dev team, Jonathan Chue, Director of State Policy Marc Vukcevich, and State Policy Manager David Martinez"
 published: false
 ---
 import { Image } from 'astro:assets';
@@ -13,14 +13,14 @@ import { Image } from 'astro:assets';
 
 With the recent abandonment of billions in federal grants, California is more dependent on internal funding than ever to build out High Speed Rail (HSR). Finding concrete local strategies to pay for construction is essential to building out California’s HSR network in a reasonable timeframe. Currently, the High Speed Rail Authority estimates a baseline cost around $37.8 billion to close the 134 mile gap between Bakersfield and LA Union Station. 
 
-By leveraging property value increases within two miles of stations, an Enhanced Infrastructure Financing District (EIFD) can capture induced land appreciation observed in many other high speed rail construction projects around the world, functionally allowing this investment in the project to pay for itself. This comparison is not out of scale; LA County has a larger population than Sweden and a larger GDP than Portugal, both nations with high speed rail networks. 
+By leveraging property value increases within two miles of stations, an Enhanced Infrastructure Financing District (EIFD) can capture induced land appreciation observed in many other high speed rail construction projects around the world, functionally allowing this investment in the project to pay for itself.  This comparison is not out of scale; LA County has a larger population than Sweden and a larger GDP than Portugal, both nations with high speed rail networks. 
 
 <b  class="highlights">
 1. A two mile EIFD around the three LA County HSR Stations (Palmdale, Burbank, Union Station) could fund a large portion of Bakersfield to Los Angeles HSR
 2. We consider net-present revenue in the $15-23B range a high confidence scenario
 3. If parcels in the EIFD appreciate on average 20% more than a no-build scenario, a 30% capture rate is net positive for LA County 
-4. Bond timing would allow construction to begin in the 2030s
-5.  Near term projects like Link Union Station could see funding gaps closed
+4. Timing is critical, the sooner an EIFD is established the sooner bonds can be issued. We model an EIFD established in 2026 allowing construction completion by 2040
+5. Near term projects like [Link Union Station](https://www.metro.net/projects/link-us/) can see funding gaps closed sooner
 </b>
 
 <img src="/images/CAHSR/MAIN_CHART.png" alt="High speed rail alignment into LA County" />
@@ -173,6 +173,9 @@ Because the entire ‘property tax pie’ sees increased property value apprecia
 
 
 ## Methodology
+
+_As always, our calculations can be run locally using [jupyter notebook files](https://github.com/streetsforall/cahsr_eifd_analysis). Please [reach out](https://data.streetsforall.org/about) with questions or datasets._
+
 
 Since the mechanism of an EIFD is essentially just reserving a future portion of property taxes in a specified geographic area, the work of projecting the value of an EIFD is modeling the increase in property taxes for that area over the timeframe. We were able to utilize existing reports on EIFDs in LA County, including the EIFD study for the [LA Metro K Line Northern Extension Project](https://weho.granicus.com/MetaViewer.php?view_id=16&clip_id=4085&meta_id=276575) and [LA River EIFD](https://cityclerk.lacity.org/onlinedocs/2014/14-1349_misc_11-30-2016.pdf) analysis to understand this type of modeling and apply the same methods to the areas around the three CAHSR stations. 
 
