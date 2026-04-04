@@ -5,9 +5,9 @@ import Footer from "../../components/Footer.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
 import { getCollection } from "astro:content";
 import FormattedDate from "../../components/FormattedDate.astro";
-
+import PCIWidget from "../../post_components/pci_widget";
 const posts = (await getCollection("blog")).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 ---
 
@@ -27,7 +27,7 @@ const posts = (await getCollection("blog")).sort(
 
       .about img {
         max-height: 25rem;
-		margin-bottom: 1rem;
+        margin-bottom: 1rem;
       }
 
       @media only screen and (max-device-width: 800px) {
@@ -55,10 +55,13 @@ const posts = (await getCollection("blog")).sort(
             interfaces to tell accessible and compelling stories.
           </p>
 
-          Email <a href="mailto:josh@streetsforall.org">josh@streetsforall.org</a> with questions or if you are interested in joining the team.
+          Email <a href="mailto:josh@streetsforall.org"
+            >josh@streetsforall.org</a
+          > with questions or if you are interested in joining the team.
         </div>
       </div>
     </main>
+    <PCIWidget client:load />
     <Footer />
   </body>
 </html>
