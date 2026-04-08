@@ -60,4 +60,13 @@
     border-radius: 4px;
     font-size: 0.9em;
   }
+  .legend-title {
+    text-align: center;
+  }
+  .legend {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
 }

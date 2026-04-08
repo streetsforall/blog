@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import * as d3 from "d3";
+import "./style.css";
 
 const PCIDegradationChart = ({ data }) => {
   const ref = useRef();
@@ -29,8 +30,8 @@ const PCIDegradationChart = ({ data }) => {
       .attr("height", "100%")
       .attr("viewBox", "0,0,800,400")
       .attr("preserveAspectRatio", "xMinYMin")
-      .attr("width", width)
-      .attr("height", height);
+      // .attr("width", width)
+      // .attr("height", height);
 
     const g = svg
       .append("g")
@@ -129,21 +130,23 @@ const PCIDegradationChart = ({ data }) => {
     <div>
       <svg ref={ref} />
       <div>
-        <div>Pavement Condition Index:</div>
-        {keys.map((key, i) => (
-          <div key={key}>
-            <div
-              style={{
-                backgroundColor: color(key),
-                height: "1rem",
-                width: "1rem",
-                display: "inline-block",
-                marginRight: "1rem",
-              }}
-            ></div>
-            {key}
-          </div>
-        ))}
+        <div className="legend-title">Pavement Condition Index:</div>
+        <div className="legend">
+          {keys.map((key, i) => (
+            <div key={key} className="legend-item">
+              <div
+                style={{
+                  backgroundColor: color(key),
+                  height: "1rem",
+                  width: "1rem",
+                  display: "inline-block",
+                  marginRight: "1rem",
+                }}
+              ></div>
+              {key}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
