@@ -1,0 +1,24 @@
+---
+title: "Test"
+
+published: true
+---
+
+import { Image } from "astro:assets";
+import { getImage } from "astro:assets";
+
+import PCIWidget from "../../post_components/pci_widget/index.jsx";
+
+<head>
+  <link rel="preload" as="image" href="/images/pci_maps/72M_lar.png" />
+  <link rel="preload" as="image" href="/images/pci_maps/72M_resurf.png" />
+  <link rel="preload" as="image" href="/images/pci_maps/100M_lar.png" />
+  <link rel="preload" as="image" href="/images/pci_maps/100M_resurf.png" />
+  <link rel="preload" as="image" href="/images/pci_maps/200M_lar.png" />
+  <link rel="preload" as="image" href="/images/pci_maps/200M_resurf.png" />
+  <link rel="preload" as="image" href="/images/pci_maps/400M_lar.png" />
+  <link rel="preload" as="image" href="/images/pci_maps/400M_resurf.png" />
+</head>
+<body>
+  <PCIWidget client:load />
+</body>

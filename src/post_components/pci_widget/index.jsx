@@ -10,46 +10,84 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import "./style.css";
-import data from "./data";
+import data from "../../../public/data/pci_scenario_results.json";
 
-const MODELS = {
-  model_100M: "model_100M",
-  model_100M_curbramps: "model_100M_curbramps",
-  model_100M_lar: "model_100M_lar",
-};
+import PCIDegradationChart from "./PCIDegradationChart";
 
-const BUDGET_OPTIONS = [72, 99, 200, 400];
-const RAMP_OPTIONS = ["No Ramps", "Curb Ramps", "Large Asphalt Repair"];
+const MODELS = Object.keys(data);
+const BUDGET_OPTIONS = [72, 100, 200, 400];
+const RAMP_OPTIONS = [
+  "Large Asphalt Repair",
+  "Curb Ramps - 10k",
+  "Curb Ramps - 50k",
+];
 
-// these can be pre-calculated
 function calculateStats(model) {
   const modelResults = data[model];
-  console.log(modelResults);
   return modelResults;
 }
 
+function round(n, digits = 0) {
+  const magnitude = Math.pow(10, digits);
+  return (Math.round(magnitude * n) / magnitude).toLocaleString();
+}
+function getTotalRamps(years) {
+  return years.reduce(
+    (agg, b) => agg + b.ramps_from_dedicated + b.ramps_from_repaving,
+    0,
+  );
+}
+
+function calculateChange(model) {
+  const modelResults = data[model];
+
+  const difference =
+    modelResults.years[10].avg_pci - modelResults.years[0].avg_pci;
+  const isLower = difference < 0;
+
+  return {
+    delta: round(Math.abs(difference)),
+    symbol: isLower ? "↓" : "↑",
+    isLower,
+  };
+}
 const PCIWidget = () => {
-  const [selectedModel, setSelectedModel] = useState(MODELS.model_100M);
+  const [selectedModel, setSelectedModel] = useState(MODELS[0]);
   const [selectedBudget, setSelectedBudget] = useState(BUDGET_OPTIONS[0]);
   const [selectedRampStrategy, setSelectedRampStrategy] = useState(
     RAMP_OPTIONS[0],
   );
-  let stats = calculateStats(selectedModel);
-  useEffect(() => {
-    stats = calculateStats(selectedModel);
-  }, [selectedModel]);
+  let modelResults = calculateStats(selectedModel);
+  let pciChange = calculateChange(selectedModel);
+  let imageUrl = `/images/pci_maps/${selectedBudget}M_${selectedRampStrategy === "Large Asphalt Repair" ? "lar" : "resurf"}.png`;
+  console.log(modelResults);
   return (
     <div className="pci_widget">
+      <div
+        className="pci-map-image"
+        style={{
+          backgroundImage: `url('${imageUrl}')`,
+        }}
+      ></div>
       <div className="controls">
         <div>
-          <label htmlFor="budget_selector">
-            Annual Street Maintenance Budget
-          </label>
+          <label>Annual Street Maintenance Budget</label>
           <select
             name="budget_selector"
             className="selector"
             value={selectedBudget}
-            onChange={(e) => setSelectedBudget(e.target.value)}
+            onChange={(e) => {
+              const budget = e.target.value;
+              setSelectedBudget(e.target.value);
+
+              if (selectedRampStrategy === "Large Asphalt Repair") {
+                setSelectedModel(`lar_${budget}m`);
+              } else if (selectedRampStrategy === "Curb Ramps - 10k") {
+                setSelectedModel(`resurf_10k_${budget}m`);
+              } else {
+                setSelectedModel(`resurf_50k_${budget}m`);
+              }
+            }}
           >
             {BUDGET_OPTIONS.map((option) => (
               <option key={option} value={option}>
@@ -68,33 +106,59 @@ const PCIWidget = () => {
               setSelectedRampStrategy(strategy);
 
               //simplistic version, will change
-              if (strategy === "No Ramps") {
-                setSelectedModel(MODELS.model_100M);
-              } else if (strategy === "Curb Ramps") {
-                setSelectedModel(MODELS.model_100M_curbramps);
+              if (strategy === "Large Asphalt Repair") {
+                setSelectedModel(`lar_${selectedBudget}m`);
+              } else if (strategy === "Curb Ramps - 10k") {
+                setSelectedModel(`resurf_10k_${selectedBudget}m`);
               } else {
-                setSelectedModel(MODELS.model_100M_lar);
+                setSelectedModel(`resurf_50k_${selectedBudget}m`);
               }
             }}
           >
             {RAMP_OPTIONS.map((option) => (
-              <option value={option}>{option}</option>
+              <option key={option} value={option}>
+                {option}
+              </option>
             ))}
           </select>
         </div>
       </div>
-      <div
-        className="pci-map-image"
-        style={{
-          backgroundImage: `url('/images/pci_maps/${selectedBudget}M-pci-map.png')`,
-        }}
-      ></div>
+
       <div className="image-container"></div>
+
       <div className="results-container">
         <div className="results-container-item">
+          <div>
+            <strong>{round(modelResults.years[10].avg_pci)} </strong>
+            <span
+              className={`delta-${pciChange.isLower ? "negative" : "positive"}`}
+            >
+              {pciChange.symbol}
+              {pciChange.delta}
+            </span>
+          </div>
           <div>Average PCI</div>
-          <div>{stats[9].avg_pci}</div>
         </div>
+
+        <div className="results-container-item">
+          {" "}
+          <div>{getTotalRamps(modelResults.years).toLocaleString()}</div>
+          <div>Access Ramps Installed</div>
+        </div>
+        <div className="results-container-item">
+          <div>
+            $
+            {Math.round(
+              modelResults.years[10].total_deferred / 1_000_000,
+            ).toLocaleString()}
+            M
+          </div>
+          <div>Total Deferred</div>
+        </div>
+      </div>
+      <div>
+        <PCIDegradationChart data={modelResults.years} />
+        {}
       </div>
     </div>
   );
