@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import * as d3 from "d3";
 import "./style.css";
 
@@ -6,6 +6,7 @@ const PCIDegradationChart = ({ data }) => {
   const ref = useRef();
 
   const keys = ["86-100", "71-85", "56-70", "41-55", "<=40"];
+  const keyLabels = { "86-100": "A", "71-85": "B", "56-70": "C", "41-55": "D", "<=40": "F" };
 
   const color = d3
     .scaleOrdinal()
@@ -15,9 +16,6 @@ const PCIDegradationChart = ({ data }) => {
     if (!data || data.length === 0) return;
 
     const margin = { top: 20, right: 100, bottom: 20, left: 40 };
-
-    const height = 400;
-    const width = 800;
 
     const innerWidth = 800 - margin.left - margin.right;
     const innerHeight = 400 - margin.top - margin.bottom;
@@ -45,8 +43,7 @@ const PCIDegradationChart = ({ data }) => {
 
     const y = d3
       .scaleLinear()
-      .domain([0, d3.max(stackedData, (layer) => d3.max(layer, (d) => d[1]))])
-      .nice()
+      .domain([0, 100])
       .range([innerHeight, 0]);
 
     const area = d3
@@ -80,7 +77,7 @@ const PCIDegradationChart = ({ data }) => {
 
     const line = d3
       .line()
-      .x((d, i) => x(2026 + d.year))
+      .x((d) => x(2026 + d.year))
       .y((d) => y(d.avg_pci))
       .curve(d3.curveMonotoneX);
 
@@ -130,9 +127,9 @@ const PCIDegradationChart = ({ data }) => {
     <div>
       <svg ref={ref} />
       <div>
-        <div className="legend-title">Pavement Condition Index:</div>
+        <div className="legend-title">Pavement Quality</div>
         <div className="legend">
-          {keys.map((key, i) => (
+          {keys.map((key) => (
             <div key={key} className="legend-item">
               <div
                 style={{
@@ -143,7 +140,7 @@ const PCIDegradationChart = ({ data }) => {
                   marginRight: "1rem",
                 }}
               ></div>
-              {key}
+              {keyLabels[key]}
             </div>
           ))}
         </div>

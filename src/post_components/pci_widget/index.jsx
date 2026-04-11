@@ -1,31 +1,15 @@
-import React, { useState, useEffect } from "react";
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from "recharts";
+import { useState } from "react";
 import "./style.css";
 import data from "../../../public/data/pci_scenario_results.json";
 
 import PCIDegradationChart from "./PCIDegradationChart";
 
-const MODELS = Object.keys(data);
 const BUDGET_OPTIONS = [72, 100, 200, 400];
 const RAMP_OPTIONS = [
   "Large Asphalt Repair",
   "Curb Ramps - 10k",
   "Curb Ramps - 50k",
 ];
-
-function calculateStats(model) {
-  const modelResults = data[model];
-  return modelResults;
-}
 
 function round(n, digits = 0) {
   const magnitude = Math.pow(10, digits);
@@ -52,12 +36,12 @@ function calculateChange(model) {
   };
 }
 const PCIWidget = () => {
-  const [selectedModel, setSelectedModel] = useState(MODELS[0]);
+  const [selectedModel, setSelectedModel] = useState("lar_72m");
   const [selectedBudget, setSelectedBudget] = useState(BUDGET_OPTIONS[0]);
   const [selectedRampStrategy, setSelectedRampStrategy] = useState(
     RAMP_OPTIONS[0],
   );
-  let modelResults = calculateStats(selectedModel);
+  let modelResults = data[selectedModel];
   let pciChange = calculateChange(selectedModel);
   let imageUrl = `/images/pci_maps/${selectedBudget}M_${selectedRampStrategy === "Large Asphalt Repair" ? "lar" : "resurf"}.png`;
   console.log(modelResults);
