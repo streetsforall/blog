@@ -1,38 +1,60 @@
 import { useRef, useEffect } from "react";
 import * as d3 from "d3";
-import "./style.css";
+import "./pci-degradation-chart.scss";
 
 const PCIDegradationChart = ({ data }) => {
   const ref = useRef();
 
   const keys = ["86-100", "71-85", "56-70", "41-55", "<=40"];
-  const keyLabels = { "86-100": "A", "71-85": "B", "56-70": "C", "41-55": "D", "<=40": "F" };
+  const keyLabels = {
+    "86-100": "A",
+    "71-85": "B",
+    "56-70": "C",
+    "41-55": "D",
+    "<=40": "F",
+  };
 
   const color = d3
     .scaleOrdinal()
     .domain(keys)
     .range(d3.schemeRdYlGn[5].toReversed());
+
+  useEffect(() => {
+    const svg = d3
+      .select(ref.current)
+      .attr("width", "100%")
+      .attr("height", "100%")
+      .attr("viewBox", "0,0,800,400")
+      .attr("preserveAspectRatio", "xMinYMin");
+    svg.append("g").attr("class", "layers");
+    svg.append("g").attr("class", "removable");
+  }, []);
+
   useEffect(() => {
     if (!data || data.length === 0) return;
 
-    const margin = { top: 20, right: 100, bottom: 20, left: 40 };
+    const margin = { top: 20, right: 15, bottom: 20, left: 15 };
 
     const innerWidth = 800 - margin.left - margin.right;
     const innerHeight = 400 - margin.top - margin.bottom;
 
-    d3.select(ref.current).selectAll("*").remove();
+    d3.select(ref.current).selectAll(".removable").selectAll('*').remove();
 
     const svg = d3
       .select(ref.current)
       .attr("width", "100%")
       .attr("height", "100%")
       .attr("viewBox", "0,0,800,400")
-      .attr("preserveAspectRatio", "xMinYMin")
-      // .attr("width", width)
-      // .attr("height", height);
+      .attr("preserveAspectRatio", "xMinYMin");
+    // .attr("width", width)
+    // .attr("height", height);
 
     const g = svg
-      .append("g")
+      .select(".layers")
+      .attr("transform", `translate(${margin.left},${margin.top})`);
+
+    const removable = svg
+      .select(".removable")
       .attr("transform", `translate(${margin.left},${margin.top})`);
 
     const x = d3.scaleLinear().domain([2026, 2036]).range([0, innerWidth]);
@@ -41,10 +63,7 @@ const PCIDegradationChart = ({ data }) => {
 
     const stackedData = stack(data);
 
-    const y = d3
-      .scaleLinear()
-      .domain([0, 100])
-      .range([innerHeight, 0]);
+    const y = d3.scaleLinear().domain([0, 100]).range([innerHeight, 0]);
 
     const area = d3
       .area()
@@ -58,10 +77,14 @@ const PCIDegradationChart = ({ data }) => {
       .join("path")
       .attr("class", "layer")
       .attr("fill", (d) => color(d.key))
-      .attr("d", area)
-      .attr("opacity", 0.9);
+      .transition()
+      .duration(200)
+      .attr("d", area);
 
-    g.append("g")
+    // .attr("opacity", 0.9);
+
+    removable
+      .append("g")
       .attr("transform", `translate(0,${innerHeight})`)
       .style("font-family", "monospace")
       .call(
@@ -71,7 +94,10 @@ const PCIDegradationChart = ({ data }) => {
           .tickFormat(d3.format("d")),
       );
 
-    g.append("g").style("font-family", "monospace").call(d3.axisLeft(y));
+    removable
+      .append("g")
+      .style("font-family", "monospace")
+      .call(d3.axisLeft(y).tickFormat(""));
 
     // Moving Average:
 
@@ -81,53 +107,54 @@ const PCIDegradationChart = ({ data }) => {
       .y((d) => y(d.avg_pci))
       .curve(d3.curveMonotoneX);
 
-    g.append("path")
-      .datum(data)
-      .attr("fill", "none")
-      .attr("stroke", "#00E")
-      .attr("stroke-dasharray", "4 6")
-      .attr("stroke-linecap", "round")
+    // g.append("path")
+    //   .datum(data)
+    //   .attr("fill", "none")
+    //   .attr("stroke", "#00E")
+    //   .attr("stroke-dasharray", "4 6")
+    //   .attr("stroke-linecap", "round")
 
-      .attr("stroke-width", 2)
-      .attr("stroke-opacity", 0.9)
-      .attr("d", line);
+    //   .attr("stroke-width", 2)
+    //   .attr("stroke-opacity", 0.9)
+    //   .attr("d", line);
 
-    g.append("path")
-      .datum(data)
-      .attr("fill", "none")
-      .attr("stroke", "#FFF")
+    // g.append("path")
+    //   .datum(data)
+    //   .attr("fill", "none")
+    //   .attr("stroke", "#FFF")
 
-      // .attr("stroke-linecap", "en")
+    //   // .attr("stroke-linecap", "en")
 
-      .attr("stroke-width", 8)
-      .attr("stroke-opacity", 0.25)
-      .attr("d", line);
+    //   .attr("stroke-width", 8)
+    //   .attr("stroke-opacity", 0.25)
+    //   .attr("d", line);
 
-    const last = data[data.length - 1];
+    // const last = data[data.length - 1];
 
-    g.append("text")
-      .attr("x", x(2026 + last.year))
-      .attr("y", y(last.avg_pci))
-      .attr("dx", 6)
-      .attr("dy", "-0.6em")
-      .attr("fill", "#333")
-      .style("font-size", "10")
-      .text("Average PCI:");
-    g.append("text")
-      .attr("x", x(2026 + last.year))
-      .attr("y", y(last.avg_pci))
-      .attr("dx", 6)
-      .attr("dy", "0.6em")
-      .attr("fill", "#333")
-      .style("font-size", "10")
-      .text(`${Math.round(last.avg_pci)}`);
+    // g.append("text")
+    //   .attr("x", x(2026 + last.year))
+    //   .attr("y", y(last.avg_pci))
+    //   .attr("dx", 6)
+    //   .attr("dy", "-0.6em")
+    //   .attr("fill", "#333")
+    //   .style("font-size", "10")
+    //   .text("Average PCI:");
+    // g.append("text")
+    //   .attr("x", x(2026 + last.year))
+    //   .attr("y", y(last.avg_pci))
+    //   .attr("dx", 6)
+    //   .attr("dy", "0.6em")
+    //   .attr("fill", "#333")
+    //   .style("font-size", "10")
+    //   .text(`${Math.round(last.avg_pci)}`);
   }, [data]);
 
   return (
-    <div>
+    <div className="pci-degradation-chart">
+      <div className="chart-title"> Ten-year PCI Change</div>
       <svg ref={ref} />
       <div>
-        <div className="legend-title">Pavement Quality</div>
+        {/* <div className="legend-title">Pavement Quality</div> */}
         <div className="legend">
           {keys.map((key) => (
             <div key={key} className="legend-item">

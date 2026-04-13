@@ -1,0 +1,149 @@
+.bottom-labels {
+  position: relative;
+  height: 1rem;
+  max-width: 24rem;
+  width: 100%;
+  transform: translate(0, -40%);
+  &-label {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    // white-space: nowrap;
+    line-height: 1.2;
+    gap: 0.5rem;
+    position: absolute;
+    font-size: 0.75em;
+
+    svg {
+      height: 1rem;
+      width: 1.5rem;
+      transform: translate(0, -40%);
+      color: #777;
+      flex-shrink: 0;
+    }
+    &:first-child {
+      right: 84%;
+      // width: 0;
+      transform-origin: top right;
+      svg {
+        transform: rotateY(180deg) translate(0, -25%);
+      }
+    }
+    &:last-child {
+      left: 30%;
+
+      transform-origin: top left;
+    }
+  }
+}
+
+.outer {
+  // background: var(--background);
+}
+.wrap {
+  opacity: 1;
+  position: relative;
+  height: 4.5rem;
+  margin: 0;
+  margin-top: 1rem;
+  width: 100%;
+  max-width: 24rem;
+  background: var(--background);
+  .button-outer {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    z-index: 4;
+    background-color: transparent;
+    // background-color: red;
+    border: none;
+    padding: 0;
+    height: 4.5rem;
+    width: 4rem;
+    top: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: monospace;
+
+    // &:last-child {
+    //   transform: translate(-100%, -50%);
+    // }
+    .button-text {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, 0);
+      user-select: none;
+    }
+    .fake-dot {
+      height: 0.8rem;
+      width: 0.8rem;
+      border-radius: 1000px;
+      background-color: #333;
+      border: 1px solid white;
+      transition: 150ms ease all;
+
+      &::before {
+        position: absolute;
+        height: 2rem;
+        width: 2rem;
+        border-radius: 1000px;
+        left: 50%;
+        right: 50%;
+        transform: translate(-50%, -30%);
+        background-color: #3a3a3a11;
+        border: 1px solid #3a3a3a01;
+
+        content: "";
+        opacity: 1;
+        transition: 100ms ease all;
+      }
+    }
+    &:hover {
+      .fake-dot {
+        transform: scale(0.88);
+      }
+      .fake-dot::before {
+        border: 1px solid #3a3a3a41;
+
+        transform: translate(-50%, -30%) scale(1.1);
+      }
+    }
+    &:active {
+      .fake-dot {
+        transform: scale(0.8);
+      }
+      .fake-dot::before {
+        border: 1px solid #3a3a3a41;
+
+        transform: translate(-50%, -30%) scale(1.1);
+      }
+    }
+    &.selected {
+      .button-text {
+        color: blue;
+      }
+      .fake-dot {
+        background-color: blue;
+      }
+    }
+  }
+  .tick {
+    height: 0.4rem;
+    position: absolute;
+    background-color: black;
+    width: 1px;
+    transform: translate(0, -50%);
+    top: 50%;
+  }
+  .bg-line {
+    height: 1px;
+    background-color: black;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translate(0, -50%);
+    width: 100%;
+    z-index: 0;
+  }
+}

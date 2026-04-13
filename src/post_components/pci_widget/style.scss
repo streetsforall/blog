@@ -1,0 +1,122 @@
+$green: #14a356;
+
+.full-bleed-article-item {
+  width: 100vw;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  overflow: hidden;
+}
+.pci-subtitle {
+  font-weight: bold;
+  font-family: sans-serif;
+  color: black;
+  letter-spacing: -0.02em;
+}
+.pci_widget {
+  font-family: monospace;
+  font-size: 1rem;
+  padding: 0 2rem;
+  margin: 0 auto;
+  width: 100%;
+  max-width: min(64rem, 90vw);
+  // padding: 0 2rem;
+  svg {
+    width: 100%;
+  }
+  .controls {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin-bottom: 1rem;
+    // padding-bottom: 20rem;
+  }
+  .slider {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+
+  .selector {
+    background-color: white;
+    display: block;
+    padding: 0.2rem;
+    border: 1px solid #dadada;
+    border-radius: 4px;
+  }
+  .budget-selector {
+    background-color: transparent;
+    border-radius: 0;
+    font-size: inherit;
+    font-family: monospace;
+    font-weight: inherit;
+    display: inline-block;
+    outline: none !important;
+    border: none;
+    border-bottom: 2px solid #dadada;
+  }
+  .result-title {
+    text-align: right;
+    & > div {
+      background: var(--background);
+      display: inline-block;
+    }
+  }
+  .result-surplus {
+    color: $green;
+  }
+  .pci-map-image {
+    height: 38rem;
+    width: 100%;
+    // background-size: 130%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    mix-blend-mode: multiply;
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    right: 0;
+    pointer-events: none;
+  }
+  .results-container {
+    display: block;
+    /* background-color: white; */
+    border: 1px solid #dadada;
+  }
+  .results-container-item {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    border-bottom: 1px solid #dadada;
+  }
+  .results-container-item:last-child {
+    border-bottom: none;
+  }
+  .results-container-item div {
+    padding: 0.25rem 0.5rem;
+    border-right: 1px solid #dadada;
+  }
+  .results-container-item div:last-child {
+    border-right: none;
+  }
+
+  .chart-side-by-side {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+  }
+  .delta-negative {
+    color: #d7191c;
+    background: #ffbdbe33;
+    padding: 0.2rem;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+  .delta-positive {
+    color: $green;
+    background: #7cec9c57;
+    padding: 0.2rem;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+}

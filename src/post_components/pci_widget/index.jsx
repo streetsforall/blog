@@ -1,8 +1,9 @@
 import { useState } from "react";
-import "./style.css";
+import "./style.scss";
 import data from "../../../public/data/pci_scenario_results.json";
 
 import PCIDegradationChart from "./PCIDegradationChart";
+import BudgetSlider from "./BudgetSlider";
 
 const BUDGET_OPTIONS = [72, 100, 200, 400];
 const RAMP_OPTIONS = [
@@ -36,113 +37,256 @@ function calculateChange(model) {
   };
 }
 const PCIWidget = () => {
-  const [selectedModel, setSelectedModel] = useState("lar_72m");
+  const [selectedModel, setSelectedModel] = useState("resurf_50k_72m");
   const [selectedBudget, setSelectedBudget] = useState(BUDGET_OPTIONS[0]);
   const [selectedRampStrategy, setSelectedRampStrategy] = useState(
-    RAMP_OPTIONS[0],
+    RAMP_OPTIONS[2],
   );
   let modelResults = data[selectedModel];
   let pciChange = calculateChange(selectedModel);
   let imageUrl = `/images/pci_maps/${selectedBudget}M_${selectedRampStrategy === "Large Asphalt Repair" ? "lar" : "resurf"}.png`;
   console.log(modelResults);
   return (
-    <div className="pci_widget">
-      <div
-        className="pci-map-image"
-        style={{
-          backgroundImage: `url('${imageUrl}')`,
-        }}
-      ></div>
-      <div className="controls">
-        <div>
-          <label>Annual Street Maintenance Budget</label>
-          <select
-            name="budget_selector"
-            className="selector"
-            value={selectedBudget}
-            onChange={(e) => {
-              const budget = e.target.value;
-              setSelectedBudget(e.target.value);
+    <div className="full-bleed-article-item">
+      <div className="pci_widget">
+        <div
+          className="pci-map-image"
+          style={{
+            backgroundImage: `url('${imageUrl}')`,
+          }}
+        ></div>
+        {/* <div className="controls"> */}
+        {/* <div>
+            <label>Annual Street Maintenance Budget</label>
+            <select
+              name="budget_selector"
+              className="selector"
+              value={selectedBudget}
+              onChange={(e) => {
+                const budget = e.target.value;
+                setSelectedBudget(e.target.value);
 
-              if (selectedRampStrategy === "Large Asphalt Repair") {
-                setSelectedModel(`lar_${budget}m`);
-              } else if (selectedRampStrategy === "Curb Ramps - 10k") {
-                setSelectedModel(`resurf_10k_${budget}m`);
-              } else {
-                setSelectedModel(`resurf_50k_${budget}m`);
-              }
-            }}
-          >
-            {BUDGET_OPTIONS.map((option) => (
-              <option key={option} value={option}>
-                ${(option * 1_000_000).toLocaleString()}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <label>Access Ramp Strategy</label>
-          <select
-            className="selector"
-            value={selectedRampStrategy}
-            onChange={(e) => {
-              const strategy = e.target.value;
-              setSelectedRampStrategy(strategy);
-
-              //simplistic version, will change
-              if (strategy === "Large Asphalt Repair") {
-                setSelectedModel(`lar_${selectedBudget}m`);
-              } else if (strategy === "Curb Ramps - 10k") {
-                setSelectedModel(`resurf_10k_${selectedBudget}m`);
-              } else {
-                setSelectedModel(`resurf_50k_${selectedBudget}m`);
-              }
-            }}
-          >
-            {RAMP_OPTIONS.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-        </div>
-      </div>
-
-      <div className="image-container"></div>
-
-      <div className="results-container">
-        <div className="results-container-item">
-          <div>
-            <strong>{round(modelResults.years[10].avg_pci)} </strong>
-            <span
-              className={`delta-${pciChange.isLower ? "negative" : "positive"}`}
+                if (selectedRampStrategy === "Large Asphalt Repair") {
+                  setSelectedModel(`lar_${budget}m`);
+                } else if (selectedRampStrategy === "Curb Ramps - 10k") {
+                  setSelectedModel(`resurf_10k_${budget}m`);
+                } else {
+                  setSelectedModel(`resurf_50k_${budget}m`);
+                }
+              }}
             >
-              {pciChange.symbol}
-              {pciChange.delta}
-            </span>
+              {BUDGET_OPTIONS.map((option) => (
+                <option key={option} value={option}>
+                  ${(option * 1_000_000).toLocaleString()}
+                </option>
+              ))}
+            </select>
           </div>
-          <div>Average PCI</div>
+          <div>
+            <label>Access Ramp Strategy</label>
+            <select
+              className="selector"
+              value={selectedRampStrategy}
+              onChange={(e) => {
+                const strategy = e.target.value;
+                setSelectedRampStrategy(strategy);
+
+                //simplistic version, will change
+                if (strategy === "Large Asphalt Repair") {
+                  setSelectedModel(`lar_${selectedBudget}m`);
+                } else if (strategy === "Curb Ramps - 10k") {
+                  setSelectedModel(`resurf_10k_${selectedBudget}m`);
+                } else {
+                  setSelectedModel(`resurf_50k_${selectedBudget}m`);
+                }
+              }}
+            >
+              {RAMP_OPTIONS.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </div> */}
+        {/* </div> */}
+        <div className="chart-side-by-side">
+          <div className="controls">
+            <div className="slider">
+              <div>
+                <div>Street Maintenance </div>
+                <h3>
+                  Annual Budget:
+                  <select
+                    name="budget_selector"
+                    className="selector budget-selector"
+                    value={selectedBudget}
+                    onChange={(e) => {
+                      const budget = e.target.value;
+                      setSelectedBudget(e.target.value);
+
+                      if (selectedRampStrategy === "Large Asphalt Repair") {
+                        setSelectedModel(`lar_${budget}m`);
+                      } else if (selectedRampStrategy === "Curb Ramps - 10k") {
+                        setSelectedModel(`resurf_10k_${budget}m`);
+                      } else {
+                        setSelectedModel(`resurf_50k_${budget}m`);
+                      }
+                    }}
+                  >
+                    {BUDGET_OPTIONS.map((option) => (
+                      <option key={option} value={option}>
+                        ${option}M
+                      </option>
+                    ))}
+                  </select>
+                </h3>
+              </div>
+              <div>
+                <BudgetSlider
+                  selectedBudget={selectedBudget}
+                  handleSelect={(budget) => {
+                    setSelectedBudget(`${budget}`);
+
+                    if (selectedRampStrategy === "Large Asphalt Repair") {
+                      setSelectedModel(`lar_${budget}m`);
+                    } else if (selectedRampStrategy === "Curb Ramps - 10k") {
+                      setSelectedModel(`resurf_10k_${budget}m`);
+                    } else {
+                      setSelectedModel(`resurf_50k_${budget}m`);
+                    }
+                  }}
+                />
+              </div>
+              <br />
+              <br />
+              <div>
+                <label>Access Ramp Strategy</label>
+                <select
+                  className="selector"
+                  value={selectedRampStrategy}
+                  onChange={(e) => {
+                    const strategy = e.target.value;
+                    setSelectedRampStrategy(strategy);
+
+                    //simplistic version, will change
+                    if (strategy === "Large Asphalt Repair") {
+                      setSelectedModel(`lar_${selectedBudget}m`);
+                    } else if (strategy === "Curb Ramps - 10k") {
+                      setSelectedModel(`resurf_10k_${selectedBudget}m`);
+                    } else {
+                      setSelectedModel(`resurf_50k_${selectedBudget}m`);
+                    }
+                  }}
+                >
+                  {RAMP_OPTIONS.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+            <div>
+              <PCIDegradationChart data={modelResults.years} />
+            </div>
+          </div>
+          <div>
+            <h3 className="result-title">2036 Outcome</h3>
+            <div className="result-title">
+              <div>Outstanding Maintenance Cost</div>
+              <h3>
+                {modelResults.years[10].total_deferred >
+                modelResults.years[0].total_deferred ? (
+                  <span>
+                    $
+                    {Math.round(
+                      (modelResults.years[10].total_deferred -
+                        modelResults.years[0].total_deferred) /
+                        1_000_000,
+                    ).toLocaleString()}
+                    M
+                  </span>
+                ) : (
+                  <span className="result-surplus">
+                    +$
+                    {Math.round(
+                      (modelResults.years[0].total_deferred -
+                        modelResults.years[10].total_deferred) /
+                        1_000_000,
+                    ).toLocaleString()}
+                    M
+                  </span>
+                )}
+              </h3>
+            </div>
+            <div className="result-title">
+              <div>Average Pavement Quality</div>
+              <h3>
+                <strong>{round(modelResults.years[10].avg_pci)} </strong>
+                <span
+                  className={`delta-${pciChange.isLower ? "negative" : "positive"}`}
+                >
+                  {pciChange.symbol}
+                  {pciChange.delta}
+                </span>
+              </h3>
+            </div>
+            <div className="result-title">
+              <div>Access Ramps Installed</div>
+              <h3>{getTotalRamps(modelResults.years).toLocaleString()}</h3>
+            </div>
+
+            {/* <div className="pci-subtitle">2036 Pavement</div> */}
+          </div>
         </div>
 
-        <div className="results-container-item">
-          {" "}
-          <div>{getTotalRamps(modelResults.years).toLocaleString()}</div>
-          <div>Access Ramps Installed</div>
-        </div>
-        <div className="results-container-item">
-          <div>
-            $
-            {Math.round(
-              modelResults.years[10].total_deferred / 1_000_000,
-            ).toLocaleString()}
-            M
+        <br />
+        {/* <div className="results-container">
+          <div className="results-container-item">
+            <div>
+              <strong>{round(modelResults.years[10].avg_pci)} </strong>
+              <span
+                className={`delta-${pciChange.isLower ? "negative" : "positive"}`}
+              >
+                {pciChange.symbol}
+                {pciChange.delta}
+              </span>
+            </div>
+            <div>Average PCI</div>
           </div>
-          <div>Total Deferred</div>
-        </div>
-      </div>
-      <div>
-        <PCIDegradationChart data={modelResults.years} />
-        {}
+
+          <div className="results-container-item">
+            {" "}
+            <div>{getTotalRamps(modelResults.years).toLocaleString()}</div>
+            <div>Access Ramps Installed</div>
+          </div>
+          <div className="results-container-item">
+            <div>
+              $
+              {Math.round(
+                modelResults.years[10].total_deferred / 1_000_000,
+              ).toLocaleString()}
+              M
+            </div>
+            <div>Total Deferred</div>
+          </div>
+          <div className="results-container-item">
+            <div>
+              $
+              {Math.round(
+                (modelResults.years[10].total_deferred -
+                  modelResults.years[0].total_deferred) /
+                  1_000_000,
+              ).toLocaleString()}
+              M
+            </div>
+            <div>Total Deferred Diff</div>
+          </div>
+        </div> */}
       </div>
     </div>
   );

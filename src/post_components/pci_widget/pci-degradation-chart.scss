@@ -1,0 +1,18 @@
+.pci-degradation-chart {
+  max-width: 20rem;
+  width: 100%;
+  margin-left: auto;
+  transform: translate(10%, 0);
+  .chart-title {
+    font-size: 0.8rem;
+  }
+  .legend-title {
+    text-align: center;
+  }
+  .legend {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+}
