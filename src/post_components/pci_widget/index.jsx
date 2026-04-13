@@ -48,12 +48,7 @@ const PCIWidget = () => {
   console.log(modelResults);
   return (
     <div className="pci_widget">
-      <div
-        className="pci-map-image"
-        style={{
-          backgroundImage: `url('${imageUrl}')`,
-        }}
-      ></div>
+
       <div className="controls">
         <div>
           <label>Annual Street Maintenance Budget</label>
@@ -90,7 +85,6 @@ const PCIWidget = () => {
               const strategy = e.target.value;
               setSelectedRampStrategy(strategy);
 
-              //simplistic version, will change
               if (strategy === "Large Asphalt Repair") {
                 setSelectedModel(`lar_${selectedBudget}m`);
               } else if (strategy === "Curb Ramps - 10k") {
@@ -142,11 +136,21 @@ const PCIWidget = () => {
         </div>
       </div>
       <div>
+                <br/>
+        <b>Street Quality over the next 10 years</b>
         <PCIDegradationChart data={modelResults.years} />
       </div>
       <div>
+        <br/>
+        <b>Deferred Maintenance over the next 10 years</b>
         <DeferredMaintenanceChart data={modelResults.years} />
       </div>
+            <div
+        className="pci-map-image"
+        style={{
+          backgroundImage: `url('${imageUrl}')`,
+        }}
+      ></div>
     </div>
   );
 };

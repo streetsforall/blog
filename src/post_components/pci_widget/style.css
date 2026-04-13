@@ -79,6 +79,7 @@
     padding: 0.5rem;
     font-size: 0.8rem;
     min-width: 13rem;
+    z-index: 10;
   }
   .pci-tooltip-year {
     font-weight: bold;
