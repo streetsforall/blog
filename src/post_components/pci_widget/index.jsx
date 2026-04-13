@@ -50,13 +50,13 @@ const PCIWidget = () => {
     <div className="full-bleed-article-item">
       <div className="pci_widget">
         <div
-          className="pci-map-image"
+          className="pci-map-image-desktop"
           style={{
             backgroundImage: `url('${imageUrl}')`,
           }}
         ></div>
-        {/* <div className="controls"> */}
-        {/* <div>
+        <div className="mobile-controls">
+          <div>
             <label>Annual Street Maintenance Budget</label>
             <select
               name="budget_selector"
@@ -107,11 +107,11 @@ const PCIWidget = () => {
                 </option>
               ))}
             </select>
-          </div> */}
-        {/* </div> */}
+          </div>
+        </div>
         <div className="chart-side-by-side">
           <div className="controls">
-            <div className="slider">
+            <div className="desktop-controls slider">
               <div>
                 <div>Street Maintenance </div>
                 <h3>
@@ -186,15 +186,20 @@ const PCIWidget = () => {
                 </select>
               </div>
             </div>
-            <br />
-            <br />
-            <br />
-            <br />
-            <div>
-              <PCIDegradationChart data={modelResults.years} />
+      
+            <div className="mobile-chart-wrap">
+              <div
+                className="pci-map-image-mobile"
+                style={{
+                  backgroundImage: `url('${imageUrl}')`,
+                }}
+              ></div>
+              <div className="degradation-chart">
+                <PCIDegradationChart data={modelResults.years} />
+              </div>
             </div>
           </div>
-          <div>
+          <div className="desktop-results">
             <h3 className="result-title">2036 Outcome</h3>
             <div className="result-title">
               <div>Outstanding Maintenance Cost</div>
@@ -245,7 +250,7 @@ const PCIWidget = () => {
         </div>
 
         <br />
-        {/* <div className="results-container">
+        <div className="mobile-results results-container">
           <div className="results-container-item">
             <div>
               <strong>{round(modelResults.years[10].avg_pci)} </strong>
@@ -286,7 +291,7 @@ const PCIWidget = () => {
             </div>
             <div>Total Deferred Diff</div>
           </div>
-        </div> */}
+        </div>
       </div>
     </div>
   );

@@ -1,13 +1,23 @@
 $green: #14a356;
 
+@mixin desktop {
+  @media screen and (min-width: 900px) {
+    @content;
+  }
+}
+
 .full-bleed-article-item {
-  width: 100vw;
-  margin-left: -50vw;
-  margin-right: -50vw;
   position: relative;
-  left: 50%;
-  right: 50%;
-  overflow: hidden;
+
+  @include desktop {
+    width: 100vw;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    overflow: hidden;
+  }
 }
 .pci-subtitle {
   font-weight: bold;
@@ -18,19 +28,41 @@ $green: #14a356;
 .pci_widget {
   font-family: monospace;
   font-size: 1rem;
-  padding: 0 2rem;
+
   margin: 0 auto;
   width: 100%;
-  max-width: min(64rem, 90vw);
+
+  @include desktop {
+    padding: 0 1rem;
+    max-width: min(64rem, 90vw);
+  }
   // padding: 0 2rem;
   svg {
     width: 100%;
   }
-  .controls {
-    display: grid;
+  .mobile-controls {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    gap: 1rem;
+    & > div {
+      flex: 1 0 50%;
+    }
+
+    @include desktop {
+      display: none;
+    }
+  }
+  .desktop-controls {
+    display: none;
     grid-template-columns: 1fr;
     margin-bottom: 1rem;
-    // padding-bottom: 20rem;
+
+    @include desktop {
+      display: grid;
+    }
+    padding-bottom: 10rem;
   }
   .slider {
     width: 100%;
@@ -65,19 +97,55 @@ $green: #14a356;
   .result-surplus {
     color: $green;
   }
-  .pci-map-image {
-    height: 38rem;
+  .pci-map-image-mobile {
+    height: 90vw;
+    width: 100%;
+    background-size: 130%;
+    // background-size: contain;
+    background-position: top center;
+    background-repeat: no-repeat;
+    mix-blend-mode: multiply;
+    left: 20%;
+    position: relative;
+
+    @include desktop {
+      display: none;
+    }
+  }
+  .pci-map-image-desktop {
+    height: calc(30rem + 10vw);
     width: 100%;
     // background-size: 130%;
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
     mix-blend-mode: multiply;
+    display: none;
+    @include desktop {
+      display: block;
+      position: absolute;
+      top: 10%;
+      left: 10%;
+      right: 0;
+      pointer-events: none;
+    }
+  }
+  .mobile-chart-wrap {
+    position: relative;
+    padding-bottom: 1rem;
+  }
+  .pci-degradation-chart {
+    max-width: 18rem;
+    width: 100%;
     position: absolute;
-    top: 10%;
-    left: 10%;
-    right: 0;
-    pointer-events: none;
+    bottom: 0;
+    @include desktop {
+      position: relative;
+      max-width: 20rem;
+      width: 100%;
+      margin-left: auto;
+      transform: translate(10%, 0);
+    }
   }
   .results-container {
     display: block;
@@ -102,8 +170,11 @@ $green: #14a356;
 
   .chart-side-by-side {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     position: relative;
+    @include desktop {
+      grid-template-columns: 1fr 1fr;
+    }
   }
   .delta-negative {
     color: #d7191c;
@@ -118,5 +189,18 @@ $green: #14a356;
     padding: 0.2rem;
     border-radius: 4px;
     font-size: 0.9em;
+  }
+
+  .desktop-results {
+    display: none;
+    @include desktop {
+      display: block;
+    }
+  }
+  .mobile-results {
+    display: block;
+    @include desktop {
+      display: none;
+    }
   }
 }
