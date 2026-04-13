@@ -1,14 +1,15 @@
 import { useState } from "react";
 import "./style.css";
-import data from "../../../public/data/pci_scenario_results.json";
+import data from "../../data/pci_scenario_results.json";
 
 import PCIDegradationChart from "./PCIDegradationChart";
+import DeferredMaintenanceChart from "./DeferredMaintenanceChart";
 
 const BUDGET_OPTIONS = [72, 100, 200, 400];
 const RAMP_OPTIONS = [
   "Large Asphalt Repair",
-  "Curb Ramps - 10k",
   "Curb Ramps - 50k",
+    "Curb Ramps - 10k",
 ];
 
 function round(n, digits = 0) {
@@ -113,7 +114,7 @@ const PCIWidget = () => {
       <div className="results-container">
         <div className="results-container-item">
           <div>
-            <strong>{round(modelResults.years[10].avg_pci)} </strong>
+            <strong>{(modelResults.years[10].avg_pci).toFixed(1)} </strong>
             <span
               className={`delta-${pciChange.isLower ? "negative" : "positive"}`}
             >
@@ -142,7 +143,9 @@ const PCIWidget = () => {
       </div>
       <div>
         <PCIDegradationChart data={modelResults.years} />
-        {}
+      </div>
+      <div>
+        <DeferredMaintenanceChart data={modelResults.years} />
       </div>
     </div>
   );

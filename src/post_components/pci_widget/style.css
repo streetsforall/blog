@@ -1,4 +1,5 @@
 .pci_widget{
+  position: relative;
   font-family: monospace;
   font-size: 1rem;
   svg {
@@ -67,6 +68,27 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 1rem;
+  }
+  .pci-tooltip {
+    position: absolute;
+    pointer-events: none;
+    background: white;
+    border: 1px solid #DADADA;
+    border-radius: 4px;
+    padding: 0.5rem;
+    font-size: 0.8rem;
+    min-width: 13rem;
+  }
+  .pci-tooltip-year {
+    font-weight: bold;
+    margin-bottom: 0.25rem;
+    border-bottom: 1px solid #DADADA;
+    padding-bottom: 0.25rem;
+  }
+  .pci-tooltip-row {
+    display: flex;
+    justify-content: space-between;
     gap: 1rem;
   }
 }
