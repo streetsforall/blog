@@ -3,7 +3,7 @@
   height: 1rem;
   max-width: 24rem;
   width: 100%;
-  transform: translate(0, -40%);
+  transform: translate(-1px, -40%);
   &-label {
     display: flex;
     align-items: flex-start;
@@ -26,11 +26,11 @@
       // width: 0;
       transform-origin: top right;
       svg {
-        transform: rotateY(180deg) translate(0, -25%);
+        transform: rotateY(180deg) translate(0, -40%);
       }
     }
     &:last-child {
-      left: 30%;
+      left: 29%;
 
       transform-origin: top left;
     }

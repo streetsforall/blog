@@ -3,7 +3,6 @@ import * as d3 from "d3";
 
 import "./budget-slider.scss";
 
-
 // not sure how we want to handle SVG imports so just hardcoding it here
 const ArrowSVG = () => (
   <svg
@@ -24,7 +23,7 @@ const BudgetSlider = ({ selectedBudget, handleSelect }) => {
   const budgetValues = [72, 100, 200, 400];
   const tickValues = [15, 30, 55, 100];
   const allTicks = d3.range(0, 101, 5);
-  console.log(selectedBudget, typeof selectedBudget);
+
   return (
     <div className="outer">
       <div className="wrap">

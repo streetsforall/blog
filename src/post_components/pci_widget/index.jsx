@@ -45,7 +45,7 @@ const PCIWidget = () => {
   let modelResults = data[selectedModel];
   let pciChange = calculateChange(selectedModel);
   let imageUrl = `/images/pci_maps/${selectedBudget}M_${selectedRampStrategy === "Large Asphalt Repair" ? "lar" : "resurf"}.png`;
-  console.log(modelResults);
+
   return (
     <div className="full-bleed-article-item">
       <div className="pci_widget">
@@ -186,7 +186,7 @@ const PCIWidget = () => {
                 </select>
               </div>
             </div>
-      
+
             <div className="mobile-chart-wrap">
               <div
                 className="pci-map-image-mobile"
