@@ -1,52 +1,48 @@
-.pci_widget{
+.pci_widget {
   position: relative;
   font-family: monospace;
   font-size: 1rem;
+  border: 1px dotted var(--gray);
+  padding: 0.5rem;
+
   svg {
     width: 100%;
- 
   }
   .controls {
     display: grid;
     grid-template-columns: 1fr 1fr;
     margin-bottom: 1rem;
+        gap: 1rem;
+  }
+
+  .controls div {
+    background-color: var(--block);
+    padding: 0.5rem;
   }
   .selector {
     background-color: white;
     display: block;
-    padding: 0.2rem;
-    border: 1px solid #DADADA;
+    padding: 0.5rem;
+    border: 1px solid #dadada;
     border-radius: 4px;
   }
+
   .pci-map-image {
     height: 30rem;
     width: 100%;
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    mix-blend-mode: multiply; 
+    mix-blend-mode: multiply;
   }
-  .results-container {
-    display: block;
-    /* background-color: white; */
-    border:1px solid #DADADA;
-    
+  .results-table {
+    margin: 2rem 0rem;
+    width: max-content;
   }
-  .results-container-item {
-    display: grid;
-    grid-template-columns: 1fr 3fr;
-    border-bottom: 1px solid #DADADA;
-  }
-  .results-container-item:last-child {
-    border-bottom: none;
-  }
-  .results-container-item div {
+  .results-table td {
     padding: 0.25rem 0.5rem;
-    border-right: 1px solid #DADADA;
   }
-  .results-container-item div:last-child {
-    border-right: none;
-  }
+
   .delta-negative {
     color: #d7191c;
     background: #ffbdbe33;
@@ -61,6 +57,38 @@
     border-radius: 4px;
     font-size: 0.9em;
   }
+  .view-tabs {
+    margin-top: 1rem;
+    display: flex;
+    border-bottom: 1px solid #dadada;
+    margin-bottom: 1rem;
+  }
+
+  .view-tabs sub {
+    font-size: 0.8rem;
+    margin-right: 1rem;
+    padding: 0.4rem 0rem;
+  }
+
+  .view-tab {
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 0.4rem 1rem;
+    cursor: pointer;
+    font-family: monospace;
+    font-size: 0.9rem;
+    color: #666;
+  }
+  .view-tab:hover {
+    color: #333;
+  }
+  .view-tab-active {
+    color: #333;
+    background-color: var(--block);
+    border-bottom-color: #333;
+    font-weight: bold;
+  }
   .legend-title {
     text-align: center;
   }
@@ -74,7 +102,7 @@
     position: absolute;
     pointer-events: none;
     background: white;
-    border: 1px solid #DADADA;
+    border: 1px solid #dadada;
     border-radius: 4px;
     padding: 0.5rem;
     font-size: 0.8rem;
@@ -84,7 +112,7 @@
   .pci-tooltip-year {
     font-weight: bold;
     margin-bottom: 0.25rem;
-    border-bottom: 1px solid #DADADA;
+    border-bottom: 1px solid #dadada;
     padding-bottom: 0.25rem;
   }
   .pci-tooltip-row {

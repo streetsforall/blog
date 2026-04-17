@@ -1,10 +1,10 @@
 ---
-title: "Think LA Streets are broken? They're about to get a lot worse."
+title: "Think LA has a lot of potholes? You're about to see a lot more"
 pubDate: "March 23 2026"
 heroImageCredit: ""
-heroImage: ""
-description: ""
-authors: ""
+heroImage: "/images/pci_maps/modeled_out.png"
+description: "This report looks to model how much it will cost to fix and maintain LA streets over the next decade. Without a significant injection of funding LA is on track to have 70% of streets in a failed state."
+authors: "Report and technical analysis by Noah Mercer and Josh Vredevoogd \n \n Web development by Anthony Kenzo Salazar \n \n Additional thanks to the SFA Data/Dev team"
 published: false
 ---
 
@@ -25,11 +25,16 @@ import PCIWidget from "../../post_components/pci_widget/index.jsx";
 
 The City of Los Angeles has the largest street network in the nation with over 7,500 miles of roads. The Bureau of Street Services (referred to as BSS, and branded as StreetsLA), is the agency responsible for maintaining this sprawling network.
 
-Unfortunately, we are standing at the edge of a financial cliff. Despite LA’s heavy car traffic our streets receive less investment than peer cities (for example, about a third of what Long Beach spends per mile of road). Decades of underinvestment in accessible curb ramps combined with a growing Citywide budget crisis means that the status quo is unsustainable.
+Unfortunately, we are standing at the edge of a financial cliff. Despite LA’s heavy car traffic our streets receive less investment than peer cities (for example, about a third of what Long Beach spends per mile of road). Decades of underinvestment in accessible curb ramps combined with a growing Citywide budget crisis means that the status quo is unsustainable. 
 
-By modeling road degradation rates we are able to estimate how different budget and policy scenarios lead to a range of outcomes. Pavement Condition Index (PCI) is a 0-100 score measuring road quality. 
+Our report shows LA needs to fully reimagine investments in the public realm. The City’s failure to meet its ADA obligations mean tens of thousands of curb ramps are out of compliance and must be fixed at exuberant costs. The compounding costs of repaving, rising each year it is put off, leaves the City patching but unable to fix structural failures. There is no budget path without a significant injection of funding, in the billions of dollars, that can maintain the current street quality. 
 
-**LA’s current average PCI of 71 is on track to fall to 41 by 2035. At that point a super majority of streets in the City will be in a failed state and cumulatively will cost over $15.5 billion to fix.**
+This is all illuminated by the current budget crisis and City spending priorities. For example, if the $2.3 Billion the City is bonding to upgrade the Convention Center was instead prioritized for street repair over the same timeframe, our model suggests by the Olympics, LA would have a PCI of 80, and a quarter of the City’s access ramps would be fully ADA compliant. We would have saved over $7 Billion in deferred maintenance costs by the end of the decade. 
+
+City officials face very difficult decisions going forward. Should LA continue to prioritize pavement quality over street safety and accessibility? What are strategies to reduce the burden of repaving costs? What additional possible funding sources can be leveraged?
+
+
+**Without a change in approach, LA’s current average Pavement Condition Index (PCI) of 71 is on track to fall to 46 by 2035. At that point a super majority of streets in the City will be in a failed state and will cost over $15.5 billion to fix.**
 
 <b  class="highlights">
 1) LA has a $8B street and access ramp maintenance backlog. We are on track for that growing to over $15B by 2035.
@@ -38,7 +43,105 @@ By modeling road degradation rates we are able to estimate how different budget 
 4) Access ramp costs are an outsized burden. At the current price of $50k per ramp it will cost $4 Billion to fix all ramps in the City. At the price of peer cities (for example, $10k in Beverly Hills) fixing all access ramps would cost less than $900m.
 </b>
 
+## Repaving Scenarios 
+
+To help policymakers and the public understand the coming fiscal crisis, we’ve built a tool to show different repaving scenarios over the next decade. If you are unfamiliar with some of these terms, we describe them in the next section.
   <PCIWidget client:load />
 
+  <details>
+  <summary>Deferred Maintenance</summary>
+  Test
+</details>
+
+  <details>
+  <summary>Slurry Seal</summary>
+  Test
+</details>
+
+  <details>
+  <summary>Large Asphalt Repair</summary>
+  Test
+</details>
+
+## Pavement Condition Index, a ticking fiscal bomb
+
+Street resurfacing is a core municipal responsibility, and a regular compass heading for the average Angeleno’s understanding of “how well is the City meeting my needs”. Potholes and broken streets are visible and tangible, leading to broken vehicles, erratic driving, and a feeling of underinvestment.
+
+While repaving streets seems simple, it is complicated and in many ways counterintuitive. Recently in Los Angeles, various stressors have led to policy changes making it even more expensive and challenging. We are going to give a brief overview here.
+
+There are two mental models to build for understanding repaving. First, as a street ages it gets more expensive to fix. Second, the rate of deterioration is non-linear. Pavement Condition Index (PCI) is a 0-100 score to assess the structural integrity of a road. Anything above 70 is considered in good condition. Anything below 55 is considered failing. Based on conversations with BSS staff these are rough costs per lane mile for different kinds of repaving:
+
+| Repaving Type | Applicable PCI | Avg Cost per Lane Mile | Access Ramp Upgrades Triggered |
+|---|---|---|---|
+| Slurry Seal | >71 | $30,000 | No |
+| Large Asphalt Repair | 41-70 | $395,000 | No |
+| Resurfacing | 41-70 | $190,000 | Yes |
+| Reconstruction | 20-40 | $250,000 | Yes|
+| Major reconstruction | 0-20 | $500,000 | Yes |
+
+
+The relationship between PCI and age follows a well established sigmoid curve. When a street is repaired, it stays in a state of good repair for a while, often around a decade, but then quickly begins to deteriorate before leveling off. How quickly this deterioration happens depends on a number of inputs, but for our high level model we simply used two curves to represent local streets and another for arterials.
+
+<img src="/images/pci_maps/pci_chart.png"/>
+<p class="subtitle">Repaving chart curves</p>
+
+
+This raises many interesting questions, is it cheaper to only keep the ‘good’ streets in a high quality state? Or is it better to fix the worst, most expensive, streets first? Our model outputs a ratio of 30% slurry seal and 70% repaving as ideal on paper, but that skips many real word realities. Top of which is that the worst streets, covered in potholes, are the ones elected officials are going to get the most angry complaints to fix. 
+
+The city of Los Angeles has long had a policy of keeping the streets that are in OK-to-good condition that way, while leaving the worst streets to deteriorate. In 2019 through 2024 Los Angeles spent an average of less than 15% of its pavement preservation budget fixing the streets in the very worst condition. The logic is that it is much less costly to keep a street in decent condition than it is to reconstruct it after it has failed. Therefore the city should focus on maintaining streets in decent condition. While sensible, if you don’t also have the money to reconstruct the failing streets they inevitably get worse. And if you don’t have enough money to even maintain the OK-to-good streets then eventually you end up with 26,000 lane miles of gravel and potholes. 
+
+Unfortunately that is the reality Los Angeles finds itself in, with the pavement preservation budget declining from $141.4M in 2020 to just over $70M in 2025 due to the City’s budget crisis. This is penny wise dollar foolish, lowering near term costs but increasing them an order of magnitude for future taxpayers. Even worse, this is only half of the current crisis.
+
+
+<img src="/images/pci_maps/curb_ramp.jpeg"/>
+<p class="subtitle">Repaving chart curves</p>
+
+## Access Ramps and LA’s accessibility crisis
+
+
+Access ramps critical pieces of infrastructure for allowing wheelchairs, strollers, or wheeled devices accessible use of sidewalks. Unfortunately, the vast majority of access ramps were built over 40 years ago, and few meet current ADA standards. 
+
+While federal law has required Cities to upgrade ramps alongside repaving since the nineties, Los Angeles has largely failed to meet its obligation, and is now paying the price. This story is complicated, and to get a better understanding of the multiple lawsuits that have led us to this moment, we recommend [Maylin Tu’s recent piece in Streetsblog](https://la.streetsblog.org/2026/02/27/disrespectful-and-infuriating-l-a-s-progress-on-making-streets-safe-and-accessible-for-disabled-people-stalled-for-decades). 
+
+What is most pertinent for our analysis is that the Willits Settlement, a massive class action lawsuit over sidewalk accessibility, was recently reopened due to LA’s failure in meeting its side of the deal. One consequence being that the City of LA finally seems to be fixing access ramps alongside repaving roads. That said, repairing a 25 year backlog across the largest street network in the nation is not easy or cheap.
+
+First, no one knows how many access ramps need to be upgraded. In 1998 the [City estimated](https://caselaw.findlaw.com/court/ca-court-of-appeal/1660274.html) 108,000 access ramps were out of compliance with ADA law. The City’s [dataset of ramps](https://geohub.lacity.org/datasets/access-ramps/explore?location=34.017442%2C-118.412045%2C10&showTable=true) generated by satellite imagery has 91,000 items, but does not account for corners without curbs, and also makes no judgement about accessibility. The City is in the initial steps of completing a full sidewalk and access ramp inventory, but it is years away. 
+
+For our analysis, we settled on an estimate of 87,000 access ramps that need to be fixed by looking at historical BSS and BOE repairs along with estimates of 3rd party projects. This number could easily be off by 10,000 curb ramps in either direction, but it does not impact the model simulation because no scenario spends enough to clear more than 50% of the access ramp backlog.
+
+The City is further burdened by extraordinarily high costs for building individual access ramps. In 2014 the City [estimated](https://cao.lacity.gov/SOSLA/2_FINAL%20BOE%20Attachment%20-%20Harris%20SOSLA%20Estimate%20Report%20022714%20(1).pdf) a ramp cost $3,000 to construct. Recent BSS reports now peg the cost of a single access ramp at a whopping $50,000. Beverly Hills of all places builds them at $10,000 per ramp. In LA, fixing access ramps at a single intersection could cost more than completely resurfacing an entire lane mile of street. This has effectively doubled the cost of completing any street repaving or reconstruction (Slurry Seal falls into a special category and does not trigger ramps). 
+
+All told, at current costs the City is looking at around four billion dollars to fix all the access ramps in the City. BSS looked at this and asked itself, what if we skirt ADA law one more time?
+
+<img src="/images/pci_maps/large_asphalt.jpeg"/>
+<p class="subtitle">Repaving chart curves</p>
+
+## Why Large Asphalt Repair is a bad idea
+
+To try to avoid the cost of access ramps the City has recently begun doing what it calls “large asphalt repairs”. These are standard street repairs but often limited to one or two lanes, often not longer than a city block, and always ending before intersections. By not repaving through crosswalks, City lawyers believe ADA repair requirements are not triggered. Street advocates began seeing these and flagging them as an accessibility and HLA violation. They also seem to violate the City’s own [engineering guidelines](https://engpermits.lacity.org/docs/upermits/uploads/2022008220/Curb_Ramp.pdf): “The scope of projects shall not be structured to avoid the obligation to provide curb ramps when altering a roadway”.
+
+As has been reported elsewhere, this fiscal year the City of LA is planning on almost no standard street repaving. Instead, nearly the entire repaving budget is being spent on Large Asphalt Repair. True to its history, BSS is once again chasing ‘better’ PCI scores instead of prioritizing the needs of the most vulnerable road users. 
+
+In conversations with BSS insiders, we have been able to peg the cost of Large Asphalt Repair at around $395,000 per lane mile. For those keeping track, that's more than twice as much as standard resurfacing. It makes sense, it requires much of the same overhead. BSS must bring the same specialized machinery and crews to the site but then only fix a fraction of the roadbed.
+
+Over the long term, our model shows that Large Asphalt Repair has no notable PCI improvement compared to standard repaving. Instead, we end up spending about the same budget while fixing half the number of access ramps.  
+
+
+# Methodology and Analysis
+
+We wanted to see what it would cost for Los Angeles to not merely slow the decline of its streets but to actively improve them. There are a lot of variables to consider when answering this question: How do we decide which streets need what treatment? How much does each treatment cost? Are we including access ramps? Are we doing inefficient large asphalt repairs? How quickly are we trying to make the improvements? We tried to answer these by grounding our analysis in what Los Angeles has historically done. We started by using an annual budget of $72M as our baseline budget scenario. We looked at each type of treatment commonly done (slurry sealing, resurfacing and reconstruction) and used the average percent of the budget spent on those during the same time period as our allocation for each treatment type. To determine which streets would receive which treatments we used the city’s measurement of the pavement condition index (PCI) for each of the more than 72,000 street segments the city tracks.  Guided by the letter grades the city assigns to ranges of PCI values, we then assigned streets with a PCI of less than or equal to 19 to a “needs complete reconstruction” category. Streets with a PCI of 20-40 were put in a cheaper reconstruction category, while those with a PCI of 41-70 were deemed to need resurfacing. Those with a PCI of 71-85 were planned for slurry sealing only (aside from larger, non-local streets, which the city does not slurry seal). A PCI of 86 or above needed no treatment.
+
+Having set up our parameters, we then ran a ten year simulation where we selected street segments in need of slurry sealing, resurfacing or reconstruction (choosing the segments with the lowest PCI in each category) and treating as many as we could until the budget for the year ran out. If at any point we had more money for, say, slurry sealing than there were street segments that needed it we rolled the extra funding to reconstruction. Similarly, extra reconstruction funding was rolled to resurfacing and extra resurfacing funding to slurry sealing. A treated segment was upgraded to a PCI of 100.
+
+##  Access Ramps
+
+In addition to simulating the pavement preservation program, we also simulated the building of access ramps. The city has 91,000 access ramps, of which 3,800 have been fixed in the last 10 years. Once fixed, a access ramp life is over 25 years, so doesn't enter back into the simulation. 
+
+There are roughly 87,000 access ramps that need to be updated across the city. We looked at the total number of access ramps to be updated by street type and found that the city has about 44,500 access ramps on local streets and 42,500 on larger streets. We used this information to calculate the density of access ramps per lane mile of each street type and factored that into our paving simulation scenarios, of which there were two: access ramp updates done only when the street segment required reconstruction (as is the case under the current “large asphalt repair” regime), and access ramp updates done for street segments that required reconstruction or resurfacing. (There is also a separate budget of $12M/year just for dedicated access ramp construction/updates; we simulated access ramp work out of this budget separately from access ramps undertaken as part of pavement repair projects.)
+
+
+## Predicting Pavement Quality
+
+Meanwhile we simulated the aging of all untreated streets following curves taken from literature around street degradation rates. Unfortunately the actual data do not remotely reflect the tidiness of that curve. The real age-to-PCI data are as bumpy as an unmaintained LA alley. Only in the first six years after a road is repaved its PCI does seem to follow a curve. We surmise that this is because the city doesn’t actually measure the PCI of recently repaved roads but instead estimates it using the given curve (or something similar). After that all real correlation between age and PCI is lost. We have survivor effects (for example, concrete roads more than 40 years old often have a PCI higher than their younger siblings), outliers (roads that are only 12 years old with a PCI of a road three times older) and generally all manner of noise in the data. We don’t know how much of this is bad data, sporadic measurements (our FOIA request for historical PCI data was denied, so we were unable to compare changes for specific segments over time), or just a truly weak correlation between age and PCI. The city’s prediction curve was the best information we found to work with, though, so we used it to estimate aging of each untreated segment over time, enforcing a requirement that the PCI of an untreated segment could never improve to help deal with outliers that were already in worse condition for their age than the curve would predict.
 
 </body>
