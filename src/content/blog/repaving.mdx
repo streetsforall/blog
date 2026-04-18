@@ -1,14 +1,15 @@
 ---
-title: "Think LA has a lot of potholes? You're about to see a lot more"
+title: "LA stopped repaving streets. We modeled how bad they are going to get."
 pubDate: "March 23 2026"
 heroImageCredit: ""
-heroImage: "/images/pci_maps/modeled_out.png"
+heroImage: "/images/pci_maps/modeled_out.jpg"
 description: "This report looks to model how much it will cost to fix and maintain LA streets over the next decade. Without a significant injection of funding LA is on track to have 70% of streets in a failed state."
 authors: "Report and technical analysis by Noah Mercer and Josh Vredevoogd \n \n Web development by Anthony Kenzo Salazar \n \n Additional thanks to the SFA Data/Dev team"
 published: false
 ---
 
 import PCIWidget from "../../post_components/pci_widget/index.jsx";
+import PCITrifold from "../../post_components/pci_widget/PCITrifold.jsx";
 
 <head>
   <link rel="preload" as="image" href="/images/pci_maps/72M_lar.png" />
@@ -69,7 +70,11 @@ Street resurfacing is a core municipal responsibility, and a regular compass hea
 
 While repaving streets seems simple, it is complicated and in many ways counterintuitive. Recently in Los Angeles, various stressors have led to policy changes making it even more expensive and challenging. We are going to give a brief overview here.
 
+
+<PCITrifold />
+
 There are two mental models to build for understanding repaving. First, as a street ages it gets more expensive to fix. Second, the rate of deterioration is non-linear. Pavement Condition Index (PCI) is a 0-100 score to assess the structural integrity of a road. Anything above 70 is considered in good condition. Anything below 55 is considered failing. Based on conversations with BSS staff these are rough costs per lane mile for different kinds of repaving:
+
 
 | Repaving Type | Applicable PCI | Avg Cost per Lane Mile | Access Ramp Upgrades Triggered |
 |---|---|---|---|
@@ -85,16 +90,12 @@ The relationship between PCI and age follows a well established sigmoid curve. W
 <img src="/images/pci_maps/pci_chart.png"/>
 <p class="subtitle">Repaving chart curves</p>
 
-
 This raises many interesting questions, is it cheaper to only keep the ‘good’ streets in a high quality state? Or is it better to fix the worst, most expensive, streets first? Our model outputs a ratio of 30% slurry seal and 70% repaving as ideal on paper, but that skips many real word realities. Top of which is that the worst streets, covered in potholes, are the ones elected officials are going to get the most angry complaints to fix. 
 
 The city of Los Angeles has long had a policy of keeping the streets that are in OK-to-good condition that way, while leaving the worst streets to deteriorate. In 2019 through 2024 Los Angeles spent an average of less than 15% of its pavement preservation budget fixing the streets in the very worst condition. The logic is that it is much less costly to keep a street in decent condition than it is to reconstruct it after it has failed. Therefore the city should focus on maintaining streets in decent condition. While sensible, if you don’t also have the money to reconstruct the failing streets they inevitably get worse. And if you don’t have enough money to even maintain the OK-to-good streets then eventually you end up with 26,000 lane miles of gravel and potholes. 
 
 Unfortunately that is the reality Los Angeles finds itself in, with the pavement preservation budget declining from $141.4M in 2020 to just over $70M in 2025 due to the City’s budget crisis. This is penny wise dollar foolish, lowering near term costs but increasing them an order of magnitude for future taxpayers. Even worse, this is only half of the current crisis.
 
-
-<img src="/images/pci_maps/curb_ramp.jpeg"/>
-<p class="subtitle">Repaving chart curves</p>
 
 ## Access Ramps and LA’s accessibility crisis
 
@@ -126,6 +127,13 @@ In conversations with BSS insiders, we have been able to peg the cost of Large A
 
 Over the long term, our model shows that Large Asphalt Repair has no notable PCI improvement compared to standard repaving. Instead, we end up spending about the same budget while fixing half the number of access ramps.  
 
+## What can we do?
+
+* __Stop Large Asphalt Repair__ - We are currently spending the same amount of money for a worse outcome, and the access ramps we aren’t building today will still need to be built in the future. 
+* __Stop overindexing on PCI__ - For decades BSS has treated pavement condition as the end all be all department goal. This creates strange incentives, like repeatedly repaving roads in good shape to inflate scores. City leadership should think about changing the goalposts. What is the value in smooth pavement if parts of it are not accessible to our most vulnerable road users? What is the value in smooth pavement if the street is designed in a way that kills people?
+* __Treat streets as a holistic project__ - Many other City’s have proper complete street policies; when a street is touched, all planned improvements are made at the same time. This prevents waste and overlapping work. LA’s fragmented departments and bureaucracy have historically stymied this approach, but efforts like Measure HLA and a citywide CIP look to fix it. It takes the City about 6 months for access ramps to be engineered and installed. In a functional City that should also be enough time for trees to be planted, bike lanes to be engineered, and streetlights fixed.
+* __Find new revenue__ - While we need to spend money we have more efficiently, at the end of the day, we likely need additional dedicated funding to get a head start and prevent a large pileup of deferred maintenance. Bonds or parcel taxes are used by many other cities to cover this gap. LA can also explore other options, like Portland’s Heavy Vehicle Use Tax, making the heaviest road users contribute more to road repair. The strange shape of the City means many people driving on LA roads may not live in the City or contribute towards its taxbase, tools like congestion pricing can help recover otherwise lost revenue. 
+* __Find creative ways to reduce maintenance needs__ - LA has the largest street network in the nation and will likely always struggle to fully maintain it. Allocating road space to other uses can reduce or eliminate the cost of maintenance. For example, a cyclist would need to travel over a stretch of pavement over 100,000 times to equal a single car. Similarly, low cost street closures creating plazas can permanently reduce the maintenance needs for a piece of street. Council District 1’s proposal to transfer a stretch of Wilshire Blvd into MacArthur Park could be replicated across the City, removing thousands of lane miles of maintenance while expanding precious greenspace.
 
 # Methodology and Analysis
 
