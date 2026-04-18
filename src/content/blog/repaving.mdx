@@ -1,9 +1,9 @@
 ---
 title: "LA stopped repaving streets. We modeled how bad they are going to get."
 pubDate: "March 23 2026"
-heroImageCredit: ""
+heroImageCredit: "The City in 2036 under the current budget and repaving trends. Nearly 75% of streets are failed, and there is more than $15 billion in necessary street maintenance."
 heroImage: "/images/pci_maps/modeled_out.jpg"
-description: "This report looks to model how much it will cost to fix and maintain LA streets over the next decade. Without a significant injection of funding LA is on track to have 70% of streets in a failed state."
+description: "Without a serious funding injection by 2035 nearly 75% of streets are failed and there is more than $15 billion in necessary street maintenance."
 authors: "Report and technical analysis by Noah Mercer and Josh Vredevoogd \n \n Web development by Anthony Kenzo Salazar \n \n Additional thanks to the SFA Data/Dev team"
 published: false
 ---
@@ -88,7 +88,7 @@ There are two mental models to build for understanding repaving. First, as a str
 The relationship between PCI and age follows a well established sigmoid curve. When a street is repaired, it stays in a state of good repair for a while, often around a decade, but then quickly begins to deteriorate before leveling off. How quickly this deterioration happens depends on a number of inputs, but for our high level model we simply used two curves to represent local streets and another for arterials.
 
 <img src="/images/pci_maps/pci_chart.png"/>
-<p class="subtitle">Repaving chart curves</p>
+<p class="subtitle">This chart shows how PCI changes over time. The curves are our approximate models, on arterial streets there is rapid deterioration around year 13, on local streets that happens around year 20.</p>
 
 This raises many interesting questions, is it cheaper to only keep the ‘good’ streets in a high quality state? Or is it better to fix the worst, most expensive, streets first? Our model outputs a ratio of 30% slurry seal and 70% repaving as ideal on paper, but that skips many real word realities. Top of which is that the worst streets, covered in potholes, are the ones elected officials are going to get the most angry complaints to fix. 
 
@@ -96,6 +96,9 @@ The city of Los Angeles has long had a policy of keeping the streets that are in
 
 Unfortunately that is the reality Los Angeles finds itself in, with the pavement preservation budget declining from $141.4M in 2020 to just over $70M in 2025 due to the City’s budget crisis. This is penny wise dollar foolish, lowering near term costs but increasing them an order of magnitude for future taxpayers. Even worse, this is only half of the current crisis.
 
+
+<img src="/images/pci_maps/curb_ramp.jpeg"/>
+<p class="subtitle">An access ramp under construction along Hollywood Blvd</p>
 
 ## Access Ramps and LA’s accessibility crisis
 
@@ -115,7 +118,7 @@ The City is further burdened by extraordinarily high costs for building individu
 All told, at current costs the City is looking at around four billion dollars to fix all the access ramps in the City. BSS looked at this and asked itself, what if we skirt ADA law one more time?
 
 <img src="/images/pci_maps/large_asphalt.jpeg"/>
-<p class="subtitle">Repaving chart curves</p>
+<p class="subtitle">This is an image of Large Asphalt Repair installed in late 2025 on Beverly Blvd.</p>
 
 ## Why Large Asphalt Repair is a bad idea
 
@@ -127,6 +130,9 @@ In conversations with BSS insiders, we have been able to peg the cost of Large A
 
 Over the long term, our model shows that Large Asphalt Repair has no notable PCI improvement compared to standard repaving. Instead, we end up spending about the same budget while fixing half the number of access ramps.  
 
+<img src="/images/pci_maps/full_city.jpg"/>
+<p class="subtitle">This map shows the City in 2036 with the current trends of Large Asphalt Repair and a limited budget under $80,000,000. The average PCI is 40, nearly 75% of streets are failed, and there is more than $15 billion in necessary street maintenance.</p>
+
 ## What can we do?
 
 * __Stop Large Asphalt Repair__ - We are currently spending the same amount of money for a worse outcome, and the access ramps we aren’t building today will still need to be built in the future. 
@@ -135,20 +141,20 @@ Over the long term, our model shows that Large Asphalt Repair has no notable PCI
 * __Find new revenue__ - While we need to spend money we have more efficiently, at the end of the day, we likely need additional dedicated funding to get a head start and prevent a large pileup of deferred maintenance. Bonds or parcel taxes are used by many other cities to cover this gap. LA can also explore other options, like Portland’s Heavy Vehicle Use Tax, making the heaviest road users contribute more to road repair. The strange shape of the City means many people driving on LA roads may not live in the City or contribute towards its taxbase, tools like congestion pricing can help recover otherwise lost revenue. 
 * __Find creative ways to reduce maintenance needs__ - LA has the largest street network in the nation and will likely always struggle to fully maintain it. Allocating road space to other uses can reduce or eliminate the cost of maintenance. For example, a cyclist would need to travel over a stretch of pavement over 100,000 times to equal a single car. Similarly, low cost street closures creating plazas can permanently reduce the maintenance needs for a piece of street. Council District 1’s proposal to transfer a stretch of Wilshire Blvd into MacArthur Park could be replicated across the City, removing thousands of lane miles of maintenance while expanding precious greenspace.
 
-# Methodology and Analysis
+## Methodology and Analysis
 
 We wanted to see what it would cost for Los Angeles to not merely slow the decline of its streets but to actively improve them. There are a lot of variables to consider when answering this question: How do we decide which streets need what treatment? How much does each treatment cost? Are we including access ramps? Are we doing inefficient large asphalt repairs? How quickly are we trying to make the improvements? We tried to answer these by grounding our analysis in what Los Angeles has historically done. We started by using an annual budget of $72M as our baseline budget scenario. We looked at each type of treatment commonly done (slurry sealing, resurfacing and reconstruction) and used the average percent of the budget spent on those during the same time period as our allocation for each treatment type. To determine which streets would receive which treatments we used the city’s measurement of the pavement condition index (PCI) for each of the more than 72,000 street segments the city tracks.  Guided by the letter grades the city assigns to ranges of PCI values, we then assigned streets with a PCI of less than or equal to 19 to a “needs complete reconstruction” category. Streets with a PCI of 20-40 were put in a cheaper reconstruction category, while those with a PCI of 41-70 were deemed to need resurfacing. Those with a PCI of 71-85 were planned for slurry sealing only (aside from larger, non-local streets, which the city does not slurry seal). A PCI of 86 or above needed no treatment.
 
 Having set up our parameters, we then ran a ten year simulation where we selected street segments in need of slurry sealing, resurfacing or reconstruction (choosing the segments with the lowest PCI in each category) and treating as many as we could until the budget for the year ran out. If at any point we had more money for, say, slurry sealing than there were street segments that needed it we rolled the extra funding to reconstruction. Similarly, extra reconstruction funding was rolled to resurfacing and extra resurfacing funding to slurry sealing. A treated segment was upgraded to a PCI of 100.
 
-##  Access Ramps
+###  Access Ramps
 
 In addition to simulating the pavement preservation program, we also simulated the building of access ramps. The city has 91,000 access ramps, of which 3,800 have been fixed in the last 10 years. Once fixed, a access ramp life is over 25 years, so doesn't enter back into the simulation. 
 
 There are roughly 87,000 access ramps that need to be updated across the city. We looked at the total number of access ramps to be updated by street type and found that the city has about 44,500 access ramps on local streets and 42,500 on larger streets. We used this information to calculate the density of access ramps per lane mile of each street type and factored that into our paving simulation scenarios, of which there were two: access ramp updates done only when the street segment required reconstruction (as is the case under the current “large asphalt repair” regime), and access ramp updates done for street segments that required reconstruction or resurfacing. (There is also a separate budget of $12M/year just for dedicated access ramp construction/updates; we simulated access ramp work out of this budget separately from access ramps undertaken as part of pavement repair projects.)
 
 
-## Predicting Pavement Quality
+### Predicting Pavement Quality
 
 Meanwhile we simulated the aging of all untreated streets following curves taken from literature around street degradation rates. Unfortunately the actual data do not remotely reflect the tidiness of that curve. The real age-to-PCI data are as bumpy as an unmaintained LA alley. Only in the first six years after a road is repaved its PCI does seem to follow a curve. We surmise that this is because the city doesn’t actually measure the PCI of recently repaved roads but instead estimates it using the given curve (or something similar). After that all real correlation between age and PCI is lost. We have survivor effects (for example, concrete roads more than 40 years old often have a PCI higher than their younger siblings), outliers (roads that are only 12 years old with a PCI of a road three times older) and generally all manner of noise in the data. We don’t know how much of this is bad data, sporadic measurements (our FOIA request for historical PCI data was denied, so we were unable to compare changes for specific segments over time), or just a truly weak correlation between age and PCI. The city’s prediction curve was the best information we found to work with, though, so we used it to estimate aging of each untreated segment over time, enforcing a requirement that the PCI of an untreated segment could never improve to help deal with outliers that were already in worse condition for their age than the curve would predict.
 

@@ -1,5 +1,3 @@
-const LABEL_COLORS = { Good: "#1a7a1a", Fair: "#888800", Failed: "#d7191c" };
-
 const STATES = [
   {
     label: "Good",
@@ -28,29 +26,76 @@ const STATES = [
 ];
 
 const PCITrifold = () => (
-  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "1rem", fontFamily: "monospace", fontSize: "0.9rem", margin: "1.5rem 0" }}>
-    {STATES.map((s) => (
-      <div key={s.label}>
-        <img src={s.image} alt={`${s.label} street condition`} style={{ width: "100%", aspectRatio: "4/3", objectFit: "cover", display: "block" }} />
-        <div style={{ }}>
-          <div style={{ marginBottom: "1rem", display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
-            <span style={{ fontWeight: "bold", fontSize: "1rem", color: LABEL_COLORS[s.label] }}>{s.label}</span>
-            <span style={{ fontSize: "0.8rem", color: "#666" }}>{s.grade}</span>
+  <>
+    <style>{`
+      .trifold {
+        OVERFLOW: scroll;
+        display: flex;
+        gap: 1rem;
+        font-family: monospace;
+        font-size: 0.9rem;
+        margin: 1.5rem 0;
+      }
+      .trifold-card {
+        flex: 1;
+      }
+      .trifold-card img {
+        width: 100%;
+        aspect-ratio: 1/1;
+        object-fit: cover;
+        min-width: 200px;
+        display: block;
+      }
+      .trifold-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 1rem;
+      }
+      .trifold-label {
+        font-weight: bold;
+        font-size: 1rem;
+      }
+      .trifold-label--good   { color: #1a7a1a; }
+      .trifold-label--fair   { color: #888800; }
+      .trifold-label--failed { color: #d7191c; }
+      .trifold-grade {
+        font-size: 0.8rem;
+        color: #666;
+      }
+      .trifold-card table {
+        width: 100%;
+      }
+      .trifold-key {
+        color: #666;
+        white-space: nowrap;
+        padding-right: 0.5rem;
+      }
+    `}</style>
+    <div className="trifold">
+      {STATES.map((s) => (
+        <div key={s.label} className="trifold-card">
+          <img src={s.image} alt={`${s.label} street condition`} />
+          <div className="trifold-body">
+            <div className="trifold-header">
+              <span className={`trifold-label trifold-label--${s.label.toLowerCase()}`}>{s.label}</span>
+              <span className="trifold-grade">{s.grade}</span>
+            </div>
+            <table>
+              <tbody>
+                {[["PCI", s.pci], ["Treatment", s.treatment], ["Cost", s.cost]].map(([k, v]) => (
+                  <tr key={k}>
+                    <td className="trifold-key">{k}</td>
+                    <td>{v}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
-          <table style={{ width: "100%"}}>
-            <tbody>
-              {[["PCI", s.pci], ["Treatment", s.treatment], ["Cost", s.cost]].map(([k, v]) => (
-                <tr key={k}>
-                  <td style={{  color: "#666", whiteSpace: "nowrap" }}>{k}</td>
-                  <td style={{}}>{v}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
         </div>
-      </div>
-    ))}
-  </div>
+      ))}
+    </div>
+  </>
 );
 
 export default PCITrifold;
