@@ -4,7 +4,7 @@ import "./style.css";
 import PCIDegradationChart from "./PCIDegradationChart";
 import DeferredMaintenanceChart from "./DeferredMaintenanceChart";
 
-const BUDGET_OPTIONS = [72, 100, 200, 400];
+const BUDGET_OPTIONS = [120, 200, 300, 400];
 const RAMP_OPTIONS = [
   "Large Asphalt Repair",
   "Curb Ramps - 50k",
@@ -38,7 +38,7 @@ const VIEWS = ["Street Quality", "Deferred Maintenance", "City Map"];
 
 const PCIWidget = () => {
   const [data, setData] = useState(null);
-  const [selectedModel, setSelectedModel] = useState("lar_72m");
+  const [selectedModel, setSelectedModel] = useState("lar_120m");
   const [selectedBudget, setSelectedBudget] = useState(BUDGET_OPTIONS[0]);
   const [selectedRampStrategy, setSelectedRampStrategy] = useState(
     RAMP_OPTIONS[0],
@@ -131,6 +131,10 @@ const PCIWidget = () => {
           <tr>
             <td>Total Access Ramps Installed</td>
             <td>{getTotalRamps(modelResults.years).toLocaleString()}</td>
+          </tr>
+          <tr>
+            <td>City Intersections ADA Accessible</td>
+            <td>{Math.round((1 - modelResults.years[10].curb_ramps_remaining / 88_000) * 100)}%</td>
           </tr>
           <tr>
             <td>Total Deferred Costs Remaining</td>
