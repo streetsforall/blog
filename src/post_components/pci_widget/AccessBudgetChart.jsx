@@ -6,8 +6,8 @@ const DATA = [
   { year: 2021, repaving: 147886881, reconstruction: 22326192, ramps: 0,        sidewalk: 34969248 },
   { year: 2022, repaving: 102185524, reconstruction: 24894086, ramps: 0,        sidewalk: 44462463 },
   { year: 2023, repaving: 121103822, reconstruction: 24437124, ramps: 9679109,  sidewalk: 35743000 },
-  { year: 2024, repaving: 154199518, reconstruction: 24252931, ramps: 20327041, sidewalk: 61500443 },
-  { year: 2025, repaving: 114310337, reconstruction: 3490557,  ramps: 36052158, sidewalk: 35743000 },
+  { year: 2024, repaving: 114310337, reconstruction: 24252931, ramps: 20327041, sidewalk: 61500443 },
+  { year: 2025, repaving: 89284901, reconstruction: 3490557,  ramps: 36052158, sidewalk: 35743000 },
   { year: 2026, repaving: 74570524,  reconstruction: 0,        ramps: 30017057, sidewalk: 40262632 },
   { year: 2027, repaving: 79807807,  reconstruction: 0,        ramps: 43597524, sidewalk: 36253074 },
 ];
