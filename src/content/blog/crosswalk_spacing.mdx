@@ -1,0 +1,126 @@
+---
+title: "Crosswalks in Los Angeles Are Too Far Apart — Here's the Data"
+pubDate: "May 8 2026"
+heroImageCredit: ""
+description: "In new research, the Streets for All Data/Dev team finds that crosswalks in Los Angeles are spaced significantly farther apart than recommended safety standards, especially on major streets where safe crossings are most critical."
+authors: "Technical Analysis by Streets for All Data/Dev Team"
+published: false
+---
+
+import CrosswalkMap from '../../post_components/crosswalk_maps/crosswalk_maps.jsx';
+
+In new research, the Streets for All Data/Dev team finds that crosswalks in Los Angeles are spaced significantly farther apart than recommended safety standards, especially on major streets where safe crossings are most critical.
+
+Crosswalk spacing plays a fundamental role in how people move through a city. When safe crossings are frequent and convenient, pedestrians are more likely to use them. When they are too far apart, people often cross where it is most direct regardless of safety.
+
+The NACTO recommends crosswalk spacing of 80–100 meters (262–328 feet) to support safe and walkable streets. This range reflects a design principle: people should not have to walk long distances out of their way to cross safely.
+
+In Los Angeles, however, the data tells a different story:
+
+- **Average (mean) crosswalk spacing: 610 feet**
+- **Median crosswalk spacing: 340 feet**
+
+This means that the typical distance between safe crossings in Los Angeles exceeds recommended standards, and in many cases, far exceeds them. On average, crosswalks are nearly twice as far apart as recommended, with some corridors exhibiting much larger gaps.
+
+## Key Findings
+
+- Crosswalk spacing in Los Angeles consistently exceeds best practice guidelines
+- The citywide average spacing is 610 feet, nearly double recommended standards
+- The median spacing is 340 feet, slightly above the recommended range
+- Collector streets have the largest spacing gaps: Mean: 742 feet; Median: 414 feet
+- Major corridors such as avenues and boulevards also exceed recommended spacing
+
+**Takeaway: Crosswalk spacing issues in Los Angeles are systemic, not isolated.**
+
+## Citywide Context
+
+Los Angeles doesn't just have slightly wider spacing. It has many corridors with very large distances between safe crossings.
+
+- **Mean spacing:** 610 feet
+- **Median spacing:** 340 feet
+- **Total crosswalks analyzed:** 14,848
+
+The difference between the mean and median is important. The median spacing of 340 feet suggests that many streets are close to recommended guidelines. However, the much higher mean indicates the presence of frequent long gaps that significantly increase overall spacing.
+
+In other words, while some areas perform reasonably well, many corridors have very large distances between crossings, pulling the average upward and creating unsafe conditions.
+
+<CrosswalkMap client:load map="crosswalks" desc="Crosswalk locations across Los Angeles, colored by distance to the nearest crosswalk along the same primary street. Darker colors indicate longer gaps between crossings." />
+
+## Crosswalk Spacing by Street Type
+
+Crosswalk spacing varies by street classification but remains elevated across nearly all categories.
+
+| Street Designation | Mean Spacing (ft) | Median Spacing (ft) | Crosswalk Count |
+| --- | --- | --- | --- |
+| Avenue I | 488 | 297 | 2,441 |
+| Avenue II | 504 | 271 | 4,717 |
+| Avenue III | 500 | 268 | 363 |
+| Boulevard I | 501 | 296 | 131 |
+| Boulevard II | 596 | 422 | 2,296 |
+| Collector | 742 | 414 | 3,311 |
+| Industrial Collector | 328 | 170 | 15 |
+| Mountain Collector | 2,053 | 1,982 | 6 |
+| Scenic Arterial Mountain | 1,634 | 696 | 23 |
+| Scenic Parkway | 1,576 | 872 | 13 |
+| **CITYWIDE** | **610** | **340** | **14,848** |
+
+Avenues (Classes I–III), which make up a large portion of Los Angeles' street network, have average spacing between 488 and 504 feet. This is well above recommended levels and indicates that even "typical" major streets lack frequent crossing opportunities.
+
+Boulevards show even larger gaps, reaching up to 596 feet on average. These are often wide, high-traffic corridors where pedestrian safety risks are already elevated, making the lack of crossings particularly concerning.
+
+Collector streets stand out as the most critical issue in the dataset. With an average spacing of 742 feet and a median of 414 feet, they represent the largest and most consistent gaps in the system. These streets serve as key connectors between local neighborhoods and major arterials, yet they lack adequate crossing infrastructure.
+
+Some street types exhibit extremely large spacing values:
+
+- **Mountain Collector:** 2,053 ft mean
+- **Scenic Parkway:** 1,576 ft mean
+
+While these represent a small number of streets, they highlight how extreme conditions can exist in certain parts of the network, particularly in lower-density or geographically constrained areas.
+
+## Neighborhood-Level Patterns
+
+Crosswalk spacing is not just a corridor-level issue — it is visible across entire neighborhoods.
+
+In many parts of Los Angeles, safe crossings are consistently spaced farther apart than what is considered safe or walkable. This suggests that the issue is not limited to a few problematic streets, but reflects broader patterns in how the street network has been designed.
+
+<CrosswalkMap client:load map="neighborhoods" desc="Neighborhood council areas colored by median crosswalk spacing. Many neighborhoods across Los Angeles exceed the safe spacing threshold of 262–328 feet." />
+
+## Why This Matters
+
+Crosswalk spacing directly influences how people navigate the city and how safe those trips are.
+
+When crossings are too far apart:
+
+- Pedestrians are more likely to cross midblock
+- Drivers are less likely to anticipate pedestrian crossings
+- The risk of collisions increases
+
+These risks are amplified on:
+
+- Arterial and collector streets
+- Transit corridors with high pedestrian activity
+- Wide, high-speed roadways
+
+Importantly, the streets with the largest gaps between crossings are often the same streets where safe crossings are most needed. This mismatch creates conditions where unsafe behavior becomes a rational response to the built environment.
+
+## Methodology
+
+This analysis uses crosswalk data from the City of Los Angeles, along with street classification data and neighborhood council boundary data, to evaluate how far apart marked crossings are across the city. The goal was to measure the spacing between crosswalks along the same corridor in a way that reflects how pedestrians actually experience the street network.
+
+For each crosswalk point, we calculated the distance to the nearest other crosswalk located on the same primary street. To ensure that this measurement reflects spacing between intersections rather than within them, we excluded crosswalks that share the same cross street and applied a minimum distance threshold of 100 feet. This prevents multiple crosswalks at a single intersection from being counted as separate spacing intervals.
+
+To improve the reliability of the results, we removed extreme outliers that could distort the analysis. Specifically, any distances greater than 2 miles (10,560 feet) were excluded. These unusually large values are typically caused by discontinuities in the street network, such as gaps in the dataset or breaks at city boundaries, rather than representing real-world crossing conditions.
+
+Because the crosswalk dataset and the street classification dataset use different naming conventions, we standardized street names before matching them. This included normalizing common suffix variations, such as converting "AV" and "AVENUE" to "AVE," and "BL" and "BOULEVARD" to "BLVD." This step ensured that each crosswalk could be accurately associated with the correct street designation.
+
+To focus the analysis on streets where crosswalk spacing is most relevant to safety and mobility, we excluded local streets, private streets, and any streets without a clear classification. The resulting dataset represents arterial, boulevard, and collector streets where pedestrian crossings are most critical.
+
+We then calculated summary statistics — including mean spacing, median spacing, and crosswalk counts — at multiple levels. Citywide statistics provide an overall picture of crosswalk spacing across Los Angeles. Street designation summaries allow for comparison across different types of corridors, such as avenues, boulevards, and collectors. Finally, neighborhood-level statistics were generated by spatially joining crosswalk points to neighborhood council boundaries and aggregating the spacing values within each area.
+
+## Conclusion
+
+Safe crossings shouldn't require a detour.
+
+While Los Angeles has made progress on many transportation initiatives, crosswalk spacing remains a fundamental issue that affects safety, accessibility, and walkability across the city.
+
+Reducing the distance between crossings, especially on major corridors, is a clear, actionable step toward safer streets.
