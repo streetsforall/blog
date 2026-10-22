@@ -4,14 +4,16 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 const projects = [
   {
     title: 'Bike and Roll Network Tracker',
-    image: 'https://bike-lane-tracker-aezn7.ondigitalocean.app/assets/biker-icon-CmShWZ4A.png',
+    image:
+      'https://bike-lane-tracker-aezn7.ondigitalocean.app/assets/biker-icon-CmShWZ4A.png',
     description:
       'Dashboard that displays the progress of bicycle infrastructure projects',
     url: 'https://data.streetsforall.org/projects/bikelanes',
   },
   {
     title: 'Metro Ridership Dashboard',
-    image: 'https://la.streetsblog.org/wp-content/uploads/sites/13/2025/10/MetroRailRidershipSFAgraph.jpg',
+    image:
+      'https://la.streetsblog.org/wp-content/uploads/sites/13/2025/10/MetroRailRidershipSFAgraph.jpg',
     description:
       'A client-side dashboard for exploring LA Metro bus and rail ridership over time',
     url: 'https://data.streetsforall.org/projects/metroridership',
@@ -116,7 +118,7 @@ const projects = [
   }
 </style>
 
-<BaseLayout>
+<BaseLayout title="Projects - Streets For All Data/Dev Team">
   <div class="about">
     <ul class="project-list">
       {projects.map((project) => (
