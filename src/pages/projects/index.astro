@@ -1,0 +1,118 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const projects = [
+  {
+    title: 'Bike and Roll Network Tracker',
+    image: 'https://bike-lane-tracker-aezn7.ondigitalocean.app/assets/biker-icon-CmShWZ4A.png',
+    description:
+      'Dashboard that displays the progress of bicycle infrastructure projects',
+    url: 'https://bike-lane-tracker-aezn7.ondigitalocean.app',
+  },
+  {
+    title: 'Metro Ridership Dashboard',
+    image: 'https://la.streetsblog.org/wp-content/uploads/sites/13/2025/10/MetroRailRidershipSFAgraph.jpg',
+    description:
+      'A client-side dashboard for exploring LA Metro bus and rail ridership over time',
+    url: 'https://ridership.streetsforall.org',
+  },
+  {
+    title: 'Hello world',
+    image: '/images/CAHSR/palmdale.jpeg',
+    description: 'Lorem ipsum.',
+    url: '#',
+  },
+  {
+    title: 'Hello world',
+    image: '/images/CAHSR/palmdale.jpeg',
+    description: 'Lorem ipsum.',
+    url: '#',
+  },
+  {
+    title: 'Hello world',
+    image: '/images/CAHSR/palmdale.jpeg',
+    description: 'Lorem ipsum.',
+    url: '#',
+  },
+];
+---
+
+<style>
+  .project-list {
+    display: grid;
+    gap: 2rem 1rem;
+    grid-template-columns: 1fr 1fr 1fr;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .card:hover {
+    background-color: var(--black);
+  }
+
+  .card:hover h2,
+  .card:hover p {
+    color: #fff;
+  }
+
+  .card img {
+    aspect-ratio: 1.5 / 1;
+    border-radius: 0;
+    object-fit: cover;
+  }
+
+  .card .caption {
+    border-top: 3px solid var(--black);
+    padding: 0.25rem 0;
+  }
+
+  .card h2 {
+    font-size: 1rem;
+    margin: 0 0 0.5rem;
+  }
+
+  .card a {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  .card p {
+    font-size: 0.875rem;
+    line-height: 1.375;
+    margin: 0;
+  }
+</style>
+
+<BaseLayout>
+  <div class="about">
+    <ul class="project-list">
+      {projects.map((project) => (
+        <li>
+          <div class="card">
+            {project.image && <img src={project.image} alt="" />}
+
+            <div class="caption">
+              <h2>{project.title}</h2>
+
+              <p>{project.description}</p>
+            </div>
+
+            <a href={project.url} target="_blank" />
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</BaseLayout>
