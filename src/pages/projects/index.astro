@@ -93,6 +93,27 @@ const projects = [
     line-height: 1.375;
     margin: 0;
   }
+
+  @media (max-width: 640px) {
+    .project-list {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .project-list {
+      gap: 3rem;
+      grid-template-columns: 1fr;
+    }
+
+    .card h2 {
+      font-size: 1.125rem;
+    }
+
+    .card p {
+      font-size: 1rem;
+    }
+  }
 </style>
 
 <BaseLayout>
