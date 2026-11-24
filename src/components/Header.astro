@@ -4,41 +4,50 @@ import { SITE_TITLE } from '../consts';
 ---
 
 <header>
-	<nav>
-		<h2><a href="/">{SITE_TITLE}</a></h2>
-		<div class="internal-links">
-			<HeaderLink href="/about">About</HeaderLink>
-		
-		</div>
-		
-	</nav>
+  <h2>
+    <a href="/">{SITE_TITLE}</a>
+  </h2>
+
+  <nav>
+    <HeaderLink href="/">Blog</HeaderLink>
+    <HeaderLink href="/projects">Projects</HeaderLink>
+    <HeaderLink href="/about">About</HeaderLink>
+  </nav>
 </header>
+
 <style>
-	header {
-		margin: 0 0 1.5rem 0;
-		padding: 0 1em;
-	}
-	h2 {
-		margin: 0;
-		font-size: 1em;
-	}
+  header {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-between;
+    margin: 0 0 1.5rem 0;
+    padding: 0 1em;
+  }
 
-	h2 a,
-	h2 a.active {
-		text-decoration: none;
-	}
-	nav {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-	}
-	nav a {
-		/* padding: 1rem 0rem 0rem 0rem; */
-		color: var(--black);
-		text-decoration: none;
-	}
-	nav a.active {
-		text-decoration: none;
-	}
+  header a {
+    color: var(--black);
+    text-decoration: none;
+  }
 
+  h2 {
+    margin: 0;
+    font-size: 1em;
+  }
+
+  h2 a,
+  h2 a.active {
+    text-decoration: none;
+  }
+
+  nav {
+    align-items: center;
+    display: flex;
+	gap: 1rem;
+  }
+
+  nav a.active {
+    text-decoration: none;
+  }
 </style>

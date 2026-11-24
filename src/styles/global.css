@@ -182,16 +182,6 @@ summary {
   font-weight: bold;
 }
 
-
-@media (max-width: 720px) {
-  body {
-    font-size: 18px;
-  }
-  main {
-    padding: 1em;
-  }
-}
-
 .hero-image img {
   max-height: 25rem;
   object-fit: cover;
